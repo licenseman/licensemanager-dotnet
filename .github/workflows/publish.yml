@@ -1,0 +1,40 @@
+# Written by the licensemanager SDK release script: changes made here are overwritten.
+# Publishes the package to NuGet when a version tag is pushed, with NuGet trusted publishing (OIDC): no API key needed.
+# NUGET_USER, a variable of this repository (or of its organization), is the nuget.org account owning the policy.
+name: Publish
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: "10.0.x"
+      - run: dotnet pack src/*/*.csproj -c Release -o out --nologo
+      - name: Check the version isn't published yet
+        id: check
+        run: |
+          package=$(ls out/*.nupkg | head -n 1)
+          read -r id version < <(unzip -p "$package" '*.nuspec' | sed -n 's:.*<id>\(.*\)</id>.*:\1:p; s:.*<version>\(.*\)</version>.*:\1:p' | paste -sd ' ')
+          if curl -fsS "https://api.nuget.org/v3-flatcontainer/${id,,}/index.json" | grep -q "\"$version\""; then
+            echo "$id $version is already published"
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          fi
+      # The temporary API key it gets is valid for an hour.
+      - if: steps.check.outputs.published != 'true'
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ vars.NUGET_USER }}
+      - if: steps.check.outputs.published != 'true'
+        run: dotnet nuget push "out/*.nupkg" --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
