@@ -20,7 +20,8 @@ jobs:
       - uses: actions/setup-dotnet@v5
         with:
           dotnet-version: "10.0.x"
-      - run: dotnet pack src/*/*.csproj -c Release -o out --nologo
+      # `src/` also holds the generated test project, and `dotnet pack` takes only one.
+      - run: dotnet pack $(ls src/*/*.csproj | grep -v '\.Test/') -c Release -o out --nologo
       - name: Check the version isn't published yet
         id: check
         run: |
