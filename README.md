@@ -1,7 +1,7 @@
 # LicenseManager C# SDK
 
-[![NuGet version](https://img.shields.io/nuget/v/LicenseManager.Sdk)](https://www.nuget.org/packages/LicenseManager.Sdk)
-[![NuGet downloads](https://img.shields.io/nuget/dt/LicenseManager.Sdk)](https://www.nuget.org/packages/LicenseManager.Sdk)
+[![NuGet version](https://img.shields.io/nuget/v/LicenseMan.Sdk)](https://www.nuget.org/packages/LicenseMan.Sdk)
+[![NuGet downloads](https://img.shields.io/nuget/dt/LicenseMan.Sdk)](https://www.nuget.org/packages/LicenseMan.Sdk)
 [![Publish](https://github.com/licenseman/licensemanager-dotnet/actions/workflows/publish.yml/badge.svg)](https://github.com/licenseman/licensemanager-dotnet/actions/workflows/publish.yml)
 [![License](https://img.shields.io/github/license/licenseman/licensemanager-dotnet)](https://github.com/licenseman/licensemanager-dotnet/blob/main/LICENSE)
 [![Documentation](https://img.shields.io/badge/docs-licensemanager.dev-blue)](https://licensemanager.dev/docs/sdks/csharp)
@@ -17,7 +17,7 @@ The official C# SDK for the [LicenseManager](https://licensemanager.dev) API: is
 ## Installation
 
 ```sh
-dotnet add package LicenseManager.Sdk
+dotnet add package LicenseMan.Sdk
 ```
 
 ## Usage
