@@ -84,8 +84,10 @@ namespace LicenseManager.Model
         /// <param name="statusReason">Why the integration isn&#39;t &#x60;active&#x60;, &#x60;null&#x60; when it is. (required).</param>
         /// <param name="lastCheckedAt">Last time its health was checked, done every day. (required).</param>
         /// <param name="lastEventAt">Last time it received an event from the provider. (required).</param>
+        /// <param name="autoRefund">Whether canceling a license bought through Stripe refunds its payment. On by default, always off when &#x60;canRefund&#x60; is false. (required).</param>
+        /// <param name="canRefund">Whether the API key has the optional Refunds: Write permission, checked when connecting and every day. Without it, canceled licenses aren&#39;t refunded: refund their payments from Stripe. (required).</param>
         /// <param name="createdAt">createdAt (required).</param>
-        public Integration(string id = default, ProviderEnum provider = default, bool livemode = default, string accountName = default, string apiKeyHint = default, string webhookUrl = default, IntegrationStatus status = default, string statusReason = default, DateTime? lastCheckedAt = default, DateTime? lastEventAt = default, DateTime createdAt = default)
+        public Integration(string id = default, ProviderEnum provider = default, bool livemode = default, string accountName = default, string apiKeyHint = default, string webhookUrl = default, IntegrationStatus status = default, string statusReason = default, DateTime? lastCheckedAt = default, DateTime? lastEventAt = default, bool autoRefund = default, bool canRefund = default, DateTime createdAt = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -132,6 +134,8 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("lastEventAt is a required property for Integration and cannot be null");
             }
             this.LastEventAt = lastEventAt;
+            this.AutoRefund = autoRefund;
+            this.CanRefund = canRefund;
             this.CreatedAt = createdAt;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
@@ -177,7 +181,7 @@ namespace LicenseManager.Model
         /// </summary>
         /// <value>URL of the webhook endpoint created on the Stripe account.</value>
         /*
-        <example>https://api.example.com/v1/webhooks/stripe/i8Fz4QnRt</example>
+        <example>https://api.licensemanager.dev/v1/webhooks/stripe/i8Fz4QnRt</example>
         */
         [DataMember(Name = "webhookUrl", IsRequired = true, EmitDefaultValue = true)]
         public string WebhookUrl { get; set; }
@@ -205,6 +209,26 @@ namespace LicenseManager.Model
         /// <value>Last time it received an event from the provider.</value>
         [DataMember(Name = "lastEventAt", IsRequired = true, EmitDefaultValue = true)]
         public DateTime? LastEventAt { get; set; }
+
+        /// <summary>
+        /// Whether canceling a license bought through Stripe refunds its payment. On by default, always off when &#x60;canRefund&#x60; is false.
+        /// </summary>
+        /// <value>Whether canceling a license bought through Stripe refunds its payment. On by default, always off when &#x60;canRefund&#x60; is false.</value>
+        /*
+        <example>true</example>
+        */
+        [DataMember(Name = "autoRefund", IsRequired = true, EmitDefaultValue = true)]
+        public bool AutoRefund { get; set; }
+
+        /// <summary>
+        /// Whether the API key has the optional Refunds: Write permission, checked when connecting and every day. Without it, canceled licenses aren&#39;t refunded: refund their payments from Stripe.
+        /// </summary>
+        /// <value>Whether the API key has the optional Refunds: Write permission, checked when connecting and every day. Without it, canceled licenses aren&#39;t refunded: refund their payments from Stripe.</value>
+        /*
+        <example>true</example>
+        */
+        [DataMember(Name = "canRefund", IsRequired = true, EmitDefaultValue = true)]
+        public bool CanRefund { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
@@ -236,6 +260,8 @@ namespace LicenseManager.Model
             sb.Append("  StatusReason: ").Append(StatusReason).Append("\n");
             sb.Append("  LastCheckedAt: ").Append(LastCheckedAt).Append("\n");
             sb.Append("  LastEventAt: ").Append(LastEventAt).Append("\n");
+            sb.Append("  AutoRefund: ").Append(AutoRefund).Append("\n");
+            sb.Append("  CanRefund: ").Append(CanRefund).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");

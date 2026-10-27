@@ -52,8 +52,9 @@ namespace LicenseManager.Model
         /// <param name="maxOfflineDurationSeconds">Longest the applications can run offline with the license, in seconds. At least one hour (&#x60;3600&#x60;). Defaults to the one of the policy..</param>
         /// <param name="price">price.</param>
         /// <param name="maxVersion">maxVersion.</param>
+        /// <param name="cancellableUntil">End of the money back guarantee: until then, the customer can cancel the license from the customer portal, or with a token. &#x60;null&#x60; to not let them. Defaults to the creation date plus the policy&#39;s &#x60;moneyBackGuaranteeDays&#x60;, or &#x60;null&#x60; when it has none..</param>
         /// <param name="sendKey">&#x60;true&#x60; emails the key to the customer once the license is created, like &#x60;sendLicenseKeys&#x60;. Sent in the background: a failed email doesn&#39;t fail the creation. In test products, it&#39;s only sent when the customer&#39;s email is a member&#39;s of the organization. Defaults to &#x60;false&#x60;..</param>
-        public CreateLicense(string email = default, string key = default, string policyId = default, DateTime? expiresAt = default, Dictionary<string, Object> meta = default, int? maxMachines = default, int maxOfflineDurationSeconds = default, PriceInput price = default, LicenseMaxVersionInput maxVersion = default, bool sendKey = default)
+        public CreateLicense(string email = default, string key = default, string policyId = default, DateTime? expiresAt = default, Dictionary<string, Object> meta = default, int? maxMachines = default, int maxOfflineDurationSeconds = default, PriceInput price = default, LicenseMaxVersionInput maxVersion = default, DateTime? cancellableUntil = default, bool sendKey = default)
         {
             // to ensure "email" is required (not null)
             if (email == null)
@@ -69,6 +70,7 @@ namespace LicenseManager.Model
             this.MaxOfflineDurationSeconds = maxOfflineDurationSeconds;
             this.Price = price;
             this.MaxVersion = maxVersion;
+            this.CancellableUntil = cancellableUntil;
             this.SendKey = sendKey;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
@@ -156,6 +158,16 @@ namespace LicenseManager.Model
         public LicenseMaxVersionInput MaxVersion { get; set; }
 
         /// <summary>
+        /// End of the money back guarantee: until then, the customer can cancel the license from the customer portal, or with a token. &#x60;null&#x60; to not let them. Defaults to the creation date plus the policy&#39;s &#x60;moneyBackGuaranteeDays&#x60;, or &#x60;null&#x60; when it has none.
+        /// </summary>
+        /// <value>End of the money back guarantee: until then, the customer can cancel the license from the customer portal, or with a token. &#x60;null&#x60; to not let them. Defaults to the creation date plus the policy&#39;s &#x60;moneyBackGuaranteeDays&#x60;, or &#x60;null&#x60; when it has none.</value>
+        /*
+        <example>2026-02-14T09:30:00.000Z</example>
+        */
+        [DataMember(Name = "cancellableUntil", EmitDefaultValue = true)]
+        public DateTime? CancellableUntil { get; set; }
+
+        /// <summary>
         /// &#x60;true&#x60; emails the key to the customer once the license is created, like &#x60;sendLicenseKeys&#x60;. Sent in the background: a failed email doesn&#39;t fail the creation. In test products, it&#39;s only sent when the customer&#39;s email is a member&#39;s of the organization. Defaults to &#x60;false&#x60;.
         /// </summary>
         /// <value>&#x60;true&#x60; emails the key to the customer once the license is created, like &#x60;sendLicenseKeys&#x60;. Sent in the background: a failed email doesn&#39;t fail the creation. In test products, it&#39;s only sent when the customer&#39;s email is a member&#39;s of the organization. Defaults to &#x60;false&#x60;.</value>
@@ -188,6 +200,7 @@ namespace LicenseManager.Model
             sb.Append("  MaxOfflineDurationSeconds: ").Append(MaxOfflineDurationSeconds).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("  MaxVersion: ").Append(MaxVersion).Append("\n");
+            sb.Append("  CancellableUntil: ").Append(CancellableUntil).Append("\n");
             sb.Append("  SendKey: ").Append(SendKey).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");

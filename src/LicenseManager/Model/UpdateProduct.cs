@@ -38,11 +38,13 @@ namespace LicenseManager.Model
         /// <param name="name">name.</param>
         /// <param name="slug">Unique within the organization. Defaults to the name, lower cased, without accents and special characters. Starts with &#x60;test_&#x60; in test products, which is added when missing, and removed in live products..</param>
         /// <param name="portal">portal.</param>
-        public UpdateProduct(string name = default, string slug = default, UpdateProductPortal portal = default)
+        /// <param name="autoMachineChange">Whether a new machine validating a license already on its max machines takes the place of the license&#39;s machine validated the longest ago, rather than being refused with &#x60;machine_limit_reached&#x60;. When the replaced machine is validated again, it takes its place back and the machine that replaced it is locked. See &#x60;validateKey&#x60;..</param>
+        public UpdateProduct(string name = default, string slug = default, UpdateProductPortal portal = default, bool autoMachineChange = default)
         {
             this.Name = name;
             this.Slug = slug;
             this.Portal = portal;
+            this.AutoMachineChange = autoMachineChange;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -72,6 +74,16 @@ namespace LicenseManager.Model
         public UpdateProductPortal Portal { get; set; }
 
         /// <summary>
+        /// Whether a new machine validating a license already on its max machines takes the place of the license&#39;s machine validated the longest ago, rather than being refused with &#x60;machine_limit_reached&#x60;. When the replaced machine is validated again, it takes its place back and the machine that replaced it is locked. See &#x60;validateKey&#x60;.
+        /// </summary>
+        /// <value>Whether a new machine validating a license already on its max machines takes the place of the license&#39;s machine validated the longest ago, rather than being refused with &#x60;machine_limit_reached&#x60;. When the replaced machine is validated again, it takes its place back and the machine that replaced it is locked. See &#x60;validateKey&#x60;.</value>
+        /*
+        <example>true</example>
+        */
+        [DataMember(Name = "autoMachineChange", EmitDefaultValue = true)]
+        public bool AutoMachineChange { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -88,6 +100,7 @@ namespace LicenseManager.Model
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Slug: ").Append(Slug).Append("\n");
             sb.Append("  Portal: ").Append(Portal).Append("\n");
+            sb.Append("  AutoMachineChange: ").Append(AutoMachineChange).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

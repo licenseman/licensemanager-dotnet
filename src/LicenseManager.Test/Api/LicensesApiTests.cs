@@ -54,6 +54,19 @@ namespace LicenseManager.Test.Api
         }
 
         /// <summary>
+        /// Test CancelLicense
+        /// </summary>
+        [Fact]
+        public void CancelLicenseTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string id = null;
+            //CancelLicense cancelLicense = null;
+            //var response = instance.CancelLicense(id, cancelLicense);
+            //Assert.IsType<License>(response);
+        }
+
+        /// <summary>
         /// Test CreateLicense
         /// </summary>
         [Fact]

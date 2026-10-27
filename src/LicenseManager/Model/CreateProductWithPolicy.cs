@@ -46,7 +46,7 @@ namespace LicenseManager.Model
         /// <param name="name">name (required).</param>
         /// <param name="slug">Unique within the organization. Defaults to the name, lower cased, without accents and special characters. Starts with &#x60;test_&#x60; in test products, which is added when missing, and removed in live products..</param>
         /// <param name="defaultPolicy">defaultPolicy.</param>
-        /// <param name="isTestFromProductId">Creates a test product: a sandbox of this live product of the organization, starting with copies of its policies, releases and portal settings..</param>
+        /// <param name="isTestFromProductId">Creates a test product: a sandbox of this live product of the organization, starting with copies of its policies, releases, portal settings and &#x60;autoMachineChange&#x60;..</param>
         public CreateProductWithPolicy(string name = default, string slug = default, PolicySettings defaultPolicy = default, string isTestFromProductId = default)
         {
             // to ensure "name" is required (not null)
@@ -87,9 +87,9 @@ namespace LicenseManager.Model
         public PolicySettings DefaultPolicy { get; set; }
 
         /// <summary>
-        /// Creates a test product: a sandbox of this live product of the organization, starting with copies of its policies, releases and portal settings.
+        /// Creates a test product: a sandbox of this live product of the organization, starting with copies of its policies, releases, portal settings and &#x60;autoMachineChange&#x60;.
         /// </summary>
-        /// <value>Creates a test product: a sandbox of this live product of the organization, starting with copies of its policies, releases and portal settings.</value>
+        /// <value>Creates a test product: a sandbox of this live product of the organization, starting with copies of its policies, releases, portal settings and &#x60;autoMachineChange&#x60;.</value>
         /*
         <example>x7Kp2QaZ</example>
         */

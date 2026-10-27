@@ -82,6 +82,24 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'CanceledLicenseCount'
+        /// </summary>
+        [Fact]
+        public void CanceledLicenseCountTest()
+        {
+            // TODO unit test for the property 'CanceledLicenseCount'
+        }
+
+        /// <summary>
+        /// Test the property 'CanceledTotal'
+        /// </summary>
+        [Fact]
+        public void CanceledTotalTest()
+        {
+            // TODO unit test for the property 'CanceledTotal'
+        }
+
+        /// <summary>
         /// Test the property 'ThisMonth'
         /// </summary>
         [Fact]

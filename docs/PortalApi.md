@@ -15,7 +15,7 @@ All URIs are relative to *https://api.licensemanager.dev*
 
 Create a link to the customer portal
 
-Link letting the customer see their licenses and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can't be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product's customer portal is disabled, but the portal answers `404` until it's enabled, and `sendPortalLink` refuses to email them.  **Required role permission**: `portalLink:create` when called with a session, granted by the member's role. API keys aren't limited by roles.
+Link letting the customer see their licenses, cancel them during their money back guarantee, and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can't be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product's customer portal is disabled, but the portal answers `404` until it's enabled, and `sendPortalLink` refuses to email them.  **Required role permission**: `portalLink:create` when called with a session, granted by the member's role. API keys aren't limited by roles.
 
 ### Example
 ```csharp

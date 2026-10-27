@@ -179,6 +179,29 @@ namespace LicenseManager.Api
         /// <returns>ApiResponse of ListStripePrices200Response</returns>
         ApiResponse<ListStripePrices200Response> ListStripePricesWithHttpInfo(string id);
         /// <summary>
+        /// Update an integration
+        /// </summary>
+        /// <remarks>
+        /// Changes the settings of the integration, for every product of its mode. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="updateIntegration"></param>
+        /// <returns>Integration</returns>
+        Integration UpdateIntegration(string id, UpdateIntegration updateIntegration);
+
+        /// <summary>
+        /// Update an integration
+        /// </summary>
+        /// <remarks>
+        /// Changes the settings of the integration, for every product of its mode. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="updateIntegration"></param>
+        /// <returns>ApiResponse of Integration</returns>
+        ApiResponse<Integration> UpdateIntegrationWithHttpInfo(string id, UpdateIntegration updateIntegration);
+        /// <summary>
         /// Change the policy of a mapping
         /// </summary>
         /// <remarks>
@@ -375,6 +398,31 @@ namespace LicenseManager.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ListStripePrices200Response)</returns>
         System.Threading.Tasks.Task<ApiResponse<ListStripePrices200Response>> ListStripePricesWithHttpInfoAsync(string id, System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Update an integration
+        /// </summary>
+        /// <remarks>
+        /// Changes the settings of the integration, for every product of its mode. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="updateIntegration"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Integration</returns>
+        System.Threading.Tasks.Task<Integration> UpdateIntegrationAsync(string id, UpdateIntegration updateIntegration, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update an integration
+        /// </summary>
+        /// <remarks>
+        /// Changes the settings of the integration, for every product of its mode. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="updateIntegration"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Integration)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Integration>> UpdateIntegrationWithHttpInfoAsync(string id, UpdateIntegration updateIntegration, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Change the policy of a mapping
         /// </summary>
@@ -1510,6 +1558,147 @@ namespace LicenseManager.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ListStripePrices", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Update an integration Changes the settings of the integration, for every product of its mode. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="updateIntegration"></param>
+        /// <returns>Integration</returns>
+        public Integration UpdateIntegration(string id, UpdateIntegration updateIntegration)
+        {
+            LicenseManager.Client.ApiResponse<Integration> localVarResponse = UpdateIntegrationWithHttpInfo(id, updateIntegration);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update an integration Changes the settings of the integration, for every product of its mode. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="updateIntegration"></param>
+        /// <returns>ApiResponse of Integration</returns>
+        public LicenseManager.Client.ApiResponse<Integration> UpdateIntegrationWithHttpInfo(string id, UpdateIntegration updateIntegration)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'id' when calling IntegrationsApi->UpdateIntegration");
+
+            // verify the required parameter 'updateIntegration' is set
+            if (updateIntegration == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'updateIntegration' when calling IntegrationsApi->UpdateIntegration");
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", LicenseManager.Client.ClientUtils.ParameterToString(id)); // path parameter
+            localVarRequestOptions.Data = updateIntegration;
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Patch<Integration>("/v1/integrations/{id}", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateIntegration", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Update an integration Changes the settings of the integration, for every product of its mode. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="updateIntegration"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Integration</returns>
+        public async System.Threading.Tasks.Task<Integration> UpdateIntegrationAsync(string id, UpdateIntegration updateIntegration, System.Threading.CancellationToken cancellationToken = default)
+        {
+            LicenseManager.Client.ApiResponse<Integration> localVarResponse = await UpdateIntegrationWithHttpInfoAsync(id, updateIntegration, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update an integration Changes the settings of the integration, for every product of its mode. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="updateIntegration"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Integration)</returns>
+        public async System.Threading.Tasks.Task<LicenseManager.Client.ApiResponse<Integration>> UpdateIntegrationWithHttpInfoAsync(string id, UpdateIntegration updateIntegration, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'id' when calling IntegrationsApi->UpdateIntegration");
+
+            // verify the required parameter 'updateIntegration' is set
+            if (updateIntegration == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'updateIntegration' when calling IntegrationsApi->UpdateIntegration");
+
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", LicenseManager.Client.ClientUtils.ParameterToString(id)); // path parameter
+            localVarRequestOptions.Data = updateIntegration;
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PatchAsync<Integration>("/v1/integrations/{id}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateIntegration", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

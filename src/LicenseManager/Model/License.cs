@@ -38,6 +38,12 @@ namespace LicenseManager.Model
         /// </summary>
         [DataMember(Name = "status", IsRequired = true, EmitDefaultValue = true)]
         public LicenseStatus Status { get; set; }
+
+        /// <summary>
+        /// Gets or Sets CancellationReason
+        /// </summary>
+        [DataMember(Name = "cancellationReason", IsRequired = true, EmitDefaultValue = true)]
+        public CancellationReason CancellationReason { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="License" /> class.
         /// </summary>
@@ -65,8 +71,13 @@ namespace LicenseManager.Model
         /// <param name="maxVersion">maxVersion (required).</param>
         /// <param name="price">price (required).</param>
         /// <param name="status">status (required).</param>
+        /// <param name="cancellableUntil">End of the money back guarantee: until then, the customer can cancel the license from the customer portal, or with a token. Set from the policy&#39;s &#x60;moneyBackGuaranteeDays&#x60; when the license is created. &#x60;null&#x60; when the customer can&#39;t cancel it. (required).</param>
+        /// <param name="canceledAt">When the license was canceled: validating its key fails since. &#x60;null&#x60; when it wasn&#39;t. (required).</param>
+        /// <param name="cancellationReason">cancellationReason (required).</param>
+        /// <param name="cancellationComment">Comment given when the license was canceled. &#x60;null&#x60; when there&#39;s none. (required).</param>
+        /// <param name="stripeRefundId">Id of the Stripe refund of the license&#39;s payment once it was canceled, through the Stripe integration. &#x60;null&#x60; otherwise. (required).</param>
         /// <param name="updatedAt">Last time the license&#39;s settings were edited, not when its key was validated. (required).</param>
-        public License(string id = default, string productId = default, string policyId = default, string customerId = default, string key = default, DateTime createdAt = default, DateTime? expiresAt = default, Dictionary<string, Object> meta = default, string stripePaymentIntentId = default, int? maxMachines = default, int maxOfflineDurationSeconds = default, int activeMachineCount = default, DateTime? lastActivatedAt = default, LicenseMaxVersion maxVersion = default, Price price = default, LicenseStatus status = default, DateTime updatedAt = default)
+        public License(string id = default, string productId = default, string policyId = default, string customerId = default, string key = default, DateTime createdAt = default, DateTime? expiresAt = default, Dictionary<string, Object> meta = default, string stripePaymentIntentId = default, int? maxMachines = default, int maxOfflineDurationSeconds = default, int activeMachineCount = default, DateTime? lastActivatedAt = default, LicenseMaxVersion maxVersion = default, Price price = default, LicenseStatus status = default, DateTime? cancellableUntil = default, DateTime? canceledAt = default, CancellationReason cancellationReason = default, string cancellationComment = default, string stripeRefundId = default, DateTime updatedAt = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -144,6 +155,31 @@ namespace LicenseManager.Model
             }
             this.Price = price;
             this.Status = status;
+            // to ensure "cancellableUntil" is required (not null)
+            if (cancellableUntil == null)
+            {
+                throw new ArgumentNullException("cancellableUntil is a required property for License and cannot be null");
+            }
+            this.CancellableUntil = cancellableUntil;
+            // to ensure "canceledAt" is required (not null)
+            if (canceledAt == null)
+            {
+                throw new ArgumentNullException("canceledAt is a required property for License and cannot be null");
+            }
+            this.CanceledAt = canceledAt;
+            this.CancellationReason = cancellationReason;
+            // to ensure "cancellationComment" is required (not null)
+            if (cancellationComment == null)
+            {
+                throw new ArgumentNullException("cancellationComment is a required property for License and cannot be null");
+            }
+            this.CancellationComment = cancellationComment;
+            // to ensure "stripeRefundId" is required (not null)
+            if (stripeRefundId == null)
+            {
+                throw new ArgumentNullException("stripeRefundId is a required property for License and cannot be null");
+            }
+            this.StripeRefundId = stripeRefundId;
             this.UpdatedAt = updatedAt;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
@@ -286,6 +322,46 @@ namespace LicenseManager.Model
         public Price Price { get; set; }
 
         /// <summary>
+        /// End of the money back guarantee: until then, the customer can cancel the license from the customer portal, or with a token. Set from the policy&#39;s &#x60;moneyBackGuaranteeDays&#x60; when the license is created. &#x60;null&#x60; when the customer can&#39;t cancel it.
+        /// </summary>
+        /// <value>End of the money back guarantee: until then, the customer can cancel the license from the customer portal, or with a token. Set from the policy&#39;s &#x60;moneyBackGuaranteeDays&#x60; when the license is created. &#x60;null&#x60; when the customer can&#39;t cancel it.</value>
+        /*
+        <example>2026-02-14T09:30:00.000Z</example>
+        */
+        [DataMember(Name = "cancellableUntil", IsRequired = true, EmitDefaultValue = true)]
+        public DateTime? CancellableUntil { get; set; }
+
+        /// <summary>
+        /// When the license was canceled: validating its key fails since. &#x60;null&#x60; when it wasn&#39;t.
+        /// </summary>
+        /// <value>When the license was canceled: validating its key fails since. &#x60;null&#x60; when it wasn&#39;t.</value>
+        /*
+        <example>2026-01-20T16:12:00.000Z</example>
+        */
+        [DataMember(Name = "canceledAt", IsRequired = true, EmitDefaultValue = true)]
+        public DateTime? CanceledAt { get; set; }
+
+        /// <summary>
+        /// Comment given when the license was canceled. &#x60;null&#x60; when there&#39;s none.
+        /// </summary>
+        /// <value>Comment given when the license was canceled. &#x60;null&#x60; when there&#39;s none.</value>
+        /*
+        <example>I only needed it for one project.</example>
+        */
+        [DataMember(Name = "cancellationComment", IsRequired = true, EmitDefaultValue = true)]
+        public string CancellationComment { get; set; }
+
+        /// <summary>
+        /// Id of the Stripe refund of the license&#39;s payment once it was canceled, through the Stripe integration. &#x60;null&#x60; otherwise.
+        /// </summary>
+        /// <value>Id of the Stripe refund of the license&#39;s payment once it was canceled, through the Stripe integration. &#x60;null&#x60; otherwise.</value>
+        /*
+        <example>re_3MtwBwLkdIwHu7ix0Bs5rA2b</example>
+        */
+        [DataMember(Name = "stripeRefundId", IsRequired = true, EmitDefaultValue = true)]
+        public string StripeRefundId { get; set; }
+
+        /// <summary>
         /// Last time the license&#39;s settings were edited, not when its key was validated.
         /// </summary>
         /// <value>Last time the license&#39;s settings were edited, not when its key was validated.</value>
@@ -325,6 +401,11 @@ namespace LicenseManager.Model
             sb.Append("  MaxVersion: ").Append(MaxVersion).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
+            sb.Append("  CancellableUntil: ").Append(CancellableUntil).Append("\n");
+            sb.Append("  CanceledAt: ").Append(CanceledAt).Append("\n");
+            sb.Append("  CancellationReason: ").Append(CancellationReason).Append("\n");
+            sb.Append("  CancellationComment: ").Append(CancellationComment).Append("\n");
+            sb.Append("  StripeRefundId: ").Append(StripeRefundId).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");

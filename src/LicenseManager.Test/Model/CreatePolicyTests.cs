@@ -116,5 +116,14 @@ namespace LicenseManager.Test.Model
         {
             // TODO unit test for the property 'MaxVersion'
         }
+
+        /// <summary>
+        /// Test the property 'MoneyBackGuaranteeDays'
+        /// </summary>
+        [Fact]
+        public void MoneyBackGuaranteeDaysTest()
+        {
+            // TODO unit test for the property 'MoneyBackGuaranteeDays'
+        }
     }
 }

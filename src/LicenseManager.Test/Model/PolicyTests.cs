@@ -136,6 +136,15 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'MoneyBackGuaranteeDays'
+        /// </summary>
+        [Fact]
+        public void MoneyBackGuaranteeDaysTest()
+        {
+            // TODO unit test for the property 'MoneyBackGuaranteeDays'
+        }
+
+        /// <summary>
         /// Test the property 'LicenseCount'
         /// </summary>
         [Fact]

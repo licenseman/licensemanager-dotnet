@@ -63,22 +63,28 @@ namespace LicenseManager.Model
             Licensewrite = 4,
 
             /// <summary>
+            /// Enum Licensecancel for value: license:cancel
+            /// </summary>
+            [EnumMember(Value = "license:cancel")]
+            Licensecancel = 5,
+
+            /// <summary>
             /// Enum Machineread for value: machine:read
             /// </summary>
             [EnumMember(Value = "machine:read")]
-            Machineread = 5,
+            Machineread = 6,
 
             /// <summary>
             /// Enum Machinewrite for value: machine:write
             /// </summary>
             [EnumMember(Value = "machine:write")]
-            Machinewrite = 6,
+            Machinewrite = 7,
 
             /// <summary>
             /// Enum UnknownDefaultOpenApi for value: unknown_default_open_api
             /// </summary>
             [EnumMember(Value = "unknown_default_open_api")]
-            UnknownDefaultOpenApi = 7
+            UnknownDefaultOpenApi = 8
         }
 
         /// <summary>
@@ -92,7 +98,7 @@ namespace LicenseManager.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateToken" /> class.
         /// </summary>
-        /// <param name="scope">Permissions of the token. A write permission implies the matching read one. A token creating a token can only give the permissions it has. (required).</param>
+        /// <param name="scope">Permissions of the token. A write permission implies the other ones of its resource, like the read one: &#x60;license:write&#x60; implies &#x60;license:read&#x60; and &#x60;license:cancel&#x60;. A token creating a token can only give the permissions it has. (required).</param>
         /// <param name="expiresInSeconds">How long the token works, in seconds, from 60 (1 minute) to 31536000 (365 days). Defaults to 900 (15 minutes). A token creating a token can&#39;t give it a later expiration than its own: it&#39;s shortened to it. (default to 900).</param>
         public CreateToken(List<ScopeEnum> scope = default, int expiresInSeconds = 900)
         {
@@ -107,9 +113,9 @@ namespace LicenseManager.Model
         }
 
         /// <summary>
-        /// Permissions of the token. A write permission implies the matching read one. A token creating a token can only give the permissions it has.
+        /// Permissions of the token. A write permission implies the other ones of its resource, like the read one: &#x60;license:write&#x60; implies &#x60;license:read&#x60; and &#x60;license:cancel&#x60;. A token creating a token can only give the permissions it has.
         /// </summary>
-        /// <value>Permissions of the token. A write permission implies the matching read one. A token creating a token can only give the permissions it has.</value>
+        /// <value>Permissions of the token. A write permission implies the other ones of its resource, like the read one: &#x60;license:write&#x60; implies &#x60;license:read&#x60; and &#x60;license:cancel&#x60;. A token creating a token can only give the permissions it has.</value>
         /*
         <example>[license:read, machine:write]</example>
         */

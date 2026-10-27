@@ -44,7 +44,7 @@ namespace LicenseManager.Model
         /// Initializes a new instance of the <see cref="PortalLink" /> class.
         /// </summary>
         /// <param name="url">Link to the customer portal, holding the token. (required).</param>
-        /// <param name="token">Customer token in the link, with the &#x60;customer:read&#x60;, &#x60;license:read&#x60; and &#x60;machine:write&#x60; permissions. (required).</param>
+        /// <param name="token">Customer token in the link, with the &#x60;customer:read&#x60;, &#x60;license:read&#x60;, &#x60;license:cancel&#x60; and &#x60;machine:write&#x60; permissions. (required).</param>
         /// <param name="expiresAt">When the link stops working. (required).</param>
         public PortalLink(string url = default, string token = default, DateTime expiresAt = default)
         {
@@ -69,15 +69,15 @@ namespace LicenseManager.Model
         /// </summary>
         /// <value>Link to the customer portal, holding the token.</value>
         /*
-        <example>https://app.example.com/portal/x7Kp2QaZ?token&#x3D;eyJhbGciOi…</example>
+        <example>https://app.licensemanager.dev/portal/x7Kp2QaZ?token&#x3D;eyJhbGciOi…</example>
         */
         [DataMember(Name = "url", IsRequired = true, EmitDefaultValue = true)]
         public string Url { get; set; }
 
         /// <summary>
-        /// Customer token in the link, with the &#x60;customer:read&#x60;, &#x60;license:read&#x60; and &#x60;machine:write&#x60; permissions.
+        /// Customer token in the link, with the &#x60;customer:read&#x60;, &#x60;license:read&#x60;, &#x60;license:cancel&#x60; and &#x60;machine:write&#x60; permissions.
         /// </summary>
-        /// <value>Customer token in the link, with the &#x60;customer:read&#x60;, &#x60;license:read&#x60; and &#x60;machine:write&#x60; permissions.</value>
+        /// <value>Customer token in the link, with the &#x60;customer:read&#x60;, &#x60;license:read&#x60;, &#x60;license:cancel&#x60; and &#x60;machine:write&#x60; permissions.</value>
         /*
         <example>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9…</example>
         */

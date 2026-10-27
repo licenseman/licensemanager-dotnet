@@ -33,9 +33,9 @@ namespace LicenseManager.Model
     public partial class Machine : IValidatableObject
     {
         /// <summary>
-        /// Whether the machine counts as using the license.
+        /// Whether the machine counts as using the license. A &#x60;locked&#x60; machine doesn&#39;t, and its validations are refused with &#x60;machine_locked&#x60;: it overrode a machine that came back. See &#x60;validateKey&#x60;.
         /// </summary>
-        /// <value>Whether the machine counts as using the license.</value>
+        /// <value>Whether the machine counts as using the license. A &#x60;locked&#x60; machine doesn&#39;t, and its validations are refused with &#x60;machine_locked&#x60;: it overrode a machine that came back. See &#x60;validateKey&#x60;.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum StatusEnum
         {
@@ -52,17 +52,23 @@ namespace LicenseManager.Model
             Deactivated = 2,
 
             /// <summary>
+            /// Enum Locked for value: locked
+            /// </summary>
+            [EnumMember(Value = "locked")]
+            Locked = 3,
+
+            /// <summary>
             /// Enum UnknownDefaultOpenApi for value: unknown_default_open_api
             /// </summary>
             [EnumMember(Value = "unknown_default_open_api")]
-            UnknownDefaultOpenApi = 3
+            UnknownDefaultOpenApi = 4
         }
 
 
         /// <summary>
-        /// Whether the machine counts as using the license.
+        /// Whether the machine counts as using the license. A &#x60;locked&#x60; machine doesn&#39;t, and its validations are refused with &#x60;machine_locked&#x60;: it overrode a machine that came back. See &#x60;validateKey&#x60;.
         /// </summary>
-        /// <value>Whether the machine counts as using the license.</value>
+        /// <value>Whether the machine counts as using the license. A &#x60;locked&#x60; machine doesn&#39;t, and its validations are refused with &#x60;machine_locked&#x60;: it overrode a machine that came back. See &#x60;validateKey&#x60;.</value>
         /*
         <example>active</example>
         */
@@ -84,12 +90,13 @@ namespace LicenseManager.Model
         /// <param name="fingerprint">Identifies the machine. Unique within the license. (required).</param>
         /// <param name="platform">platform (required).</param>
         /// <param name="name">name (required).</param>
-        /// <param name="status">Whether the machine counts as using the license. (required).</param>
+        /// <param name="status">Whether the machine counts as using the license. A &#x60;locked&#x60; machine doesn&#39;t, and its validations are refused with &#x60;machine_locked&#x60;: it overrode a machine that came back. See &#x60;validateKey&#x60;. (required).</param>
         /// <param name="varVersion">Version of the application last validated on the machine. (required).</param>
+        /// <param name="overriddenByMachineId">For a machine deactivated or locked by automatic machine changes, the machine that took its place. Validating the key on a deactivated machine that has one takes its place back. &#x60;null&#x60; otherwise. (required).</param>
         /// <param name="lastValidatedAt">When the license was last validated on the machine. (required).</param>
         /// <param name="createdAt">createdAt (required).</param>
         /// <param name="updatedAt">updatedAt (required).</param>
-        public Machine(string id = default, string licenseId = default, string fingerprint = default, string platform = default, string name = default, StatusEnum status = default, string varVersion = default, DateTime? lastValidatedAt = default, DateTime createdAt = default, DateTime updatedAt = default)
+        public Machine(string id = default, string licenseId = default, string fingerprint = default, string platform = default, string name = default, StatusEnum status = default, string varVersion = default, string overriddenByMachineId = default, DateTime? lastValidatedAt = default, DateTime createdAt = default, DateTime updatedAt = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -128,6 +135,12 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("varVersion is a required property for Machine and cannot be null");
             }
             this.VarVersion = varVersion;
+            // to ensure "overriddenByMachineId" is required (not null)
+            if (overriddenByMachineId == null)
+            {
+                throw new ArgumentNullException("overriddenByMachineId is a required property for Machine and cannot be null");
+            }
+            this.OverriddenByMachineId = overriddenByMachineId;
             // to ensure "lastValidatedAt" is required (not null)
             if (lastValidatedAt == null)
             {
@@ -196,6 +209,13 @@ namespace LicenseManager.Model
         public string VarVersion { get; set; }
 
         /// <summary>
+        /// For a machine deactivated or locked by automatic machine changes, the machine that took its place. Validating the key on a deactivated machine that has one takes its place back. &#x60;null&#x60; otherwise.
+        /// </summary>
+        /// <value>For a machine deactivated or locked by automatic machine changes, the machine that took its place. Validating the key on a deactivated machine that has one takes its place back. &#x60;null&#x60; otherwise.</value>
+        [DataMember(Name = "overriddenByMachineId", IsRequired = true, EmitDefaultValue = true)]
+        public string OverriddenByMachineId { get; set; }
+
+        /// <summary>
         /// When the license was last validated on the machine.
         /// </summary>
         /// <value>When the license was last validated on the machine.</value>
@@ -244,6 +264,7 @@ namespace LicenseManager.Model
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  VarVersion: ").Append(VarVersion).Append("\n");
+            sb.Append("  OverriddenByMachineId: ").Append(OverriddenByMachineId).Append("\n");
             sb.Append("  LastValidatedAt: ").Append(LastValidatedAt).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");

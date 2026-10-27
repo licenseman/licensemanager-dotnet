@@ -105,22 +105,28 @@ namespace LicenseManager.Model
             Licensewrite = 4,
 
             /// <summary>
+            /// Enum Licensecancel for value: license:cancel
+            /// </summary>
+            [EnumMember(Value = "license:cancel")]
+            Licensecancel = 5,
+
+            /// <summary>
             /// Enum Machineread for value: machine:read
             /// </summary>
             [EnumMember(Value = "machine:read")]
-            Machineread = 5,
+            Machineread = 6,
 
             /// <summary>
             /// Enum Machinewrite for value: machine:write
             /// </summary>
             [EnumMember(Value = "machine:write")]
-            Machinewrite = 6,
+            Machinewrite = 7,
 
             /// <summary>
             /// Enum UnknownDefaultOpenApi for value: unknown_default_open_api
             /// </summary>
             [EnumMember(Value = "unknown_default_open_api")]
-            UnknownDefaultOpenApi = 7
+            UnknownDefaultOpenApi = 8
         }
 
         /// <summary>

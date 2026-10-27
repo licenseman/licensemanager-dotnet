@@ -44,13 +44,13 @@ namespace LicenseManager.Model
         /// Initializes a new instance of the <see cref="ProductStats" /> class.
         /// </summary>
         /// <param name="licenseCount">Number of licenses of the product. (required).</param>
-        /// <param name="activeLicenseCount">Number of licenses that haven&#39;t expired, and that a machine validated in the last 90 days. (required).</param>
+        /// <param name="activeLicenseCount">Number of licenses that haven&#39;t expired nor were canceled, and that a machine validated in the last 90 days. (required).</param>
         /// <param name="newLicenseCount">Number of licenses created in the last 30 days, today included, in UTC. (required).</param>
-        /// <param name="expiringLicenseCount">Number of licenses expiring in the next 30 days. (required).</param>
-        /// <param name="expiredLicenseCount">Number of licenses that expired in the last 30 days. (required).</param>
+        /// <param name="expiringLicenseCount">Number of licenses expiring in the next 30 days, canceled ones left out. (required).</param>
+        /// <param name="expiredLicenseCount">Number of licenses that expired in the last 30 days, canceled ones left out. (required).</param>
         /// <param name="activeMachineCount">Number of active machines of the licenses of the product. (required).</param>
         /// <param name="inUseLicenseCount">Number of licenses with at least one active machine. (required).</param>
-        /// <param name="seatCount">Sum of the maximum numbers of machines of the licenses that haven&#39;t expired. Licenses without a maximum are left out. (required).</param>
+        /// <param name="seatCount">Sum of the maximum numbers of machines of the licenses that haven&#39;t expired nor were canceled. Licenses without a maximum are left out. (required).</param>
         /// <param name="usedSeatCount">Number of active machines of the licenses counted in &#x60;seatCount&#x60;, at most their maximum number of machines each. (required).</param>
         /// <param name="fullLicenseCount">Number of licenses counted in &#x60;seatCount&#x60; active on their maximum number of machines. (required).</param>
         /// <param name="days">The 30 days covered by the daily stats, from the oldest one, in UTC. (required).</param>
@@ -58,11 +58,12 @@ namespace LicenseManager.Model
         /// <param name="newLicensesByDay">Number of licenses created each day, aligned on &#x60;days&#x60;. (required).</param>
         /// <param name="newLicensesByMonth">Number of licenses created each month, aligned on &#x60;months&#x60;. (required).</param>
         /// <param name="newLicensesByPolicy">Number of licenses of each policy created each day and each month, for the policies with licenses created over the covered months. (required).</param>
+        /// <param name="cancellation">Cancellations of the licenses with a money back guarantee. &#x60;null&#x60; when no license of the product has one. (required).</param>
         /// <param name="revenue">Revenue in each currency licenses were sold in, from the one with the most licenses sold. Amounts aren&#39;t converted between currencies. (required).</param>
         /// <param name="activationsByVersion">Successful activations of the licenses of the product each day, per version of the application, from the most recent one. (required).</param>
         /// <param name="activeMachinesByVersion">Number of active machines running each version of the application, from the most recent one. (required).</param>
         /// <param name="activeMachinesByPlatform">Number of active machines on each platform, from the one with the most machines. (required).</param>
-        public ProductStats(int licenseCount = default, int activeLicenseCount = default, int newLicenseCount = default, int expiringLicenseCount = default, int expiredLicenseCount = default, int activeMachineCount = default, int inUseLicenseCount = default, int seatCount = default, int usedSeatCount = default, int fullLicenseCount = default, List<DateTime> days = default, List<string> months = default, List<int> newLicensesByDay = default, List<int> newLicensesByMonth = default, List<ProductStatsNewLicensesByPolicyInner> newLicensesByPolicy = default, List<Revenue> revenue = default, List<ProductStatsActivationsByVersionInner> activationsByVersion = default, List<ProductStatsActiveMachinesByVersionInner> activeMachinesByVersion = default, List<ProductStatsActiveMachinesByPlatformInner> activeMachinesByPlatform = default)
+        public ProductStats(int licenseCount = default, int activeLicenseCount = default, int newLicenseCount = default, int expiringLicenseCount = default, int expiredLicenseCount = default, int activeMachineCount = default, int inUseLicenseCount = default, int seatCount = default, int usedSeatCount = default, int fullLicenseCount = default, List<DateTime> days = default, List<string> months = default, List<int> newLicensesByDay = default, List<int> newLicensesByMonth = default, List<ProductStatsNewLicensesByPolicyInner> newLicensesByPolicy = default, CancellationStats cancellation = default, List<Revenue> revenue = default, List<ProductStatsActivationsByVersionInner> activationsByVersion = default, List<ProductStatsActiveMachinesByVersionInner> activeMachinesByVersion = default, List<ProductStatsActiveMachinesByPlatformInner> activeMachinesByPlatform = default)
         {
             this.LicenseCount = licenseCount;
             this.ActiveLicenseCount = activeLicenseCount;
@@ -104,6 +105,12 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("newLicensesByPolicy is a required property for ProductStats and cannot be null");
             }
             this.NewLicensesByPolicy = newLicensesByPolicy;
+            // to ensure "cancellation" is required (not null)
+            if (cancellation == null)
+            {
+                throw new ArgumentNullException("cancellation is a required property for ProductStats and cannot be null");
+            }
+            this.Cancellation = cancellation;
             // to ensure "revenue" is required (not null)
             if (revenue == null)
             {
@@ -142,9 +149,9 @@ namespace LicenseManager.Model
         public int LicenseCount { get; set; }
 
         /// <summary>
-        /// Number of licenses that haven&#39;t expired, and that a machine validated in the last 90 days.
+        /// Number of licenses that haven&#39;t expired nor were canceled, and that a machine validated in the last 90 days.
         /// </summary>
-        /// <value>Number of licenses that haven&#39;t expired, and that a machine validated in the last 90 days.</value>
+        /// <value>Number of licenses that haven&#39;t expired nor were canceled, and that a machine validated in the last 90 days.</value>
         /*
         <example>87</example>
         */
@@ -162,9 +169,9 @@ namespace LicenseManager.Model
         public int NewLicenseCount { get; set; }
 
         /// <summary>
-        /// Number of licenses expiring in the next 30 days.
+        /// Number of licenses expiring in the next 30 days, canceled ones left out.
         /// </summary>
-        /// <value>Number of licenses expiring in the next 30 days.</value>
+        /// <value>Number of licenses expiring in the next 30 days, canceled ones left out.</value>
         /*
         <example>3</example>
         */
@@ -172,9 +179,9 @@ namespace LicenseManager.Model
         public int ExpiringLicenseCount { get; set; }
 
         /// <summary>
-        /// Number of licenses that expired in the last 30 days.
+        /// Number of licenses that expired in the last 30 days, canceled ones left out.
         /// </summary>
-        /// <value>Number of licenses that expired in the last 30 days.</value>
+        /// <value>Number of licenses that expired in the last 30 days, canceled ones left out.</value>
         /*
         <example>2</example>
         */
@@ -202,9 +209,9 @@ namespace LicenseManager.Model
         public int InUseLicenseCount { get; set; }
 
         /// <summary>
-        /// Sum of the maximum numbers of machines of the licenses that haven&#39;t expired. Licenses without a maximum are left out.
+        /// Sum of the maximum numbers of machines of the licenses that haven&#39;t expired nor were canceled. Licenses without a maximum are left out.
         /// </summary>
-        /// <value>Sum of the maximum numbers of machines of the licenses that haven&#39;t expired. Licenses without a maximum are left out.</value>
+        /// <value>Sum of the maximum numbers of machines of the licenses that haven&#39;t expired nor were canceled. Licenses without a maximum are left out.</value>
         /*
         <example>200</example>
         */
@@ -273,6 +280,13 @@ namespace LicenseManager.Model
         public List<ProductStatsNewLicensesByPolicyInner> NewLicensesByPolicy { get; set; }
 
         /// <summary>
+        /// Cancellations of the licenses with a money back guarantee. &#x60;null&#x60; when no license of the product has one.
+        /// </summary>
+        /// <value>Cancellations of the licenses with a money back guarantee. &#x60;null&#x60; when no license of the product has one.</value>
+        [DataMember(Name = "cancellation", IsRequired = true, EmitDefaultValue = true)]
+        public CancellationStats Cancellation { get; set; }
+
+        /// <summary>
         /// Revenue in each currency licenses were sold in, from the one with the most licenses sold. Amounts aren&#39;t converted between currencies.
         /// </summary>
         /// <value>Revenue in each currency licenses were sold in, from the one with the most licenses sold. Amounts aren&#39;t converted between currencies.</value>
@@ -329,6 +343,7 @@ namespace LicenseManager.Model
             sb.Append("  NewLicensesByDay: ").Append(NewLicensesByDay).Append("\n");
             sb.Append("  NewLicensesByMonth: ").Append(NewLicensesByMonth).Append("\n");
             sb.Append("  NewLicensesByPolicy: ").Append(NewLicensesByPolicy).Append("\n");
+            sb.Append("  Cancellation: ").Append(Cancellation).Append("\n");
             sb.Append("  Revenue: ").Append(Revenue).Append("\n");
             sb.Append("  ActivationsByVersion: ").Append(ActivationsByVersion).Append("\n");
             sb.Append("  ActiveMachinesByVersion: ").Append(ActiveMachinesByVersion).Append("\n");

@@ -145,6 +145,24 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'AutoRefund'
+        /// </summary>
+        [Fact]
+        public void AutoRefundTest()
+        {
+            // TODO unit test for the property 'AutoRefund'
+        }
+
+        /// <summary>
+        /// Test the property 'CanRefund'
+        /// </summary>
+        [Fact]
+        public void CanRefundTest()
+        {
+            // TODO unit test for the property 'CanRefund'
+        }
+
+        /// <summary>
         /// Test the property 'CreatedAt'
         /// </summary>
         [Fact]

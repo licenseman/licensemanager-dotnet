@@ -11,6 +11,7 @@ All URIs are relative to *https://api.licensemanager.dev*
 | [**DisconnectIntegration**](IntegrationsApi.md#disconnectintegration) | **DELETE** /v1/integrations/{id} | Disconnect an integration |
 | [**GetStripeIntegration**](IntegrationsApi.md#getstripeintegration) | **GET** /v1/products/{productId}/integrations/stripe | Get the Stripe integration of a product |
 | [**ListStripePrices**](IntegrationsApi.md#liststripeprices) | **GET** /v1/integrations/{id}/stripe/prices | List the Stripe prices of an integration |
+| [**UpdateIntegration**](IntegrationsApi.md#updateintegration) | **PATCH** /v1/integrations/{id} | Update an integration |
 | [**UpdateStripeMapping**](IntegrationsApi.md#updatestripemapping) | **PATCH** /v1/integration-mappings/{id} | Change the policy of a mapping |
 
 <a id="checkintegration"></a>
@@ -225,7 +226,7 @@ catch (ApiException e)
 | **403** | &#x60;token_not_allowed&#x60;: the endpoint doesn&#39;t accept tokens, or not of this type. &#x60;insufficient_scope&#x60;: the token lacks the permission. &#x60;no_active_organization&#x60; or &#x60;forbidden&#x60;: the session has no organization, or isn&#39;t a member of the one requested |  -  |
 | **404** | Product not found |  -  |
 | **409** | &#x60;webhook_url_unreachable&#x60;: Stripe can&#39;t reach the server&#39;s webhook URL |  -  |
-| **422** | &#x60;validation_error&#x60;: invalid body. &#x60;invalid_api_key&#x60;: not a Stripe secret or restricted key, or Stripe rejected it. &#x60;key_mode_mismatch&#x60;: a test mode key for a live product, or the opposite. &#x60;missing_permission&#x60;: the key lacks required permissions, listed in the message |  -  |
+| **422** | &#x60;validation_error&#x60;: invalid body. &#x60;invalid_api_key&#x60;: not a Stripe secret or restricted key, or Stripe rejected it. &#x60;key_mode_mismatch&#x60;: a test mode key for a live product, or the opposite. &#x60;missing_permission&#x60;: the key lacks required permissions, listed in the message. Optional ones aren&#39;t required: without Refunds: Write, it connects with &#x60;canRefund&#x60; false |  -  |
 | **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
 | **502** | &#x60;provider_unavailable&#x60;: Stripe couldn&#39;t be reached |  -  |
 
@@ -756,6 +757,114 @@ catch (ApiException e)
 | **422** | &#x60;validation_error&#x60;: invalid path, query or body, with the &#x60;issues&#x60; |  -  |
 | **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
 | **502** | &#x60;provider_unavailable&#x60;: Stripe couldn&#39;t be reached, or refused the request |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="updateintegration"></a>
+# **UpdateIntegration**
+> Integration UpdateIntegration (string id, UpdateIntegration updateIntegration)
+
+Update an integration
+
+Changes the settings of the integration, for every product of its mode. Doesn't accept tokens: only API keys and sessions.  **Required role permission**: `integration:update` when called with a session, granted by the member's role. API keys aren't limited by roles.
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using LicenseManager.Api;
+using LicenseManager.Client;
+using LicenseManager.Model;
+
+namespace Example
+{
+    public class UpdateIntegrationExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.licensemanager.dev";
+            // Configure API key authorization: apiKey
+            config.AddApiKey("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("x-api-key", "Bearer");
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new IntegrationsApi(httpClient, config, httpClientHandler);
+            var id = i8Fz4QnRt;  // string | 
+            var updateIntegration = new UpdateIntegration(); // UpdateIntegration | 
+
+            try
+            {
+                // Update an integration
+                Integration result = apiInstance.UpdateIntegration(id, updateIntegration);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling IntegrationsApi.UpdateIntegration: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the UpdateIntegrationWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Update an integration
+    ApiResponse<Integration> response = apiInstance.UpdateIntegrationWithHttpInfo(id, updateIntegration);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling IntegrationsApi.UpdateIntegrationWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **id** | **string** |  |  |
+| **updateIntegration** | [**UpdateIntegration**](UpdateIntegration.md) |  |  |
+
+### Return type
+
+[**Integration**](Integration.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Updated integration |  -  |
+| **401** | &#x60;unauthorized&#x60;: no credentials. &#x60;invalid_api_key&#x60;: the API key doesn&#39;t exist, was revoked or has expired. &#x60;invalid_token&#x60;: the token&#39;s signature is invalid, it has expired, or the resource it&#39;s scoped to was deleted |  -  |
+| **402** | &#x60;plan_limit_exceeded&#x60;: the organization stayed over its plan&#39;s limits after the grace period, its API is blocked until it upgrades. &#x60;plan_limit_reached&#x60;: creating the resource would go over the plan&#39;s limit |  -  |
+| **403** | &#x60;token_not_allowed&#x60;: the endpoint doesn&#39;t accept tokens, or not of this type. &#x60;insufficient_scope&#x60;: the token lacks the permission. &#x60;no_active_organization&#x60; or &#x60;forbidden&#x60;: the session has no organization, or isn&#39;t a member of the one requested |  -  |
+| **404** | Integration not found |  -  |
+| **422** | &#x60;validation_error&#x60;: invalid body. &#x60;missing_permission&#x60;: turning &#x60;autoRefund&#x60; on while the API key lacks the Refunds: Write permission |  -  |
+| **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

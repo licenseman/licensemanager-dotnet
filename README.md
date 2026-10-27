@@ -95,7 +95,7 @@ Every method is documented, with its parameters and responses, in the [`docs`](d
 
 | Class | Methods |
 | --- | --- |
-| [`LicensesApi`](docs/LicensesApi.md) | `ValidateKeyAsync`, `ListLicensesAsync`, `CreateLicenseAsync`, `ListCustomerLicensesAsync`, `GetLicenseAsync`, `DeleteLicenseAsync`, `UpdateLicenseAsync`, `GetLicenseStatsAsync`, `SendLicenseKeysAsync`, `GetSigningKeyAsync` |
+| [`LicensesApi`](docs/LicensesApi.md) | `ValidateKeyAsync`, `ListLicensesAsync`, `CreateLicenseAsync`, `ListCustomerLicensesAsync`, `GetLicenseAsync`, `DeleteLicenseAsync`, `UpdateLicenseAsync`, `GetLicenseStatsAsync`, `CancelLicenseAsync`, `SendLicenseKeysAsync`, `GetSigningKeyAsync` |
 | [`PortalApi`](docs/PortalApi.md) | `GetPortalAsync`, `RequestPortalLinkAsync`, `CreatePortalLinkAsync`, `SendPortalLinkAsync` |
 | [`ProductsApi`](docs/ProductsApi.md) | `ListProductsAsync`, `CreateProductAsync`, `GetProductAsync`, `DeleteProductAsync`, `UpdateProductAsync`, `ResetProductAsync`, `UploadProductLogoAsync`, `DeleteProductLogoAsync`, `GetProductStatsAsync` |
 | [`PoliciesApi`](docs/PoliciesApi.md) | `ListPoliciesAsync`, `CreatePolicyAsync`, `GetPolicyAsync`, `DeletePolicyAsync`, `UpdatePolicyAsync` |
@@ -104,7 +104,7 @@ Every method is documented, with its parameters and responses, in the [`docs`](d
 | [`ReleasesApi`](docs/ReleasesApi.md) | `ListReleasesAsync`, `CreateReleaseAsync`, `GetReleaseAsync`, `DeleteReleaseAsync`, `UpdateReleaseAsync` |
 | [`TokensApi`](docs/TokensApi.md) | `CreateCustomerTokenAsync`, `CreateLicenseTokenAsync`, `CreateMachineTokenAsync` |
 | [`EventsApi`](docs/EventsApi.md) | `ListPolicyEventsAsync`, `ListLicenseEventsAsync` |
-| [`IntegrationsApi`](docs/IntegrationsApi.md) | `GetStripeIntegrationAsync`, `ConnectStripeAsync`, `DisconnectIntegrationAsync`, `CheckIntegrationAsync`, `ListStripePricesAsync`, `CreateStripeMappingAsync`, `DeleteStripeMappingAsync`, `UpdateStripeMappingAsync` |
+| [`IntegrationsApi`](docs/IntegrationsApi.md) | `GetStripeIntegrationAsync`, `ConnectStripeAsync`, `DisconnectIntegrationAsync`, `UpdateIntegrationAsync`, `CheckIntegrationAsync`, `ListStripePricesAsync`, `CreateStripeMappingAsync`, `DeleteStripeMappingAsync`, `UpdateStripeMappingAsync` |
 
 ## Versioning
 

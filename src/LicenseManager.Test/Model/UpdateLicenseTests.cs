@@ -107,5 +107,14 @@ namespace LicenseManager.Test.Model
         {
             // TODO unit test for the property 'Price'
         }
+
+        /// <summary>
+        /// Test the property 'CancellableUntil'
+        /// </summary>
+        [Fact]
+        public void CancellableUntilTest()
+        {
+            // TODO unit test for the property 'CancellableUntil'
+        }
     }
 }

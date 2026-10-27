@@ -49,9 +49,10 @@ namespace LicenseManager.Model
         /// <param name="isTestFromProductId">For test products, id of the live product they&#39;re a sandbox of. &#x60;null&#x60; for live products. (required).</param>
         /// <param name="logoUrl">Public URL of the product&#39;s logo, shown in the web app and the customer portal. &#x60;null&#x60; without a logo. (required).</param>
         /// <param name="portal">portal (required).</param>
+        /// <param name="autoMachineChange">Whether a new machine validating a license already on its max machines takes the place of the license&#39;s machine validated the longest ago, rather than being refused with &#x60;machine_limit_reached&#x60;. When the replaced machine is validated again, it takes its place back and the machine that replaced it is locked. See &#x60;validateKey&#x60;. (required).</param>
         /// <param name="createdAt">createdAt (required).</param>
         /// <param name="updatedAt">updatedAt (required).</param>
-        public Product(string id = default, string slug = default, string name = default, string isTestFromProductId = default, string logoUrl = default, PortalSettings portal = default, DateTime createdAt = default, DateTime updatedAt = default)
+        public Product(string id = default, string slug = default, string name = default, string isTestFromProductId = default, string logoUrl = default, PortalSettings portal = default, bool autoMachineChange = default, DateTime createdAt = default, DateTime updatedAt = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -89,6 +90,7 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("portal is a required property for Product and cannot be null");
             }
             this.Portal = portal;
+            this.AutoMachineChange = autoMachineChange;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
             this.AdditionalProperties = new Dictionary<string, object>();
@@ -145,6 +147,16 @@ namespace LicenseManager.Model
         public PortalSettings Portal { get; set; }
 
         /// <summary>
+        /// Whether a new machine validating a license already on its max machines takes the place of the license&#39;s machine validated the longest ago, rather than being refused with &#x60;machine_limit_reached&#x60;. When the replaced machine is validated again, it takes its place back and the machine that replaced it is locked. See &#x60;validateKey&#x60;.
+        /// </summary>
+        /// <value>Whether a new machine validating a license already on its max machines takes the place of the license&#39;s machine validated the longest ago, rather than being refused with &#x60;machine_limit_reached&#x60;. When the replaced machine is validated again, it takes its place back and the machine that replaced it is locked. See &#x60;validateKey&#x60;.</value>
+        /*
+        <example>true</example>
+        */
+        [DataMember(Name = "autoMachineChange", IsRequired = true, EmitDefaultValue = true)]
+        public bool AutoMachineChange { get; set; }
+
+        /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
         /*
@@ -182,6 +194,7 @@ namespace LicenseManager.Model
             sb.Append("  IsTestFromProductId: ").Append(IsTestFromProductId).Append("\n");
             sb.Append("  LogoUrl: ").Append(LogoUrl).Append("\n");
             sb.Append("  Portal: ").Append(Portal).Append("\n");
+            sb.Append("  AutoMachineChange: ").Append(AutoMachineChange).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");

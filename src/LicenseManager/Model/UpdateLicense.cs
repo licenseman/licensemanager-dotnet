@@ -41,7 +41,8 @@ namespace LicenseManager.Model
         /// <param name="maxOfflineDurationSeconds">Longest the applications can run offline with the license, in seconds. At least one hour (&#x60;3600&#x60;)..</param>
         /// <param name="maxVersion">Latest version of the product the license can use. The values left out are kept..</param>
         /// <param name="price">price.</param>
-        public UpdateLicense(DateTime? expiresAt = default, Dictionary<string, Object> meta = default, int? maxMachines = default, int maxOfflineDurationSeconds = default, LicenseMaxVersionInput maxVersion = default, PriceInput price = default)
+        /// <param name="cancellableUntil">End of the money back guarantee: until then, the customer can cancel the license from the customer portal, or with a token. &#x60;null&#x60; to not let them..</param>
+        public UpdateLicense(DateTime? expiresAt = default, Dictionary<string, Object> meta = default, int? maxMachines = default, int maxOfflineDurationSeconds = default, LicenseMaxVersionInput maxVersion = default, PriceInput price = default, DateTime? cancellableUntil = default)
         {
             this.ExpiresAt = expiresAt;
             this.Meta = meta;
@@ -49,6 +50,7 @@ namespace LicenseManager.Model
             this.MaxOfflineDurationSeconds = maxOfflineDurationSeconds;
             this.MaxVersion = maxVersion;
             this.Price = price;
+            this.CancellableUntil = cancellableUntil;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -106,6 +108,16 @@ namespace LicenseManager.Model
         public PriceInput Price { get; set; }
 
         /// <summary>
+        /// End of the money back guarantee: until then, the customer can cancel the license from the customer portal, or with a token. &#x60;null&#x60; to not let them.
+        /// </summary>
+        /// <value>End of the money back guarantee: until then, the customer can cancel the license from the customer portal, or with a token. &#x60;null&#x60; to not let them.</value>
+        /*
+        <example>2026-02-14T09:30:00.000Z</example>
+        */
+        [DataMember(Name = "cancellableUntil", EmitDefaultValue = true)]
+        public DateTime? CancellableUntil { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -125,6 +137,7 @@ namespace LicenseManager.Model
             sb.Append("  MaxOfflineDurationSeconds: ").Append(MaxOfflineDurationSeconds).Append("\n");
             sb.Append("  MaxVersion: ").Append(MaxVersion).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
+            sb.Append("  CancellableUntil: ").Append(CancellableUntil).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

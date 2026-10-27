@@ -199,6 +199,51 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'CancellableUntil'
+        /// </summary>
+        [Fact]
+        public void CancellableUntilTest()
+        {
+            // TODO unit test for the property 'CancellableUntil'
+        }
+
+        /// <summary>
+        /// Test the property 'CanceledAt'
+        /// </summary>
+        [Fact]
+        public void CanceledAtTest()
+        {
+            // TODO unit test for the property 'CanceledAt'
+        }
+
+        /// <summary>
+        /// Test the property 'CancellationReason'
+        /// </summary>
+        [Fact]
+        public void CancellationReasonTest()
+        {
+            // TODO unit test for the property 'CancellationReason'
+        }
+
+        /// <summary>
+        /// Test the property 'CancellationComment'
+        /// </summary>
+        [Fact]
+        public void CancellationCommentTest()
+        {
+            // TODO unit test for the property 'CancellationComment'
+        }
+
+        /// <summary>
+        /// Test the property 'StripeRefundId'
+        /// </summary>
+        [Fact]
+        public void StripeRefundIdTest()
+        {
+            // TODO unit test for the property 'StripeRefundId'
+        }
+
+        /// <summary>
         /// Test the property 'UpdatedAt'
         /// </summary>
         [Fact]

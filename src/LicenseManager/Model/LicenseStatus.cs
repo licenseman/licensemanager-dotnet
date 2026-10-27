@@ -27,9 +27,9 @@ using OpenAPIDateConverter = LicenseManager.Client.OpenAPIDateConverter;
 namespace LicenseManager.Model
 {
     /// <summary>
-    /// &#x60;expired&#x60; when the license has expired, &#x60;active&#x60; when a machine validated its key in the last 90 days, &#x60;inactive&#x60; otherwise.
+    /// &#x60;canceled&#x60; when the license was canceled, &#x60;expired&#x60; when it has expired, &#x60;active&#x60; when a machine validated its key in the last 90 days, &#x60;inactive&#x60; otherwise.
     /// </summary>
-    /// <value>&#x60;expired&#x60; when the license has expired, &#x60;active&#x60; when a machine validated its key in the last 90 days, &#x60;inactive&#x60; otherwise.</value>
+    /// <value>&#x60;canceled&#x60; when the license was canceled, &#x60;expired&#x60; when it has expired, &#x60;active&#x60; when a machine validated its key in the last 90 days, &#x60;inactive&#x60; otherwise.</value>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum LicenseStatus
     {
@@ -52,10 +52,16 @@ namespace LicenseManager.Model
         Expired = 3,
 
         /// <summary>
+        /// Enum Canceled for value: canceled
+        /// </summary>
+        [EnumMember(Value = "canceled")]
+        Canceled = 4,
+
+        /// <summary>
         /// Enum UnknownDefaultOpenApi for value: unknown_default_open_api
         /// </summary>
         [EnumMember(Value = "unknown_default_open_api")]
-        UnknownDefaultOpenApi = 4
+        UnknownDefaultOpenApi = 5
     }
 
 }

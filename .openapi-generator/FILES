@@ -4,6 +4,10 @@ LicenseManager.sln
 README.md
 api/openapi.yaml
 appveyor.yml
+docs/CancelLicense.md
+docs/CancellationReason.md
+docs/CancellationStats.md
+docs/CancellationStatsByReasonInner.md
 docs/ConnectStripe.md
 docs/CreateCustomer.md
 docs/CreateIntegrationMapping.md
@@ -97,6 +101,7 @@ docs/StripePrice.md
 docs/Token.md
 docs/TokensApi.md
 docs/UpdateCustomer.md
+docs/UpdateIntegration.md
 docs/UpdateIntegrationMapping.md
 docs/UpdateLicense.md
 docs/UpdatePolicy.md
@@ -118,6 +123,10 @@ src/LicenseManager.Test/Api/ProductsApiTests.cs
 src/LicenseManager.Test/Api/ReleasesApiTests.cs
 src/LicenseManager.Test/Api/TokensApiTests.cs
 src/LicenseManager.Test/LicenseManager.Test.csproj
+src/LicenseManager.Test/Model/CancelLicenseTests.cs
+src/LicenseManager.Test/Model/CancellationReasonTests.cs
+src/LicenseManager.Test/Model/CancellationStatsByReasonInnerTests.cs
+src/LicenseManager.Test/Model/CancellationStatsTests.cs
 src/LicenseManager.Test/Model/ConnectStripeTests.cs
 src/LicenseManager.Test/Model/CreateCustomerTests.cs
 src/LicenseManager.Test/Model/CreateIntegrationMappingTests.cs
@@ -202,6 +211,7 @@ src/LicenseManager.Test/Model/StripePriceTests.cs
 src/LicenseManager.Test/Model/TokenTests.cs
 src/LicenseManager.Test/Model/UpdateCustomerTests.cs
 src/LicenseManager.Test/Model/UpdateIntegrationMappingTests.cs
+src/LicenseManager.Test/Model/UpdateIntegrationTests.cs
 src/LicenseManager.Test/Model/UpdateLicenseTests.cs
 src/LicenseManager.Test/Model/UpdatePolicyTests.cs
 src/LicenseManager.Test/Model/UpdateProductPortalTests.cs
@@ -239,6 +249,10 @@ src/LicenseManager/Client/RetryConfiguration.cs
 src/LicenseManager/Client/WebRequestPathBuilder.cs
 src/LicenseManager/LicenseManager.csproj
 src/LicenseManager/Model/AbstractOpenAPISchema.cs
+src/LicenseManager/Model/CancelLicense.cs
+src/LicenseManager/Model/CancellationReason.cs
+src/LicenseManager/Model/CancellationStats.cs
+src/LicenseManager/Model/CancellationStatsByReasonInner.cs
 src/LicenseManager/Model/ConnectStripe.cs
 src/LicenseManager/Model/CreateCustomer.cs
 src/LicenseManager/Model/CreateIntegrationMapping.cs
@@ -322,6 +336,7 @@ src/LicenseManager/Model/StripePermission.cs
 src/LicenseManager/Model/StripePrice.cs
 src/LicenseManager/Model/Token.cs
 src/LicenseManager/Model/UpdateCustomer.cs
+src/LicenseManager/Model/UpdateIntegration.cs
 src/LicenseManager/Model/UpdateIntegrationMapping.cs
 src/LicenseManager/Model/UpdateLicense.cs
 src/LicenseManager/Model/UpdatePolicy.cs

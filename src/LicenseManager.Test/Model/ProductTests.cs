@@ -109,6 +109,15 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'AutoMachineChange'
+        /// </summary>
+        [Fact]
+        public void AutoMachineChangeTest()
+        {
+            // TODO unit test for the property 'AutoMachineChange'
+        }
+
+        /// <summary>
         /// Test the property 'CreatedAt'
         /// </summary>
         [Fact]

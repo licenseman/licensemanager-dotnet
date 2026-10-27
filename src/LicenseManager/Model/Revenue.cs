@@ -27,7 +27,7 @@ using OpenAPIDateConverter = LicenseManager.Client.OpenAPIDateConverter;
 namespace LicenseManager.Model
 {
     /// <summary>
-    /// Revenue of the licenses sold in one currency, each license counting on the day it was created. Licenses without a price are left out.
+    /// Revenue of the licenses sold in one currency, each license counting on the day it was created. Licenses without a price are left out, and so are canceled ones, but in &#x60;canceledLicenseCount&#x60; and &#x60;canceledTotal&#x60;.
     /// </summary>
     [DataContract(Name = "Revenue")]
     public partial class Revenue : IValidatableObject
@@ -44,15 +44,17 @@ namespace LicenseManager.Model
         /// Initializes a new instance of the <see cref="Revenue" /> class.
         /// </summary>
         /// <param name="currency">ISO 4217 code of the currency of the revenue. (required).</param>
-        /// <param name="licenseCount">Number of licenses sold in the currency, free ones included. (required).</param>
-        /// <param name="total">Sum of the prices of the licenses sold in the currency, in major units. (required).</param>
+        /// <param name="licenseCount">Number of licenses sold in the currency, free ones included, canceled ones left out. (required).</param>
+        /// <param name="total">Sum of the prices of the licenses sold in the currency, in major units, canceled ones left out. (required).</param>
+        /// <param name="canceledLicenseCount">Number of canceled licenses sold in the currency. (required).</param>
+        /// <param name="canceledTotal">Sum of the prices of the canceled licenses sold in the currency, in major units: revenue lost to cancellations. (required).</param>
         /// <param name="thisMonth">Revenue of the current month, in UTC. (required).</param>
         /// <param name="lastMonth">Revenue of the previous month, in UTC. (required).</param>
         /// <param name="last30Days">Revenue of the last 30 days, today included, in UTC. (required).</param>
         /// <param name="byDay">Revenue each day, aligned on &#x60;days&#x60;. (required).</param>
         /// <param name="byMonth">Revenue each month, aligned on &#x60;months&#x60;. (required).</param>
         /// <param name="byPolicy">Revenue of the licenses of each policy, for the policies with licenses sold in the currency over the covered months. (required).</param>
-        public Revenue(string currency = default, int licenseCount = default, decimal total = default, decimal thisMonth = default, decimal lastMonth = default, decimal last30Days = default, List<decimal> byDay = default, List<decimal> byMonth = default, List<ProductStatsNewLicensesByPolicyInner> byPolicy = default)
+        public Revenue(string currency = default, int licenseCount = default, decimal total = default, int canceledLicenseCount = default, decimal canceledTotal = default, decimal thisMonth = default, decimal lastMonth = default, decimal last30Days = default, List<decimal> byDay = default, List<decimal> byMonth = default, List<ProductStatsNewLicensesByPolicyInner> byPolicy = default)
         {
             // to ensure "currency" is required (not null)
             if (currency == null)
@@ -62,6 +64,8 @@ namespace LicenseManager.Model
             this.Currency = currency;
             this.LicenseCount = licenseCount;
             this.Total = total;
+            this.CanceledLicenseCount = canceledLicenseCount;
+            this.CanceledTotal = canceledTotal;
             this.ThisMonth = thisMonth;
             this.LastMonth = lastMonth;
             this.Last30Days = last30Days;
@@ -97,9 +101,9 @@ namespace LicenseManager.Model
         public string Currency { get; set; }
 
         /// <summary>
-        /// Number of licenses sold in the currency, free ones included.
+        /// Number of licenses sold in the currency, free ones included, canceled ones left out.
         /// </summary>
-        /// <value>Number of licenses sold in the currency, free ones included.</value>
+        /// <value>Number of licenses sold in the currency, free ones included, canceled ones left out.</value>
         /*
         <example>42</example>
         */
@@ -107,14 +111,34 @@ namespace LicenseManager.Model
         public int LicenseCount { get; set; }
 
         /// <summary>
-        /// Sum of the prices of the licenses sold in the currency, in major units.
+        /// Sum of the prices of the licenses sold in the currency, in major units, canceled ones left out.
         /// </summary>
-        /// <value>Sum of the prices of the licenses sold in the currency, in major units.</value>
+        /// <value>Sum of the prices of the licenses sold in the currency, in major units, canceled ones left out.</value>
         /*
         <example>2099.58</example>
         */
         [DataMember(Name = "total", IsRequired = true, EmitDefaultValue = true)]
         public decimal Total { get; set; }
+
+        /// <summary>
+        /// Number of canceled licenses sold in the currency.
+        /// </summary>
+        /// <value>Number of canceled licenses sold in the currency.</value>
+        /*
+        <example>2</example>
+        */
+        [DataMember(Name = "canceledLicenseCount", IsRequired = true, EmitDefaultValue = true)]
+        public int CanceledLicenseCount { get; set; }
+
+        /// <summary>
+        /// Sum of the prices of the canceled licenses sold in the currency, in major units: revenue lost to cancellations.
+        /// </summary>
+        /// <value>Sum of the prices of the canceled licenses sold in the currency, in major units: revenue lost to cancellations.</value>
+        /*
+        <example>99.98</example>
+        */
+        [DataMember(Name = "canceledTotal", IsRequired = true, EmitDefaultValue = true)]
+        public decimal CanceledTotal { get; set; }
 
         /// <summary>
         /// Revenue of the current month, in UTC.
@@ -190,6 +214,8 @@ namespace LicenseManager.Model
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  LicenseCount: ").Append(LicenseCount).Append("\n");
             sb.Append("  Total: ").Append(Total).Append("\n");
+            sb.Append("  CanceledLicenseCount: ").Append(CanceledLicenseCount).Append("\n");
+            sb.Append("  CanceledTotal: ").Append(CanceledTotal).Append("\n");
             sb.Append("  ThisMonth: ").Append(ThisMonth).Append("\n");
             sb.Append("  LastMonth: ").Append(LastMonth).Append("\n");
             sb.Append("  Last30Days: ").Append(Last30Days).Append("\n");

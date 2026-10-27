@@ -52,10 +52,11 @@ namespace LicenseManager.Model
         /// <param name="maxMachines">Maximum number of active machines of the licenses created with this policy. &#x60;null&#x60; when there&#39;s no limit. (required).</param>
         /// <param name="maxOfflineDurationSeconds">Longest the applications can run offline with the licenses created with this policy, in seconds. (required).</param>
         /// <param name="maxVersion">maxVersion (required).</param>
+        /// <param name="moneyBackGuaranteeDays">Number of days after their creation during which customers can cancel the licenses created with this policy, from the customer portal or with &#x60;cancelLicense&#x60;. &#x60;null&#x60; when they can&#39;t. (required).</param>
         /// <param name="licenseCount">Number of licenses following this policy. (required).</param>
         /// <param name="createdAt">createdAt (required).</param>
         /// <param name="updatedAt">updatedAt (required).</param>
-        public Policy(string id = default, string productId = default, string slug = default, string name = default, bool isDefault = default, PolicyDuration duration = default, int? maxMachines = default, int maxOfflineDurationSeconds = default, PolicyMaxVersion maxVersion = default, int licenseCount = default, DateTime createdAt = default, DateTime updatedAt = default)
+        public Policy(string id = default, string productId = default, string slug = default, string name = default, bool isDefault = default, PolicyDuration duration = default, int? maxMachines = default, int maxOfflineDurationSeconds = default, PolicyMaxVersion maxVersion = default, int? moneyBackGuaranteeDays = default, int licenseCount = default, DateTime createdAt = default, DateTime updatedAt = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -101,6 +102,12 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("maxVersion is a required property for Policy and cannot be null");
             }
             this.MaxVersion = maxVersion;
+            // to ensure "moneyBackGuaranteeDays" is required (not null)
+            if (moneyBackGuaranteeDays == null)
+            {
+                throw new ArgumentNullException("moneyBackGuaranteeDays is a required property for Policy and cannot be null");
+            }
+            this.MoneyBackGuaranteeDays = moneyBackGuaranteeDays;
             this.LicenseCount = licenseCount;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
@@ -186,6 +193,16 @@ namespace LicenseManager.Model
         public PolicyMaxVersion MaxVersion { get; set; }
 
         /// <summary>
+        /// Number of days after their creation during which customers can cancel the licenses created with this policy, from the customer portal or with &#x60;cancelLicense&#x60;. &#x60;null&#x60; when they can&#39;t.
+        /// </summary>
+        /// <value>Number of days after their creation during which customers can cancel the licenses created with this policy, from the customer portal or with &#x60;cancelLicense&#x60;. &#x60;null&#x60; when they can&#39;t.</value>
+        /*
+        <example>30</example>
+        */
+        [DataMember(Name = "moneyBackGuaranteeDays", IsRequired = true, EmitDefaultValue = true)]
+        public int? MoneyBackGuaranteeDays { get; set; }
+
+        /// <summary>
         /// Number of licenses following this policy.
         /// </summary>
         /// <value>Number of licenses following this policy.</value>
@@ -236,6 +253,7 @@ namespace LicenseManager.Model
             sb.Append("  MaxMachines: ").Append(MaxMachines).Append("\n");
             sb.Append("  MaxOfflineDurationSeconds: ").Append(MaxOfflineDurationSeconds).Append("\n");
             sb.Append("  MaxVersion: ").Append(MaxVersion).Append("\n");
+            sb.Append("  MoneyBackGuaranteeDays: ").Append(MoneyBackGuaranteeDays).Append("\n");
             sb.Append("  LicenseCount: ").Append(LicenseCount).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");

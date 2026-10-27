@@ -138,6 +138,19 @@ namespace LicenseManager.Test.Api
         }
 
         /// <summary>
+        /// Test UpdateIntegration
+        /// </summary>
+        [Fact]
+        public void UpdateIntegrationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string id = null;
+            //UpdateIntegration updateIntegration = null;
+            //var response = instance.UpdateIntegration(id, updateIntegration);
+            //Assert.IsType<Integration>(response);
+        }
+
+        /// <summary>
         /// Test UpdateStripeMapping
         /// </summary>
         [Fact]

@@ -80,5 +80,14 @@ namespace LicenseManager.Test.Model
         {
             // TODO unit test for the property 'Portal'
         }
+
+        /// <summary>
+        /// Test the property 'AutoMachineChange'
+        /// </summary>
+        [Fact]
+        public void AutoMachineChangeTest()
+        {
+            // TODO unit test for the property 'AutoMachineChange'
+        }
     }
 }

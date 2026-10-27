@@ -126,7 +126,7 @@ namespace LicenseManager.Model
         /// Gets or Sets Email
         /// </summary>
         /*
-        <example>jane@example.com</example>
+        <example>jane@licensemanager.dev</example>
         */
         [DataMember(Name = "email", IsRequired = true, EmitDefaultValue = true)]
         public string Email { get; set; }

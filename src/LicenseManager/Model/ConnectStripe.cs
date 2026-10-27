@@ -43,7 +43,7 @@ namespace LicenseManager.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ConnectStripe" /> class.
         /// </summary>
-        /// <param name="apiKey">Restricted API key of the Stripe account (&#x60;rk_live_…&#x60; for live products, &#x60;rk_test_…&#x60; for test products), with the &#x60;requiredPermissions&#x60; of &#x60;getStripeIntegration&#x60;. A secret key works too, but gives the app more access than it needs. (required).</param>
+        /// <param name="apiKey">Restricted API key of the Stripe account (&#x60;rk_live_…&#x60; for live products, &#x60;rk_test_…&#x60; for test products), with the &#x60;requiredPermissions&#x60; of &#x60;getStripeIntegration&#x60;. Without the optional ones, it connects with what they&#39;re for turned off. A secret key works too, but gives the app more access than it needs. (required).</param>
         public ConnectStripe(string apiKey = default)
         {
             // to ensure "apiKey" is required (not null)
@@ -56,9 +56,9 @@ namespace LicenseManager.Model
         }
 
         /// <summary>
-        /// Restricted API key of the Stripe account (&#x60;rk_live_…&#x60; for live products, &#x60;rk_test_…&#x60; for test products), with the &#x60;requiredPermissions&#x60; of &#x60;getStripeIntegration&#x60;. A secret key works too, but gives the app more access than it needs.
+        /// Restricted API key of the Stripe account (&#x60;rk_live_…&#x60; for live products, &#x60;rk_test_…&#x60; for test products), with the &#x60;requiredPermissions&#x60; of &#x60;getStripeIntegration&#x60;. Without the optional ones, it connects with what they&#39;re for turned off. A secret key works too, but gives the app more access than it needs.
         /// </summary>
-        /// <value>Restricted API key of the Stripe account (&#x60;rk_live_…&#x60; for live products, &#x60;rk_test_…&#x60; for test products), with the &#x60;requiredPermissions&#x60; of &#x60;getStripeIntegration&#x60;. A secret key works too, but gives the app more access than it needs.</value>
+        /// <value>Restricted API key of the Stripe account (&#x60;rk_live_…&#x60; for live products, &#x60;rk_test_…&#x60; for test products), with the &#x60;requiredPermissions&#x60; of &#x60;getStripeIntegration&#x60;. Without the optional ones, it connects with what they&#39;re for turned off. A secret key works too, but gives the app more access than it needs.</value>
         /*
         <example>rk_live_51Nv0FG…</example>
         */

@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **MaxMachines** | **int?** | Maximum number of active machines of the licenses created with this policy. &#x60;null&#x60; when there&#39;s no limit. | 
 **MaxOfflineDurationSeconds** | **int** | Longest the applications can run offline with the licenses created with this policy, in seconds. | 
 **MaxVersion** | [**PolicyMaxVersion**](PolicyMaxVersion.md) |  | 
+**MoneyBackGuaranteeDays** | **int?** | Number of days after their creation during which customers can cancel the licenses created with this policy, from the customer portal or with &#x60;cancelLicense&#x60;. &#x60;null&#x60; when they can&#39;t. | 
 **LicenseCount** | **int** | Number of licenses following this policy. | 
 **CreatedAt** | **DateTime** |  | 
 **UpdatedAt** | **DateTime** |  | 

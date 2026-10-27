@@ -42,7 +42,8 @@ namespace LicenseManager.Model
         /// <param name="maxMachines">Maximum number of active machines of the licenses created with this policy, copied to each of them. &#x60;null&#x60; for no limit. Defaults to &#x60;null&#x60;..</param>
         /// <param name="maxOfflineDurationSeconds">Longest the applications can run offline with the licenses created with this policy, in seconds, copied to each of them. At least one hour (&#x60;3600&#x60;). Defaults to one week..</param>
         /// <param name="maxVersion">maxVersion.</param>
-        public UpdatePolicy(string name = default, string slug = default, bool isDefault = default, PolicySettingsDuration duration = default, int? maxMachines = default, int maxOfflineDurationSeconds = default, PolicySettingsMaxVersion maxVersion = default)
+        /// <param name="moneyBackGuaranteeDays">Number of days after their creation during which customers can cancel the licenses created with this policy, from the customer portal or with &#x60;cancelLicense&#x60;, which refunds their Stripe payment. Each license keeps the end of its own period as &#x60;cancellableUntil&#x60;. &#x60;null&#x60; for no money back guarantee. Defaults to &#x60;null&#x60;..</param>
+        public UpdatePolicy(string name = default, string slug = default, bool isDefault = default, PolicySettingsDuration duration = default, int? maxMachines = default, int maxOfflineDurationSeconds = default, PolicySettingsMaxVersion maxVersion = default, int? moneyBackGuaranteeDays = default)
         {
             this.Name = name;
             this.Slug = slug;
@@ -51,6 +52,7 @@ namespace LicenseManager.Model
             this.MaxMachines = maxMachines;
             this.MaxOfflineDurationSeconds = maxOfflineDurationSeconds;
             this.MaxVersion = maxVersion;
+            this.MoneyBackGuaranteeDays = moneyBackGuaranteeDays;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -116,6 +118,16 @@ namespace LicenseManager.Model
         public PolicySettingsMaxVersion MaxVersion { get; set; }
 
         /// <summary>
+        /// Number of days after their creation during which customers can cancel the licenses created with this policy, from the customer portal or with &#x60;cancelLicense&#x60;, which refunds their Stripe payment. Each license keeps the end of its own period as &#x60;cancellableUntil&#x60;. &#x60;null&#x60; for no money back guarantee. Defaults to &#x60;null&#x60;.
+        /// </summary>
+        /// <value>Number of days after their creation during which customers can cancel the licenses created with this policy, from the customer portal or with &#x60;cancelLicense&#x60;, which refunds their Stripe payment. Each license keeps the end of its own period as &#x60;cancellableUntil&#x60;. &#x60;null&#x60; for no money back guarantee. Defaults to &#x60;null&#x60;.</value>
+        /*
+        <example>30</example>
+        */
+        [DataMember(Name = "moneyBackGuaranteeDays", EmitDefaultValue = true)]
+        public int? MoneyBackGuaranteeDays { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -136,6 +148,7 @@ namespace LicenseManager.Model
             sb.Append("  MaxMachines: ").Append(MaxMachines).Append("\n");
             sb.Append("  MaxOfflineDurationSeconds: ").Append(MaxOfflineDurationSeconds).Append("\n");
             sb.Append("  MaxVersion: ").Append(MaxVersion).Append("\n");
+            sb.Append("  MoneyBackGuaranteeDays: ").Append(MoneyBackGuaranteeDays).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -212,6 +225,18 @@ namespace LicenseManager.Model
             if (this.MaxOfflineDurationSeconds < (int)3600)
             {
                 yield return new ValidationResult("Invalid value for MaxOfflineDurationSeconds, must be a value greater than or equal to 3600.", new [] { "MaxOfflineDurationSeconds" });
+            }
+
+            // MoneyBackGuaranteeDays (int?) maximum
+            if (this.MoneyBackGuaranteeDays > (int?)3650)
+            {
+                yield return new ValidationResult("Invalid value for MoneyBackGuaranteeDays, must be a value less than or equal to 3650.", new [] { "MoneyBackGuaranteeDays" });
+            }
+
+            // MoneyBackGuaranteeDays (int?) minimum
+            if (this.MoneyBackGuaranteeDays < (int?)0)
+            {
+                yield return new ValidationResult("Invalid value for MoneyBackGuaranteeDays, must be a value greater than 0.", new [] { "MoneyBackGuaranteeDays" });
             }
 
             yield break;

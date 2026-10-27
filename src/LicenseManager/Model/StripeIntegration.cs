@@ -45,7 +45,7 @@ namespace LicenseManager.Model
         /// </summary>
         /// <param name="livemode">Mode of the Stripe connection the product uses: live for live products, test for test products. (required).</param>
         /// <param name="webhookUrlReachable">Whether Stripe can reach the API&#39;s webhook URL. A local URL can&#39;t be: set &#x60;WEBHOOK_URL&#x60; on the server, like to a tunnel in development. (required).</param>
-        /// <param name="requiredPermissions">Permissions the restricted API key needs, and why. Every other permission can stay &#x60;None&#x60;. (required).</param>
+        /// <param name="requiredPermissions">Permissions the restricted API key needs, and why, the &#x60;optional&#x60; ones included. Every other permission can stay &#x60;None&#x60;. (required).</param>
         /// <param name="integration">The organization&#39;s Stripe connection in this mode, &#x60;null&#x60; when there&#39;s none. (required).</param>
         /// <param name="mappings">Stripe prices creating licenses of the product. (required).</param>
         public StripeIntegration(bool livemode = default, bool webhookUrlReachable = default, List<StripePermission> requiredPermissions = default, Integration integration = default, List<IntegrationMapping> mappings = default)
@@ -88,9 +88,9 @@ namespace LicenseManager.Model
         public bool WebhookUrlReachable { get; set; }
 
         /// <summary>
-        /// Permissions the restricted API key needs, and why. Every other permission can stay &#x60;None&#x60;.
+        /// Permissions the restricted API key needs, and why, the &#x60;optional&#x60; ones included. Every other permission can stay &#x60;None&#x60;.
         /// </summary>
-        /// <value>Permissions the restricted API key needs, and why. Every other permission can stay &#x60;None&#x60;.</value>
+        /// <value>Permissions the restricted API key needs, and why, the &#x60;optional&#x60; ones included. Every other permission can stay &#x60;None&#x60;.</value>
         [DataMember(Name = "requiredPermissions", IsRequired = true, EmitDefaultValue = true)]
         public List<StripePermission> RequiredPermissions { get; set; }
 

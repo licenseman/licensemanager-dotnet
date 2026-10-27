@@ -31,7 +31,7 @@ namespace LicenseManager.Api
         /// Create a link to the customer portal
         /// </summary>
         /// <remarks>
-        /// Link letting the customer see their licenses and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can&#39;t be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product&#39;s customer portal is disabled, but the portal answers &#x60;404&#x60; until it&#39;s enabled, and &#x60;sendPortalLink&#x60; refuses to email them.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// Link letting the customer see their licenses, cancel them during their money back guarantee, and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can&#39;t be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product&#39;s customer portal is disabled, but the portal answers &#x60;404&#x60; until it&#39;s enabled, and &#x60;sendPortalLink&#x60; refuses to email them.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
         /// </remarks>
         /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -43,7 +43,7 @@ namespace LicenseManager.Api
         /// Create a link to the customer portal
         /// </summary>
         /// <remarks>
-        /// Link letting the customer see their licenses and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can&#39;t be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product&#39;s customer portal is disabled, but the portal answers &#x60;404&#x60; until it&#39;s enabled, and &#x60;sendPortalLink&#x60; refuses to email them.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// Link letting the customer see their licenses, cancel them during their money back guarantee, and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can&#39;t be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product&#39;s customer portal is disabled, but the portal answers &#x60;404&#x60; until it&#39;s enabled, and &#x60;sendPortalLink&#x60; refuses to email them.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
         /// </remarks>
         /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -132,7 +132,7 @@ namespace LicenseManager.Api
         /// Create a link to the customer portal
         /// </summary>
         /// <remarks>
-        /// Link letting the customer see their licenses and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can&#39;t be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product&#39;s customer portal is disabled, but the portal answers &#x60;404&#x60; until it&#39;s enabled, and &#x60;sendPortalLink&#x60; refuses to email them.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// Link letting the customer see their licenses, cancel them during their money back guarantee, and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can&#39;t be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product&#39;s customer portal is disabled, but the portal answers &#x60;404&#x60; until it&#39;s enabled, and &#x60;sendPortalLink&#x60; refuses to email them.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
         /// </remarks>
         /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -145,7 +145,7 @@ namespace LicenseManager.Api
         /// Create a link to the customer portal
         /// </summary>
         /// <remarks>
-        /// Link letting the customer see their licenses and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can&#39;t be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product&#39;s customer portal is disabled, but the portal answers &#x60;404&#x60; until it&#39;s enabled, and &#x60;sendPortalLink&#x60; refuses to email them.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// Link letting the customer see their licenses, cancel them during their money back guarantee, and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can&#39;t be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product&#39;s customer portal is disabled, but the portal answers &#x60;404&#x60; until it&#39;s enabled, and &#x60;sendPortalLink&#x60; refuses to email them.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
         /// </remarks>
         /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -442,7 +442,7 @@ namespace LicenseManager.Api
         }
 
         /// <summary>
-        /// Create a link to the customer portal Link letting the customer see their licenses and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can&#39;t be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product&#39;s customer portal is disabled, but the portal answers &#x60;404&#x60; until it&#39;s enabled, and &#x60;sendPortalLink&#x60; refuses to email them.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// Create a link to the customer portal Link letting the customer see their licenses, cancel them during their money back guarantee, and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can&#39;t be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product&#39;s customer portal is disabled, but the portal answers &#x60;404&#x60; until it&#39;s enabled, and &#x60;sendPortalLink&#x60; refuses to email them.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
         /// </summary>
         /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -455,7 +455,7 @@ namespace LicenseManager.Api
         }
 
         /// <summary>
-        /// Create a link to the customer portal Link letting the customer see their licenses and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can&#39;t be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product&#39;s customer portal is disabled, but the portal answers &#x60;404&#x60; until it&#39;s enabled, and &#x60;sendPortalLink&#x60; refuses to email them.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// Create a link to the customer portal Link letting the customer see their licenses, cancel them during their money back guarantee, and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can&#39;t be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product&#39;s customer portal is disabled, but the portal answers &#x60;404&#x60; until it&#39;s enabled, and &#x60;sendPortalLink&#x60; refuses to email them.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
         /// </summary>
         /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -510,7 +510,7 @@ namespace LicenseManager.Api
         }
 
         /// <summary>
-        /// Create a link to the customer portal Link letting the customer see their licenses and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can&#39;t be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product&#39;s customer portal is disabled, but the portal answers &#x60;404&#x60; until it&#39;s enabled, and &#x60;sendPortalLink&#x60; refuses to email them.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// Create a link to the customer portal Link letting the customer see their licenses, cancel them during their money back guarantee, and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can&#39;t be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product&#39;s customer portal is disabled, but the portal answers &#x60;404&#x60; until it&#39;s enabled, and &#x60;sendPortalLink&#x60; refuses to email them.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
         /// </summary>
         /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -524,7 +524,7 @@ namespace LicenseManager.Api
         }
 
         /// <summary>
-        /// Create a link to the customer portal Link letting the customer see their licenses and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can&#39;t be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product&#39;s customer portal is disabled, but the portal answers &#x60;404&#x60; until it&#39;s enabled, and &#x60;sendPortalLink&#x60; refuses to email them.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// Create a link to the customer portal Link letting the customer see their licenses, cancel them during their money back guarantee, and deactivate their machines in the customer portal, without signing in. Anyone with the link can, until it expires or the customer is deleted: it can&#39;t be revoked otherwise. The token also works with the API endpoints that accept customer tokens.  Links can be created while the product&#39;s customer portal is disabled, but the portal answers &#x60;404&#x60; until it&#39;s enabled, and &#x60;sendPortalLink&#x60; refuses to email them.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
         /// </summary>
         /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>

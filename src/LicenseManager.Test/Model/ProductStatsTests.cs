@@ -190,6 +190,15 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Cancellation'
+        /// </summary>
+        [Fact]
+        public void CancellationTest()
+        {
+            // TODO unit test for the property 'Cancellation'
+        }
+
+        /// <summary>
         /// Test the property 'Revenue'
         /// </summary>
         [Fact]

@@ -118,6 +118,15 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'OverriddenByMachineId'
+        /// </summary>
+        [Fact]
+        public void OverriddenByMachineIdTest()
+        {
+            // TODO unit test for the property 'OverriddenByMachineId'
+        }
+
+        /// <summary>
         /// Test the property 'LastValidatedAt'
         /// </summary>
         [Fact]
