@@ -1,15 +1,17 @@
 # LicenseManager.Model.Revenue
-Revenue of the licenses sold in one currency, each license counting on the day it was created. Licenses without a price are left out, and so are canceled ones, but in `canceledLicenseCount` and `canceledTotal`.
+Revenue in one currency: the licenses sold once, each counting on the day it was created, and the payments of the subscription licenses, each counting on the day it was paid, with the license's policy. Licenses without a price are left out, and so are canceled ones, but in `canceledLicenseCount` and `canceledTotal`.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Currency** | **string** | ISO 4217 code of the currency of the revenue. | 
-**LicenseCount** | **int** | Number of licenses sold in the currency, free ones included, canceled ones left out. | 
-**Total** | **decimal** | Sum of the prices of the licenses sold in the currency, in major units, canceled ones left out. | 
-**CanceledLicenseCount** | **int** | Number of canceled licenses sold in the currency. | 
-**CanceledTotal** | **decimal** | Sum of the prices of the canceled licenses sold in the currency, in major units: revenue lost to cancellations. | 
+**LicenseCount** | **int** | Number of licenses sold once in the currency, free ones included, canceled ones and subscription licenses left out. | 
+**Total** | **decimal** | Revenue in the currency, in major units: the prices of the licenses sold once, canceled ones left out, plus the payments of the subscriptions, &#x60;subscriptionTotal&#x60;. | 
+**SubscriptionTotal** | **decimal** | Sum of the payments of the subscription licenses in the currency, before taxes, in major units. | 
+**PaymentCount** | **int** | Number of payments of the subscription licenses in the currency. | 
+**CanceledLicenseCount** | **int** | Number of canceled licenses sold once in the currency. | 
+**CanceledTotal** | **decimal** | Sum of the prices of the canceled licenses sold once in the currency, in major units: revenue lost to cancellations. | 
 **ThisMonth** | **decimal** | Revenue of the current month, in UTC. | 
 **LastMonth** | **decimal** | Revenue of the previous month, in UTC. | 
 **Last30Days** | **decimal** | Revenue of the last 30 days, today included, in UTC. | 

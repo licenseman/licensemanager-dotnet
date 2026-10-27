@@ -43,7 +43,7 @@ namespace LicenseManager.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateIntegrationMapping" /> class.
         /// </summary>
-        /// <param name="stripePriceId">Active one-time price of the Stripe account. (required).</param>
+        /// <param name="stripePriceId">Active one-time or licensed recurring price of the Stripe account. (required).</param>
         /// <param name="policyId">policyId (required).</param>
         public CreateIntegrationMapping(string stripePriceId = default, string policyId = default)
         {
@@ -63,9 +63,9 @@ namespace LicenseManager.Model
         }
 
         /// <summary>
-        /// Active one-time price of the Stripe account.
+        /// Active one-time or licensed recurring price of the Stripe account.
         /// </summary>
-        /// <value>Active one-time price of the Stripe account.</value>
+        /// <value>Active one-time or licensed recurring price of the Stripe account.</value>
         /*
         <example>price_1MoBy5LkdIwHu7ix</example>
         */

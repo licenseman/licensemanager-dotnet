@@ -96,7 +96,7 @@ Every method is documented, with its parameters and responses, in the [`docs`](d
 | Class | Methods |
 | --- | --- |
 | [`LicensesApi`](docs/LicensesApi.md) | `ValidateKeyAsync`, `ListLicensesAsync`, `CreateLicenseAsync`, `ListCustomerLicensesAsync`, `GetLicenseAsync`, `DeleteLicenseAsync`, `UpdateLicenseAsync`, `GetLicenseStatsAsync`, `CancelLicenseAsync`, `SendLicenseKeysAsync`, `GetSigningKeyAsync` |
-| [`PortalApi`](docs/PortalApi.md) | `GetPortalAsync`, `RequestPortalLinkAsync`, `CreatePortalLinkAsync`, `SendPortalLinkAsync` |
+| [`PortalApi`](docs/PortalApi.md) | `GetPortalAsync`, `RequestPortalLinkAsync`, `CreatePortalLinkAsync`, `CreateBillingPortalSessionAsync`, `SendPortalLinkAsync` |
 | [`ProductsApi`](docs/ProductsApi.md) | `ListProductsAsync`, `CreateProductAsync`, `GetProductAsync`, `DeleteProductAsync`, `UpdateProductAsync`, `ResetProductAsync`, `UploadProductLogoAsync`, `DeleteProductLogoAsync`, `GetProductStatsAsync` |
 | [`PoliciesApi`](docs/PoliciesApi.md) | `ListPoliciesAsync`, `CreatePolicyAsync`, `GetPolicyAsync`, `DeletePolicyAsync`, `UpdatePolicyAsync` |
 | [`CustomersApi`](docs/CustomersApi.md) | `ListCustomersAsync`, `CreateCustomerAsync`, `GetCustomerAsync`, `DeleteCustomerAsync`, `UpdateCustomerAsync` |

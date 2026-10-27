@@ -163,6 +163,33 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'CanManageSubscriptions'
+        /// </summary>
+        [Fact]
+        public void CanManageSubscriptionsTest()
+        {
+            // TODO unit test for the property 'CanManageSubscriptions'
+        }
+
+        /// <summary>
+        /// Test the property 'CanBillingPortal'
+        /// </summary>
+        [Fact]
+        public void CanBillingPortalTest()
+        {
+            // TODO unit test for the property 'CanBillingPortal'
+        }
+
+        /// <summary>
+        /// Test the property 'SubscriptionGraceDays'
+        /// </summary>
+        [Fact]
+        public void SubscriptionGraceDaysTest()
+        {
+            // TODO unit test for the property 'SubscriptionGraceDays'
+        }
+
+        /// <summary>
         /// Test the property 'CreatedAt'
         /// </summary>
         [Fact]

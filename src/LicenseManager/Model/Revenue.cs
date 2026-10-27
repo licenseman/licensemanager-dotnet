@@ -27,7 +27,7 @@ using OpenAPIDateConverter = LicenseManager.Client.OpenAPIDateConverter;
 namespace LicenseManager.Model
 {
     /// <summary>
-    /// Revenue of the licenses sold in one currency, each license counting on the day it was created. Licenses without a price are left out, and so are canceled ones, but in &#x60;canceledLicenseCount&#x60; and &#x60;canceledTotal&#x60;.
+    /// Revenue in one currency: the licenses sold once, each counting on the day it was created, and the payments of the subscription licenses, each counting on the day it was paid, with the license&#39;s policy. Licenses without a price are left out, and so are canceled ones, but in &#x60;canceledLicenseCount&#x60; and &#x60;canceledTotal&#x60;.
     /// </summary>
     [DataContract(Name = "Revenue")]
     public partial class Revenue : IValidatableObject
@@ -44,17 +44,19 @@ namespace LicenseManager.Model
         /// Initializes a new instance of the <see cref="Revenue" /> class.
         /// </summary>
         /// <param name="currency">ISO 4217 code of the currency of the revenue. (required).</param>
-        /// <param name="licenseCount">Number of licenses sold in the currency, free ones included, canceled ones left out. (required).</param>
-        /// <param name="total">Sum of the prices of the licenses sold in the currency, in major units, canceled ones left out. (required).</param>
-        /// <param name="canceledLicenseCount">Number of canceled licenses sold in the currency. (required).</param>
-        /// <param name="canceledTotal">Sum of the prices of the canceled licenses sold in the currency, in major units: revenue lost to cancellations. (required).</param>
+        /// <param name="licenseCount">Number of licenses sold once in the currency, free ones included, canceled ones and subscription licenses left out. (required).</param>
+        /// <param name="total">Revenue in the currency, in major units: the prices of the licenses sold once, canceled ones left out, plus the payments of the subscriptions, &#x60;subscriptionTotal&#x60;. (required).</param>
+        /// <param name="subscriptionTotal">Sum of the payments of the subscription licenses in the currency, before taxes, in major units. (required).</param>
+        /// <param name="paymentCount">Number of payments of the subscription licenses in the currency. (required).</param>
+        /// <param name="canceledLicenseCount">Number of canceled licenses sold once in the currency. (required).</param>
+        /// <param name="canceledTotal">Sum of the prices of the canceled licenses sold once in the currency, in major units: revenue lost to cancellations. (required).</param>
         /// <param name="thisMonth">Revenue of the current month, in UTC. (required).</param>
         /// <param name="lastMonth">Revenue of the previous month, in UTC. (required).</param>
         /// <param name="last30Days">Revenue of the last 30 days, today included, in UTC. (required).</param>
         /// <param name="byDay">Revenue each day, aligned on &#x60;days&#x60;. (required).</param>
         /// <param name="byMonth">Revenue each month, aligned on &#x60;months&#x60;. (required).</param>
         /// <param name="byPolicy">Revenue of the licenses of each policy, for the policies with licenses sold in the currency over the covered months. (required).</param>
-        public Revenue(string currency = default, int licenseCount = default, decimal total = default, int canceledLicenseCount = default, decimal canceledTotal = default, decimal thisMonth = default, decimal lastMonth = default, decimal last30Days = default, List<decimal> byDay = default, List<decimal> byMonth = default, List<ProductStatsNewLicensesByPolicyInner> byPolicy = default)
+        public Revenue(string currency = default, int licenseCount = default, decimal total = default, decimal subscriptionTotal = default, int paymentCount = default, int canceledLicenseCount = default, decimal canceledTotal = default, decimal thisMonth = default, decimal lastMonth = default, decimal last30Days = default, List<decimal> byDay = default, List<decimal> byMonth = default, List<ProductStatsNewLicensesByPolicyInner> byPolicy = default)
         {
             // to ensure "currency" is required (not null)
             if (currency == null)
@@ -64,6 +66,8 @@ namespace LicenseManager.Model
             this.Currency = currency;
             this.LicenseCount = licenseCount;
             this.Total = total;
+            this.SubscriptionTotal = subscriptionTotal;
+            this.PaymentCount = paymentCount;
             this.CanceledLicenseCount = canceledLicenseCount;
             this.CanceledTotal = canceledTotal;
             this.ThisMonth = thisMonth;
@@ -101,9 +105,9 @@ namespace LicenseManager.Model
         public string Currency { get; set; }
 
         /// <summary>
-        /// Number of licenses sold in the currency, free ones included, canceled ones left out.
+        /// Number of licenses sold once in the currency, free ones included, canceled ones and subscription licenses left out.
         /// </summary>
-        /// <value>Number of licenses sold in the currency, free ones included, canceled ones left out.</value>
+        /// <value>Number of licenses sold once in the currency, free ones included, canceled ones and subscription licenses left out.</value>
         /*
         <example>42</example>
         */
@@ -111,9 +115,9 @@ namespace LicenseManager.Model
         public int LicenseCount { get; set; }
 
         /// <summary>
-        /// Sum of the prices of the licenses sold in the currency, in major units, canceled ones left out.
+        /// Revenue in the currency, in major units: the prices of the licenses sold once, canceled ones left out, plus the payments of the subscriptions, &#x60;subscriptionTotal&#x60;.
         /// </summary>
-        /// <value>Sum of the prices of the licenses sold in the currency, in major units, canceled ones left out.</value>
+        /// <value>Revenue in the currency, in major units: the prices of the licenses sold once, canceled ones left out, plus the payments of the subscriptions, &#x60;subscriptionTotal&#x60;.</value>
         /*
         <example>2099.58</example>
         */
@@ -121,9 +125,29 @@ namespace LicenseManager.Model
         public decimal Total { get; set; }
 
         /// <summary>
-        /// Number of canceled licenses sold in the currency.
+        /// Sum of the payments of the subscription licenses in the currency, before taxes, in major units.
         /// </summary>
-        /// <value>Number of canceled licenses sold in the currency.</value>
+        /// <value>Sum of the payments of the subscription licenses in the currency, before taxes, in major units.</value>
+        /*
+        <example>480</example>
+        */
+        [DataMember(Name = "subscriptionTotal", IsRequired = true, EmitDefaultValue = true)]
+        public decimal SubscriptionTotal { get; set; }
+
+        /// <summary>
+        /// Number of payments of the subscription licenses in the currency.
+        /// </summary>
+        /// <value>Number of payments of the subscription licenses in the currency.</value>
+        /*
+        <example>48</example>
+        */
+        [DataMember(Name = "paymentCount", IsRequired = true, EmitDefaultValue = true)]
+        public int PaymentCount { get; set; }
+
+        /// <summary>
+        /// Number of canceled licenses sold once in the currency.
+        /// </summary>
+        /// <value>Number of canceled licenses sold once in the currency.</value>
         /*
         <example>2</example>
         */
@@ -131,9 +155,9 @@ namespace LicenseManager.Model
         public int CanceledLicenseCount { get; set; }
 
         /// <summary>
-        /// Sum of the prices of the canceled licenses sold in the currency, in major units: revenue lost to cancellations.
+        /// Sum of the prices of the canceled licenses sold once in the currency, in major units: revenue lost to cancellations.
         /// </summary>
-        /// <value>Sum of the prices of the canceled licenses sold in the currency, in major units: revenue lost to cancellations.</value>
+        /// <value>Sum of the prices of the canceled licenses sold once in the currency, in major units: revenue lost to cancellations.</value>
         /*
         <example>99.98</example>
         */
@@ -214,6 +238,8 @@ namespace LicenseManager.Model
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  LicenseCount: ").Append(LicenseCount).Append("\n");
             sb.Append("  Total: ").Append(Total).Append("\n");
+            sb.Append("  SubscriptionTotal: ").Append(SubscriptionTotal).Append("\n");
+            sb.Append("  PaymentCount: ").Append(PaymentCount).Append("\n");
             sb.Append("  CanceledLicenseCount: ").Append(CanceledLicenseCount).Append("\n");
             sb.Append("  CanceledTotal: ").Append(CanceledTotal).Append("\n");
             sb.Append("  ThisMonth: ").Append(ThisMonth).Append("\n");

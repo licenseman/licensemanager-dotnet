@@ -4,11 +4,13 @@ LicenseManager.sln
 README.md
 api/openapi.yaml
 appveyor.yml
+docs/BillingPortalSession.md
 docs/CancelLicense.md
 docs/CancellationReason.md
 docs/CancellationStats.md
 docs/CancellationStatsByReasonInner.md
 docs/ConnectStripe.md
+docs/CreateBillingPortalSession.md
 docs/CreateCustomer.md
 docs/CreateIntegrationMapping.md
 docs/CreateLicense.md
@@ -39,6 +41,7 @@ docs/EventsApi.md
 docs/FixedMaxVersion.md
 docs/Integration.md
 docs/IntegrationMapping.md
+docs/IntegrationMappingRecurring.md
 docs/IntegrationStatus.md
 docs/IntegrationsApi.md
 docs/License.md
@@ -49,6 +52,7 @@ docs/LicenseStats.md
 docs/LicenseStatsActivationsByMachineInner.md
 docs/LicenseStatsActivationsByVersionInner.md
 docs/LicenseStatus.md
+docs/LicenseSubscription.md
 docs/LicenseToken.md
 docs/LicensesApi.md
 docs/ListPolicyEventsTypeParameter.md
@@ -61,6 +65,9 @@ docs/LockMaxVersionMinorAfter.md
 docs/Machine.md
 docs/MachineList.md
 docs/MachinesApi.md
+docs/Mrr.md
+docs/MrrByIntervalInner.md
+docs/MrrByPolicyInner.md
 docs/Pagination.md
 docs/PoliciesApi.md
 docs/Policy.md
@@ -98,6 +105,8 @@ docs/SigningKey.md
 docs/StripeIntegration.md
 docs/StripePermission.md
 docs/StripePrice.md
+docs/StripePriceRecurring.md
+docs/SubscriptionStats.md
 docs/Token.md
 docs/TokensApi.md
 docs/UpdateCustomer.md
@@ -123,11 +132,13 @@ src/LicenseManager.Test/Api/ProductsApiTests.cs
 src/LicenseManager.Test/Api/ReleasesApiTests.cs
 src/LicenseManager.Test/Api/TokensApiTests.cs
 src/LicenseManager.Test/LicenseManager.Test.csproj
+src/LicenseManager.Test/Model/BillingPortalSessionTests.cs
 src/LicenseManager.Test/Model/CancelLicenseTests.cs
 src/LicenseManager.Test/Model/CancellationReasonTests.cs
 src/LicenseManager.Test/Model/CancellationStatsByReasonInnerTests.cs
 src/LicenseManager.Test/Model/CancellationStatsTests.cs
 src/LicenseManager.Test/Model/ConnectStripeTests.cs
+src/LicenseManager.Test/Model/CreateBillingPortalSessionTests.cs
 src/LicenseManager.Test/Model/CreateCustomerTests.cs
 src/LicenseManager.Test/Model/CreateIntegrationMappingTests.cs
 src/LicenseManager.Test/Model/CreateLicenseTests.cs
@@ -154,6 +165,7 @@ src/LicenseManager.Test/Model/EventMachineTests.cs
 src/LicenseManager.Test/Model/EventTests.cs
 src/LicenseManager.Test/Model/EventTypeTests.cs
 src/LicenseManager.Test/Model/FixedMaxVersionTests.cs
+src/LicenseManager.Test/Model/IntegrationMappingRecurringTests.cs
 src/LicenseManager.Test/Model/IntegrationMappingTests.cs
 src/LicenseManager.Test/Model/IntegrationStatusTests.cs
 src/LicenseManager.Test/Model/IntegrationTests.cs
@@ -164,6 +176,7 @@ src/LicenseManager.Test/Model/LicenseStatsActivationsByMachineInnerTests.cs
 src/LicenseManager.Test/Model/LicenseStatsActivationsByVersionInnerTests.cs
 src/LicenseManager.Test/Model/LicenseStatsTests.cs
 src/LicenseManager.Test/Model/LicenseStatusTests.cs
+src/LicenseManager.Test/Model/LicenseSubscriptionTests.cs
 src/LicenseManager.Test/Model/LicenseTests.cs
 src/LicenseManager.Test/Model/LicenseTokenTests.cs
 src/LicenseManager.Test/Model/ListPolicyEventsTypeParameterTests.cs
@@ -175,6 +188,9 @@ src/LicenseManager.Test/Model/LockMaxVersionMinorAfterTests.cs
 src/LicenseManager.Test/Model/LockMaxVersionTests.cs
 src/LicenseManager.Test/Model/MachineListTests.cs
 src/LicenseManager.Test/Model/MachineTests.cs
+src/LicenseManager.Test/Model/MrrByIntervalInnerTests.cs
+src/LicenseManager.Test/Model/MrrByPolicyInnerTests.cs
+src/LicenseManager.Test/Model/MrrTests.cs
 src/LicenseManager.Test/Model/PaginationTests.cs
 src/LicenseManager.Test/Model/PolicyDurationTests.cs
 src/LicenseManager.Test/Model/PolicyListTests.cs
@@ -207,7 +223,9 @@ src/LicenseManager.Test/Model/SendPortalLinkTests.cs
 src/LicenseManager.Test/Model/SigningKeyTests.cs
 src/LicenseManager.Test/Model/StripeIntegrationTests.cs
 src/LicenseManager.Test/Model/StripePermissionTests.cs
+src/LicenseManager.Test/Model/StripePriceRecurringTests.cs
 src/LicenseManager.Test/Model/StripePriceTests.cs
+src/LicenseManager.Test/Model/SubscriptionStatsTests.cs
 src/LicenseManager.Test/Model/TokenTests.cs
 src/LicenseManager.Test/Model/UpdateCustomerTests.cs
 src/LicenseManager.Test/Model/UpdateIntegrationMappingTests.cs
@@ -249,11 +267,13 @@ src/LicenseManager/Client/RetryConfiguration.cs
 src/LicenseManager/Client/WebRequestPathBuilder.cs
 src/LicenseManager/LicenseManager.csproj
 src/LicenseManager/Model/AbstractOpenAPISchema.cs
+src/LicenseManager/Model/BillingPortalSession.cs
 src/LicenseManager/Model/CancelLicense.cs
 src/LicenseManager/Model/CancellationReason.cs
 src/LicenseManager/Model/CancellationStats.cs
 src/LicenseManager/Model/CancellationStatsByReasonInner.cs
 src/LicenseManager/Model/ConnectStripe.cs
+src/LicenseManager/Model/CreateBillingPortalSession.cs
 src/LicenseManager/Model/CreateCustomer.cs
 src/LicenseManager/Model/CreateIntegrationMapping.cs
 src/LicenseManager/Model/CreateLicense.cs
@@ -282,6 +302,7 @@ src/LicenseManager/Model/EventType.cs
 src/LicenseManager/Model/FixedMaxVersion.cs
 src/LicenseManager/Model/Integration.cs
 src/LicenseManager/Model/IntegrationMapping.cs
+src/LicenseManager/Model/IntegrationMappingRecurring.cs
 src/LicenseManager/Model/IntegrationStatus.cs
 src/LicenseManager/Model/License.cs
 src/LicenseManager/Model/LicenseList.cs
@@ -291,6 +312,7 @@ src/LicenseManager/Model/LicenseStats.cs
 src/LicenseManager/Model/LicenseStatsActivationsByMachineInner.cs
 src/LicenseManager/Model/LicenseStatsActivationsByVersionInner.cs
 src/LicenseManager/Model/LicenseStatus.cs
+src/LicenseManager/Model/LicenseSubscription.cs
 src/LicenseManager/Model/LicenseToken.cs
 src/LicenseManager/Model/ListPolicyEventsTypeParameter.cs
 src/LicenseManager/Model/ListStripePrices200Response.cs
@@ -301,6 +323,9 @@ src/LicenseManager/Model/LockMaxVersionMajorAfterOneOf1.cs
 src/LicenseManager/Model/LockMaxVersionMinorAfter.cs
 src/LicenseManager/Model/Machine.cs
 src/LicenseManager/Model/MachineList.cs
+src/LicenseManager/Model/Mrr.cs
+src/LicenseManager/Model/MrrByIntervalInner.cs
+src/LicenseManager/Model/MrrByPolicyInner.cs
 src/LicenseManager/Model/Pagination.cs
 src/LicenseManager/Model/Policy.cs
 src/LicenseManager/Model/PolicyDuration.cs
@@ -334,6 +359,8 @@ src/LicenseManager/Model/SigningKey.cs
 src/LicenseManager/Model/StripeIntegration.cs
 src/LicenseManager/Model/StripePermission.cs
 src/LicenseManager/Model/StripePrice.cs
+src/LicenseManager/Model/StripePriceRecurring.cs
+src/LicenseManager/Model/SubscriptionStats.cs
 src/LicenseManager/Model/Token.cs
 src/LicenseManager/Model/UpdateCustomer.cs
 src/LicenseManager/Model/UpdateIntegration.cs

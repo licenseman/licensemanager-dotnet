@@ -36,9 +36,11 @@ namespace LicenseManager.Model
         /// Initializes a new instance of the <see cref="UpdateIntegration" /> class.
         /// </summary>
         /// <param name="autoRefund">Whether canceling a license bought through Stripe refunds its payment. Can only be turned on when the integration&#39;s &#x60;canRefund&#x60; is true: the API key has the Refunds: Write permission..</param>
-        public UpdateIntegration(bool autoRefund = default)
+        /// <param name="subscriptionGraceDays">Days a subscription license stays valid after its period ends while its renewal is unpaid, as Stripe retries the payment..</param>
+        public UpdateIntegration(bool autoRefund = default, int subscriptionGraceDays = default)
         {
             this.AutoRefund = autoRefund;
+            this.SubscriptionGraceDays = subscriptionGraceDays;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -51,6 +53,16 @@ namespace LicenseManager.Model
         */
         [DataMember(Name = "autoRefund", EmitDefaultValue = true)]
         public bool AutoRefund { get; set; }
+
+        /// <summary>
+        /// Days a subscription license stays valid after its period ends while its renewal is unpaid, as Stripe retries the payment.
+        /// </summary>
+        /// <value>Days a subscription license stays valid after its period ends while its renewal is unpaid, as Stripe retries the payment.</value>
+        /*
+        <example>7</example>
+        */
+        [DataMember(Name = "subscriptionGraceDays", EmitDefaultValue = false)]
+        public int SubscriptionGraceDays { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -67,6 +79,7 @@ namespace LicenseManager.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class UpdateIntegration {\n");
             sb.Append("  AutoRefund: ").Append(AutoRefund).Append("\n");
+            sb.Append("  SubscriptionGraceDays: ").Append(SubscriptionGraceDays).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -88,6 +101,18 @@ namespace LicenseManager.Model
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // SubscriptionGraceDays (int) maximum
+            if (this.SubscriptionGraceDays > (int)60)
+            {
+                yield return new ValidationResult("Invalid value for SubscriptionGraceDays, must be a value less than or equal to 60.", new [] { "SubscriptionGraceDays" });
+            }
+
+            // SubscriptionGraceDays (int) minimum
+            if (this.SubscriptionGraceDays < (int)0)
+            {
+                yield return new ValidationResult("Invalid value for SubscriptionGraceDays, must be a value greater than or equal to 0.", new [] { "SubscriptionGraceDays" });
+            }
+
             yield break;
         }
     }

@@ -82,6 +82,24 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'SubscriptionTotal'
+        /// </summary>
+        [Fact]
+        public void SubscriptionTotalTest()
+        {
+            // TODO unit test for the property 'SubscriptionTotal'
+        }
+
+        /// <summary>
+        /// Test the property 'PaymentCount'
+        /// </summary>
+        [Fact]
+        public void PaymentCountTest()
+        {
+            // TODO unit test for the property 'PaymentCount'
+        }
+
+        /// <summary>
         /// Test the property 'CanceledLicenseCount'
         /// </summary>
         [Fact]

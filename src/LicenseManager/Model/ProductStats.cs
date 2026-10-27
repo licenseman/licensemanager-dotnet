@@ -59,11 +59,12 @@ namespace LicenseManager.Model
         /// <param name="newLicensesByMonth">Number of licenses created each month, aligned on &#x60;months&#x60;. (required).</param>
         /// <param name="newLicensesByPolicy">Number of licenses of each policy created each day and each month, for the policies with licenses created over the covered months. (required).</param>
         /// <param name="cancellation">Cancellations of the licenses with a money back guarantee. &#x60;null&#x60; when no license of the product has one. (required).</param>
+        /// <param name="subscriptions">Subscriptions of the product. &#x60;null&#x60; when it has never had one. (required).</param>
         /// <param name="revenue">Revenue in each currency licenses were sold in, from the one with the most licenses sold. Amounts aren&#39;t converted between currencies. (required).</param>
         /// <param name="activationsByVersion">Successful activations of the licenses of the product each day, per version of the application, from the most recent one. (required).</param>
         /// <param name="activeMachinesByVersion">Number of active machines running each version of the application, from the most recent one. (required).</param>
         /// <param name="activeMachinesByPlatform">Number of active machines on each platform, from the one with the most machines. (required).</param>
-        public ProductStats(int licenseCount = default, int activeLicenseCount = default, int newLicenseCount = default, int expiringLicenseCount = default, int expiredLicenseCount = default, int activeMachineCount = default, int inUseLicenseCount = default, int seatCount = default, int usedSeatCount = default, int fullLicenseCount = default, List<DateTime> days = default, List<string> months = default, List<int> newLicensesByDay = default, List<int> newLicensesByMonth = default, List<ProductStatsNewLicensesByPolicyInner> newLicensesByPolicy = default, CancellationStats cancellation = default, List<Revenue> revenue = default, List<ProductStatsActivationsByVersionInner> activationsByVersion = default, List<ProductStatsActiveMachinesByVersionInner> activeMachinesByVersion = default, List<ProductStatsActiveMachinesByPlatformInner> activeMachinesByPlatform = default)
+        public ProductStats(int licenseCount = default, int activeLicenseCount = default, int newLicenseCount = default, int expiringLicenseCount = default, int expiredLicenseCount = default, int activeMachineCount = default, int inUseLicenseCount = default, int seatCount = default, int usedSeatCount = default, int fullLicenseCount = default, List<DateTime> days = default, List<string> months = default, List<int> newLicensesByDay = default, List<int> newLicensesByMonth = default, List<ProductStatsNewLicensesByPolicyInner> newLicensesByPolicy = default, CancellationStats cancellation = default, SubscriptionStats subscriptions = default, List<Revenue> revenue = default, List<ProductStatsActivationsByVersionInner> activationsByVersion = default, List<ProductStatsActiveMachinesByVersionInner> activeMachinesByVersion = default, List<ProductStatsActiveMachinesByPlatformInner> activeMachinesByPlatform = default)
         {
             this.LicenseCount = licenseCount;
             this.ActiveLicenseCount = activeLicenseCount;
@@ -111,6 +112,12 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("cancellation is a required property for ProductStats and cannot be null");
             }
             this.Cancellation = cancellation;
+            // to ensure "subscriptions" is required (not null)
+            if (subscriptions == null)
+            {
+                throw new ArgumentNullException("subscriptions is a required property for ProductStats and cannot be null");
+            }
+            this.Subscriptions = subscriptions;
             // to ensure "revenue" is required (not null)
             if (revenue == null)
             {
@@ -287,6 +294,13 @@ namespace LicenseManager.Model
         public CancellationStats Cancellation { get; set; }
 
         /// <summary>
+        /// Subscriptions of the product. &#x60;null&#x60; when it has never had one.
+        /// </summary>
+        /// <value>Subscriptions of the product. &#x60;null&#x60; when it has never had one.</value>
+        [DataMember(Name = "subscriptions", IsRequired = true, EmitDefaultValue = true)]
+        public SubscriptionStats Subscriptions { get; set; }
+
+        /// <summary>
         /// Revenue in each currency licenses were sold in, from the one with the most licenses sold. Amounts aren&#39;t converted between currencies.
         /// </summary>
         /// <value>Revenue in each currency licenses were sold in, from the one with the most licenses sold. Amounts aren&#39;t converted between currencies.</value>
@@ -344,6 +358,7 @@ namespace LicenseManager.Model
             sb.Append("  NewLicensesByMonth: ").Append(NewLicensesByMonth).Append("\n");
             sb.Append("  NewLicensesByPolicy: ").Append(NewLicensesByPolicy).Append("\n");
             sb.Append("  Cancellation: ").Append(Cancellation).Append("\n");
+            sb.Append("  Subscriptions: ").Append(Subscriptions).Append("\n");
             sb.Append("  Revenue: ").Append(Revenue).Append("\n");
             sb.Append("  ActivationsByVersion: ").Append(ActivationsByVersion).Append("\n");
             sb.Append("  ActiveMachinesByVersion: ").Append(ActiveMachinesByVersion).Append("\n");

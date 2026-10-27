@@ -89,5 +89,14 @@ namespace LicenseManager.Test.Model
         {
             // TODO unit test for the property 'Optional'
         }
+
+        /// <summary>
+        /// Test the property 'Subscriptions'
+        /// </summary>
+        [Fact]
+        public void SubscriptionsTest()
+        {
+            // TODO unit test for the property 'Subscriptions'
+        }
     }
 }

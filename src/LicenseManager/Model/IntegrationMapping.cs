@@ -84,10 +84,11 @@ namespace LicenseManager.Model
         /// <param name="stripePriceId">stripePriceId (required).</param>
         /// <param name="productName">Name of the Stripe product when it was mapped. (required).</param>
         /// <param name="price">price (required).</param>
+        /// <param name="recurring">recurring (required).</param>
         /// <param name="status">&#x60;error&#x60; when the price can no longer be paid, explained by &#x60;statusReason&#x60;. (required).</param>
         /// <param name="statusReason">statusReason (required).</param>
         /// <param name="createdAt">createdAt (required).</param>
-        public IntegrationMapping(string id = default, string integrationId = default, string productId = default, string policyId = default, string stripeProductId = default, string stripePriceId = default, string productName = default, Price price = default, StatusEnum status = default, string statusReason = default, DateTime createdAt = default)
+        public IntegrationMapping(string id = default, string integrationId = default, string productId = default, string policyId = default, string stripeProductId = default, string stripePriceId = default, string productName = default, Price price = default, IntegrationMappingRecurring recurring = default, StatusEnum status = default, string statusReason = default, DateTime createdAt = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -137,6 +138,12 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("price is a required property for IntegrationMapping and cannot be null");
             }
             this.Price = price;
+            // to ensure "recurring" is required (not null)
+            if (recurring == null)
+            {
+                throw new ArgumentNullException("recurring is a required property for IntegrationMapping and cannot be null");
+            }
+            this.Recurring = recurring;
             this.Status = status;
             // to ensure "statusReason" is required (not null)
             if (statusReason == null)
@@ -219,6 +226,12 @@ namespace LicenseManager.Model
         public Price Price { get; set; }
 
         /// <summary>
+        /// Gets or Sets Recurring
+        /// </summary>
+        [DataMember(Name = "recurring", IsRequired = true, EmitDefaultValue = true)]
+        public IntegrationMappingRecurring Recurring { get; set; }
+
+        /// <summary>
         /// Gets or Sets StatusReason
         /// </summary>
         /*
@@ -255,6 +268,7 @@ namespace LicenseManager.Model
             sb.Append("  StripePriceId: ").Append(StripePriceId).Append("\n");
             sb.Append("  ProductName: ").Append(ProductName).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
+            sb.Append("  Recurring: ").Append(Recurring).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  StatusReason: ").Append(StatusReason).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");

@@ -48,8 +48,9 @@ namespace LicenseManager.Model
         /// <param name="productName">productName (required).</param>
         /// <param name="nickname">nickname (required).</param>
         /// <param name="price">price (required).</param>
+        /// <param name="recurring">recurring (required).</param>
         /// <param name="mapped">Whether the price already creates licenses of a product. (required).</param>
-        public StripePrice(string id = default, string productId = default, string productName = default, string nickname = default, Price price = default, bool mapped = default)
+        public StripePrice(string id = default, string productId = default, string productName = default, string nickname = default, Price price = default, StripePriceRecurring recurring = default, bool mapped = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -81,6 +82,12 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("price is a required property for StripePrice and cannot be null");
             }
             this.Price = price;
+            // to ensure "recurring" is required (not null)
+            if (recurring == null)
+            {
+                throw new ArgumentNullException("recurring is a required property for StripePrice and cannot be null");
+            }
+            this.Recurring = recurring;
             this.Mapped = mapped;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
@@ -128,6 +135,12 @@ namespace LicenseManager.Model
         public Price Price { get; set; }
 
         /// <summary>
+        /// Gets or Sets Recurring
+        /// </summary>
+        [DataMember(Name = "recurring", IsRequired = true, EmitDefaultValue = true)]
+        public StripePriceRecurring Recurring { get; set; }
+
+        /// <summary>
         /// Whether the price already creates licenses of a product.
         /// </summary>
         /// <value>Whether the price already creates licenses of a product.</value>
@@ -153,6 +166,7 @@ namespace LicenseManager.Model
             sb.Append("  ProductName: ").Append(ProductName).Append("\n");
             sb.Append("  Nickname: ").Append(Nickname).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
+            sb.Append("  Recurring: ").Append(Recurring).Append("\n");
             sb.Append("  Mapped: ").Append(Mapped).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");

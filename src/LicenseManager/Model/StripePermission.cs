@@ -78,7 +78,8 @@ namespace LicenseManager.Model
         /// <param name="access">access (required).</param>
         /// <param name="reason">reason (required).</param>
         /// <param name="optional">Whether the key can connect without it, losing what it&#39;s for, explained by &#x60;reason&#x60;. (required).</param>
-        public StripePermission(string resource = default, AccessEnum access = default, string reason = default, bool optional = default)
+        /// <param name="subscriptions">Whether it&#39;s only needed to sell subscriptions: checked once a recurring price is mapped. (required).</param>
+        public StripePermission(string resource = default, AccessEnum access = default, string reason = default, bool optional = default, bool subscriptions = default)
         {
             // to ensure "resource" is required (not null)
             if (resource == null)
@@ -94,6 +95,7 @@ namespace LicenseManager.Model
             }
             this.Reason = reason;
             this.Optional = optional;
+            this.Subscriptions = subscriptions;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -126,6 +128,16 @@ namespace LicenseManager.Model
         public bool Optional { get; set; }
 
         /// <summary>
+        /// Whether it&#39;s only needed to sell subscriptions: checked once a recurring price is mapped.
+        /// </summary>
+        /// <value>Whether it&#39;s only needed to sell subscriptions: checked once a recurring price is mapped.</value>
+        /*
+        <example>false</example>
+        */
+        [DataMember(Name = "subscriptions", IsRequired = true, EmitDefaultValue = true)]
+        public bool Subscriptions { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -143,6 +155,7 @@ namespace LicenseManager.Model
             sb.Append("  Access: ").Append(Access).Append("\n");
             sb.Append("  Reason: ").Append(Reason).Append("\n");
             sb.Append("  Optional: ").Append(Optional).Append("\n");
+            sb.Append("  Subscriptions: ").Append(Subscriptions).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

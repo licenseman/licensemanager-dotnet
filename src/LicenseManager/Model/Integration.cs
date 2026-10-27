@@ -86,8 +86,11 @@ namespace LicenseManager.Model
         /// <param name="lastEventAt">Last time it received an event from the provider. (required).</param>
         /// <param name="autoRefund">Whether canceling a license bought through Stripe refunds its payment. On by default, always off when &#x60;canRefund&#x60; is false. (required).</param>
         /// <param name="canRefund">Whether the API key has the optional Refunds: Write permission, checked when connecting and every day. Without it, canceled licenses aren&#39;t refunded: refund their payments from Stripe. (required).</param>
+        /// <param name="canManageSubscriptions">Whether the API key has the optional Subscriptions: Write permission, checked when connecting and every day. Without it, subscription licenses can&#39;t be canceled from the app: cancel their subscriptions from Stripe. (required).</param>
+        /// <param name="canBillingPortal">Whether the API key has the optional Customer portal: Write permission, checked when connecting and every day. Without it, the license portal doesn&#39;t link to the Stripe customer portal. (required).</param>
+        /// <param name="subscriptionGraceDays">Days a subscription license stays valid after its period ends while its renewal is unpaid, as Stripe retries the payment. 7 by default. (required).</param>
         /// <param name="createdAt">createdAt (required).</param>
-        public Integration(string id = default, ProviderEnum provider = default, bool livemode = default, string accountName = default, string apiKeyHint = default, string webhookUrl = default, IntegrationStatus status = default, string statusReason = default, DateTime? lastCheckedAt = default, DateTime? lastEventAt = default, bool autoRefund = default, bool canRefund = default, DateTime createdAt = default)
+        public Integration(string id = default, ProviderEnum provider = default, bool livemode = default, string accountName = default, string apiKeyHint = default, string webhookUrl = default, IntegrationStatus status = default, string statusReason = default, DateTime? lastCheckedAt = default, DateTime? lastEventAt = default, bool autoRefund = default, bool canRefund = default, bool canManageSubscriptions = default, bool canBillingPortal = default, int subscriptionGraceDays = default, DateTime createdAt = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -136,6 +139,9 @@ namespace LicenseManager.Model
             this.LastEventAt = lastEventAt;
             this.AutoRefund = autoRefund;
             this.CanRefund = canRefund;
+            this.CanManageSubscriptions = canManageSubscriptions;
+            this.CanBillingPortal = canBillingPortal;
+            this.SubscriptionGraceDays = subscriptionGraceDays;
             this.CreatedAt = createdAt;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
@@ -231,6 +237,36 @@ namespace LicenseManager.Model
         public bool CanRefund { get; set; }
 
         /// <summary>
+        /// Whether the API key has the optional Subscriptions: Write permission, checked when connecting and every day. Without it, subscription licenses can&#39;t be canceled from the app: cancel their subscriptions from Stripe.
+        /// </summary>
+        /// <value>Whether the API key has the optional Subscriptions: Write permission, checked when connecting and every day. Without it, subscription licenses can&#39;t be canceled from the app: cancel their subscriptions from Stripe.</value>
+        /*
+        <example>true</example>
+        */
+        [DataMember(Name = "canManageSubscriptions", IsRequired = true, EmitDefaultValue = true)]
+        public bool CanManageSubscriptions { get; set; }
+
+        /// <summary>
+        /// Whether the API key has the optional Customer portal: Write permission, checked when connecting and every day. Without it, the license portal doesn&#39;t link to the Stripe customer portal.
+        /// </summary>
+        /// <value>Whether the API key has the optional Customer portal: Write permission, checked when connecting and every day. Without it, the license portal doesn&#39;t link to the Stripe customer portal.</value>
+        /*
+        <example>true</example>
+        */
+        [DataMember(Name = "canBillingPortal", IsRequired = true, EmitDefaultValue = true)]
+        public bool CanBillingPortal { get; set; }
+
+        /// <summary>
+        /// Days a subscription license stays valid after its period ends while its renewal is unpaid, as Stripe retries the payment. 7 by default.
+        /// </summary>
+        /// <value>Days a subscription license stays valid after its period ends while its renewal is unpaid, as Stripe retries the payment. 7 by default.</value>
+        /*
+        <example>7</example>
+        */
+        [DataMember(Name = "subscriptionGraceDays", IsRequired = true, EmitDefaultValue = true)]
+        public int SubscriptionGraceDays { get; set; }
+
+        /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
         [DataMember(Name = "createdAt", IsRequired = true, EmitDefaultValue = true)]
@@ -262,6 +298,9 @@ namespace LicenseManager.Model
             sb.Append("  LastEventAt: ").Append(LastEventAt).Append("\n");
             sb.Append("  AutoRefund: ").Append(AutoRefund).Append("\n");
             sb.Append("  CanRefund: ").Append(CanRefund).Append("\n");
+            sb.Append("  CanManageSubscriptions: ").Append(CanManageSubscriptions).Append("\n");
+            sb.Append("  CanBillingPortal: ").Append(CanBillingPortal).Append("\n");
+            sb.Append("  SubscriptionGraceDays: ").Append(SubscriptionGraceDays).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");

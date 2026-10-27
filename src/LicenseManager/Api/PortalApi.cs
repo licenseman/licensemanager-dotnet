@@ -28,6 +28,29 @@ namespace LicenseManager.Api
     {
         #region Synchronous Operations
         /// <summary>
+        /// Open the Stripe customer portal of a customer
+        /// </summary>
+        /// <remarks>
+        /// Link to the Stripe customer portal of the customer&#39;s Stripe customer, where they manage their subscriptions: change their plan or payment method, see their invoices, cancel. Needs the Stripe integration&#39;s &#x60;canBillingPortal&#x60;, and the customer portal configured in the Stripe account&#39;s settings. The changes come back through the integration&#39;s webhook, keeping the subscription licenses in line.  **Token access**: customer tokens with the &#x60;customer:billing&#x60; permission (or the matching write one). A customer token reaches its own customer.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="createBillingPortalSession"> (optional)</param>
+        /// <returns>BillingPortalSession</returns>
+        BillingPortalSession CreateBillingPortalSession(string id, CreateBillingPortalSession createBillingPortalSession = default);
+
+        /// <summary>
+        /// Open the Stripe customer portal of a customer
+        /// </summary>
+        /// <remarks>
+        /// Link to the Stripe customer portal of the customer&#39;s Stripe customer, where they manage their subscriptions: change their plan or payment method, see their invoices, cancel. Needs the Stripe integration&#39;s &#x60;canBillingPortal&#x60;, and the customer portal configured in the Stripe account&#39;s settings. The changes come back through the integration&#39;s webhook, keeping the subscription licenses in line.  **Token access**: customer tokens with the &#x60;customer:billing&#x60; permission (or the matching write one). A customer token reaches its own customer.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="createBillingPortalSession"> (optional)</param>
+        /// <returns>ApiResponse of BillingPortalSession</returns>
+        ApiResponse<BillingPortalSession> CreateBillingPortalSessionWithHttpInfo(string id, CreateBillingPortalSession createBillingPortalSession = default);
+        /// <summary>
         /// Create a link to the customer portal
         /// </summary>
         /// <remarks>
@@ -128,6 +151,31 @@ namespace LicenseManager.Api
     public interface IPortalApiAsync : IApiAccessor
     {
         #region Asynchronous Operations
+        /// <summary>
+        /// Open the Stripe customer portal of a customer
+        /// </summary>
+        /// <remarks>
+        /// Link to the Stripe customer portal of the customer&#39;s Stripe customer, where they manage their subscriptions: change their plan or payment method, see their invoices, cancel. Needs the Stripe integration&#39;s &#x60;canBillingPortal&#x60;, and the customer portal configured in the Stripe account&#39;s settings. The changes come back through the integration&#39;s webhook, keeping the subscription licenses in line.  **Token access**: customer tokens with the &#x60;customer:billing&#x60; permission (or the matching write one). A customer token reaches its own customer.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="createBillingPortalSession"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of BillingPortalSession</returns>
+        System.Threading.Tasks.Task<BillingPortalSession> CreateBillingPortalSessionAsync(string id, CreateBillingPortalSession createBillingPortalSession = default, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Open the Stripe customer portal of a customer
+        /// </summary>
+        /// <remarks>
+        /// Link to the Stripe customer portal of the customer&#39;s Stripe customer, where they manage their subscriptions: change their plan or payment method, see their invoices, cancel. Needs the Stripe integration&#39;s &#x60;canBillingPortal&#x60;, and the customer portal configured in the Stripe account&#39;s settings. The changes come back through the integration&#39;s webhook, keeping the subscription licenses in line.  **Token access**: customer tokens with the &#x60;customer:billing&#x60; permission (or the matching write one). A customer token reaches its own customer.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="createBillingPortalSession"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (BillingPortalSession)</returns>
+        System.Threading.Tasks.Task<ApiResponse<BillingPortalSession>> CreateBillingPortalSessionWithHttpInfoAsync(string id, CreateBillingPortalSession createBillingPortalSession = default, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Create a link to the customer portal
         /// </summary>
@@ -439,6 +487,151 @@ namespace LicenseManager.Api
                 return _exceptionFactory;
             }
             set { _exceptionFactory = value; }
+        }
+
+        /// <summary>
+        /// Open the Stripe customer portal of a customer Link to the Stripe customer portal of the customer&#39;s Stripe customer, where they manage their subscriptions: change their plan or payment method, see their invoices, cancel. Needs the Stripe integration&#39;s &#x60;canBillingPortal&#x60;, and the customer portal configured in the Stripe account&#39;s settings. The changes come back through the integration&#39;s webhook, keeping the subscription licenses in line.  **Token access**: customer tokens with the &#x60;customer:billing&#x60; permission (or the matching write one). A customer token reaches its own customer.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="createBillingPortalSession"> (optional)</param>
+        /// <returns>BillingPortalSession</returns>
+        public BillingPortalSession CreateBillingPortalSession(string id, CreateBillingPortalSession createBillingPortalSession = default)
+        {
+            LicenseManager.Client.ApiResponse<BillingPortalSession> localVarResponse = CreateBillingPortalSessionWithHttpInfo(id, createBillingPortalSession);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Open the Stripe customer portal of a customer Link to the Stripe customer portal of the customer&#39;s Stripe customer, where they manage their subscriptions: change their plan or payment method, see their invoices, cancel. Needs the Stripe integration&#39;s &#x60;canBillingPortal&#x60;, and the customer portal configured in the Stripe account&#39;s settings. The changes come back through the integration&#39;s webhook, keeping the subscription licenses in line.  **Token access**: customer tokens with the &#x60;customer:billing&#x60; permission (or the matching write one). A customer token reaches its own customer.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="createBillingPortalSession"> (optional)</param>
+        /// <returns>ApiResponse of BillingPortalSession</returns>
+        public LicenseManager.Client.ApiResponse<BillingPortalSession> CreateBillingPortalSessionWithHttpInfo(string id, CreateBillingPortalSession createBillingPortalSession = default)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'id' when calling PortalApi->CreateBillingPortalSession");
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", LicenseManager.Client.ClientUtils.ParameterToString(id)); // path parameter
+            localVarRequestOptions.Data = createBillingPortalSession;
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+            // authentication (token) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<BillingPortalSession>("/v1/customers/{id}/billing-portal-sessions", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("CreateBillingPortalSession", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Open the Stripe customer portal of a customer Link to the Stripe customer portal of the customer&#39;s Stripe customer, where they manage their subscriptions: change their plan or payment method, see their invoices, cancel. Needs the Stripe integration&#39;s &#x60;canBillingPortal&#x60;, and the customer portal configured in the Stripe account&#39;s settings. The changes come back through the integration&#39;s webhook, keeping the subscription licenses in line.  **Token access**: customer tokens with the &#x60;customer:billing&#x60; permission (or the matching write one). A customer token reaches its own customer.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="createBillingPortalSession"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of BillingPortalSession</returns>
+        public async System.Threading.Tasks.Task<BillingPortalSession> CreateBillingPortalSessionAsync(string id, CreateBillingPortalSession createBillingPortalSession = default, System.Threading.CancellationToken cancellationToken = default)
+        {
+            LicenseManager.Client.ApiResponse<BillingPortalSession> localVarResponse = await CreateBillingPortalSessionWithHttpInfoAsync(id, createBillingPortalSession, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Open the Stripe customer portal of a customer Link to the Stripe customer portal of the customer&#39;s Stripe customer, where they manage their subscriptions: change their plan or payment method, see their invoices, cancel. Needs the Stripe integration&#39;s &#x60;canBillingPortal&#x60;, and the customer portal configured in the Stripe account&#39;s settings. The changes come back through the integration&#39;s webhook, keeping the subscription licenses in line.  **Token access**: customer tokens with the &#x60;customer:billing&#x60; permission (or the matching write one). A customer token reaches its own customer.  **Required role permission**: &#x60;portalLink:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="createBillingPortalSession"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (BillingPortalSession)</returns>
+        public async System.Threading.Tasks.Task<LicenseManager.Client.ApiResponse<BillingPortalSession>> CreateBillingPortalSessionWithHttpInfoAsync(string id, CreateBillingPortalSession createBillingPortalSession = default, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'id' when calling PortalApi->CreateBillingPortalSession");
+
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", LicenseManager.Client.ClientUtils.ParameterToString(id)); // path parameter
+            localVarRequestOptions.Data = createBillingPortalSession;
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+            // authentication (token) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<BillingPortalSession>("/v1/customers/{id}/billing-portal-sessions", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("CreateBillingPortalSession", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
         }
 
         /// <summary>

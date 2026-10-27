@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ProductName** | **string** |  | 
 **Nickname** | **string** |  | 
 **Price** | [**Price**](Price.md) |  | 
+**Recurring** | [**StripePriceRecurring**](StripePriceRecurring.md) |  | 
 **Mapped** | **bool** | Whether the price already creates licenses of a product. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

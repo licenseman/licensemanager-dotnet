@@ -93,40 +93,46 @@ namespace LicenseManager.Model
             Customerwrite = 2,
 
             /// <summary>
+            /// Enum Customerbilling for value: customer:billing
+            /// </summary>
+            [EnumMember(Value = "customer:billing")]
+            Customerbilling = 3,
+
+            /// <summary>
             /// Enum Licenseread for value: license:read
             /// </summary>
             [EnumMember(Value = "license:read")]
-            Licenseread = 3,
+            Licenseread = 4,
 
             /// <summary>
             /// Enum Licensewrite for value: license:write
             /// </summary>
             [EnumMember(Value = "license:write")]
-            Licensewrite = 4,
+            Licensewrite = 5,
 
             /// <summary>
             /// Enum Licensecancel for value: license:cancel
             /// </summary>
             [EnumMember(Value = "license:cancel")]
-            Licensecancel = 5,
+            Licensecancel = 6,
 
             /// <summary>
             /// Enum Machineread for value: machine:read
             /// </summary>
             [EnumMember(Value = "machine:read")]
-            Machineread = 6,
+            Machineread = 7,
 
             /// <summary>
             /// Enum Machinewrite for value: machine:write
             /// </summary>
             [EnumMember(Value = "machine:write")]
-            Machinewrite = 7,
+            Machinewrite = 8,
 
             /// <summary>
             /// Enum UnknownDefaultOpenApi for value: unknown_default_open_api
             /// </summary>
             [EnumMember(Value = "unknown_default_open_api")]
-            UnknownDefaultOpenApi = 8
+            UnknownDefaultOpenApi = 9
         }
 
         /// <summary>

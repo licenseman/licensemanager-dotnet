@@ -62,5 +62,14 @@ namespace LicenseManager.Test.Model
         {
             // TODO unit test for the property 'AutoRefund'
         }
+
+        /// <summary>
+        /// Test the property 'SubscriptionGraceDays'
+        /// </summary>
+        [Fact]
+        public void SubscriptionGraceDaysTest()
+        {
+            // TODO unit test for the property 'SubscriptionGraceDays'
+        }
     }
 }

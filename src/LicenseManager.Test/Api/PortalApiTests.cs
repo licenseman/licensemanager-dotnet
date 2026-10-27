@@ -54,6 +54,19 @@ namespace LicenseManager.Test.Api
         }
 
         /// <summary>
+        /// Test CreateBillingPortalSession
+        /// </summary>
+        [Fact]
+        public void CreateBillingPortalSessionTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string id = null;
+            //CreateBillingPortalSession createBillingPortalSession = null;
+            //var response = instance.CreateBillingPortalSession(id, createBillingPortalSession);
+            //Assert.IsType<BillingPortalSession>(response);
+        }
+
+        /// <summary>
         /// Test CreatePortalLink
         /// </summary>
         [Fact]

@@ -100,6 +100,15 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Recurring'
+        /// </summary>
+        [Fact]
+        public void RecurringTest()
+        {
+            // TODO unit test for the property 'Recurring'
+        }
+
+        /// <summary>
         /// Test the property 'Mapped'
         /// </summary>
         [Fact]
