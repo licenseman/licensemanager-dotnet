@@ -91,6 +91,15 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Customer'
+        /// </summary>
+        [Fact]
+        public void CustomerTest()
+        {
+            // TODO unit test for the property 'Customer'
+        }
+
+        /// <summary>
         /// Test the property 'Key'
         /// </summary>
         [Fact]

@@ -2103,6 +2103,9 @@
             "type": "string",
             "example": "c9Wd3RtE"
           },
+          "customer": {
+            "$ref": "#/components/schemas/LicenseCustomer"
+          },
           "key": {
             "type": "string",
             "description": "Unique within the product. Case sensitive: `validateKey` compares keys exactly.",
@@ -2240,6 +2243,7 @@
           "productId",
           "policyId",
           "customerId",
+          "customer",
           "key",
           "createdAt",
           "expiresAt",
@@ -2260,6 +2264,34 @@
           "stripeRefundId",
           "updatedAt"
         ]
+      },
+      "LicenseCustomer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "c9Wd3RtE"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "jane@example.com"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Display name of the customer. `null` when unknown.",
+            "example": "Jane Doe"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "name"
+        ],
+        "description": "Customer the license belongs to, the one of `customerId`."
       },
       "LicenseMaxVersion": {
         "type": "object",
@@ -6402,11 +6434,11 @@
               "type": "string",
               "minLength": 1,
               "maxLength": 200,
-              "description": "Case-insensitive text the key contains.",
+              "description": "Case-insensitive text the key or the email of the customer contains.",
               "example": "X9ZPA"
             },
             "required": false,
-            "description": "Case-insensitive text the key contains.",
+            "description": "Case-insensitive text the key or the email of the customer contains.",
             "name": "search",
             "in": "query"
           },
@@ -6914,11 +6946,11 @@
               "type": "string",
               "minLength": 1,
               "maxLength": 200,
-              "description": "Case-insensitive text the key contains.",
+              "description": "Case-insensitive text the key or the email of the customer contains.",
               "example": "X9ZPA"
             },
             "required": false,
-            "description": "Case-insensitive text the key contains.",
+            "description": "Case-insensitive text the key or the email of the customer contains.",
             "name": "search",
             "in": "query"
           },

@@ -693,7 +693,7 @@ namespace Example
             var page = 1;  // int? | Page to return. Pages are numbered from 1: `1` is the first page. A page past the last one returns an empty `data`, not an error. Defaults to `1`. (optional)  (default to 1)
             var pageSize = 20;  // int? | Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to `20`. (optional)  (default to 20)
             var sort = -createdAt;  // string | Field to sort by, prefixed with `-` for descending order. Defaults to `-createdAt`. (optional)  (default to -createdAt)
-            var search = X9ZPA;  // string | Case-insensitive text the key contains. (optional) 
+            var search = X9ZPA;  // string | Case-insensitive text the key or the email of the customer contains. (optional) 
             var key = 7KQ2M-X9ZPA-H4TRC-WN6EY-B3JDF;  // string | Only returns the license with this exact key, case included. Keys of test products start with `TEST-`. (optional) 
             var policyId = p4Rt8LmQ;  // string | Only returns the licenses following this policy. (optional) 
             var machineVersion = 2.3.1;  // string | Only returns the licenses with at least one active machine running this version of the product. (optional) 
@@ -757,7 +757,7 @@ catch (ApiException e)
 | **page** | **int?** | Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. | [optional] [default to 1] |
 | **pageSize** | **int?** | Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. | [optional] [default to 20] |
 | **sort** | **string** | Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. | [optional] [default to -createdAt] |
-| **search** | **string** | Case-insensitive text the key contains. | [optional]  |
+| **search** | **string** | Case-insensitive text the key or the email of the customer contains. | [optional]  |
 | **key** | **string** | Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. | [optional]  |
 | **policyId** | **string** | Only returns the licenses following this policy. | [optional]  |
 | **machineVersion** | **string** | Only returns the licenses with at least one active machine running this version of the product. | [optional]  |
@@ -841,7 +841,7 @@ namespace Example
             var page = 1;  // int? | Page to return. Pages are numbered from 1: `1` is the first page. A page past the last one returns an empty `data`, not an error. Defaults to `1`. (optional)  (default to 1)
             var pageSize = 20;  // int? | Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to `20`. (optional)  (default to 20)
             var sort = -createdAt;  // string | Field to sort by, prefixed with `-` for descending order. Defaults to `-createdAt`. (optional)  (default to -createdAt)
-            var search = X9ZPA;  // string | Case-insensitive text the key contains. (optional) 
+            var search = X9ZPA;  // string | Case-insensitive text the key or the email of the customer contains. (optional) 
             var key = 7KQ2M-X9ZPA-H4TRC-WN6EY-B3JDF;  // string | Only returns the license with this exact key, case included. Keys of test products start with `TEST-`. (optional) 
             var policyId = p4Rt8LmQ;  // string | Only returns the licenses following this policy. (optional) 
             var customerId = c9Wd3RtE;  // string | Only returns the licenses of this customer. (optional) 
@@ -906,7 +906,7 @@ catch (ApiException e)
 | **page** | **int?** | Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. | [optional] [default to 1] |
 | **pageSize** | **int?** | Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. | [optional] [default to 20] |
 | **sort** | **string** | Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. | [optional] [default to -createdAt] |
-| **search** | **string** | Case-insensitive text the key contains. | [optional]  |
+| **search** | **string** | Case-insensitive text the key or the email of the customer contains. | [optional]  |
 | **key** | **string** | Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. | [optional]  |
 | **policyId** | **string** | Only returns the licenses following this policy. | [optional]  |
 | **customerId** | **string** | Only returns the licenses of this customer. | [optional]  |

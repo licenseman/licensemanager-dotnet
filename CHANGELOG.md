@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.1 (2026-11-04)
+
+### Changes
+
+- `GET /v1/customers/{customerId}/licenses`: added the required property `data/items/customer` to the response with the `200` status
+- `GET /v1/licenses/{id}`: added the required property `customer` to the response with the `200` status
+- `PATCH /v1/licenses/{id}`: added the required property `customer` to the response with the `200` status
+- `POST /v1/licenses/{id}/cancel`: added the required property `customer` to the response with the `200` status
+- `GET /v1/products/{productId}/licenses`: added the required property `data/items/customer` to the response with the `200` status
+- `POST /v1/products/{productId}/licenses`: added the required property `customer` to the response with the `201` status
+
 ## 0.3.0 (2026-10-27)
 
 ### Breaking changes

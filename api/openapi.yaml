@@ -2068,13 +2068,14 @@ paths:
           example: -createdAt
           type: string
         style: form
-      - description: Case-insensitive text the key contains.
+      - description: Case-insensitive text the key or the email of the customer contains.
         explode: true
         in: query
         name: search
         required: false
         schema:
-          description: Case-insensitive text the key contains.
+          description: Case-insensitive text the key or the email of the customer
+            contains.
           example: X9ZPA
           maxLength: 200
           minLength: 1
@@ -2548,13 +2549,14 @@ paths:
           example: -createdAt
           type: string
         style: form
-      - description: Case-insensitive text the key contains.
+      - description: Case-insensitive text the key or the email of the customer contains.
         explode: true
         in: query
         name: search
         required: false
         schema:
-          description: Case-insensitive text the key contains.
+          description: Case-insensitive text the key or the email of the customer
+            contains.
           example: X9ZPA
           maxLength: 200
           minLength: 1
@@ -7385,6 +7387,10 @@ components:
           productId: x7Kp2QaZ
           policyId: p4Rt8LmQ
           customerId: c9Wd3RtE
+          customer:
+            id: c9Wd3RtE
+            email: jane@example.com
+            name: Jane Doe
           key: 7KQ2M-X9ZPA-H4TRC-WN6EY-B3JDF
           createdAt: 2026-01-15T09:30:00.000Z
           expiresAt: 2027-01-15T09:30:00.000Z
@@ -7423,6 +7429,10 @@ components:
           productId: x7Kp2QaZ
           policyId: p4Rt8LmQ
           customerId: c9Wd3RtE
+          customer:
+            id: c9Wd3RtE
+            email: jane@example.com
+            name: Jane Doe
           key: 7KQ2M-X9ZPA-H4TRC-WN6EY-B3JDF
           createdAt: 2026-01-15T09:30:00.000Z
           expiresAt: 2027-01-15T09:30:00.000Z
@@ -7481,6 +7491,10 @@ components:
         productId: x7Kp2QaZ
         policyId: p4Rt8LmQ
         customerId: c9Wd3RtE
+        customer:
+          id: c9Wd3RtE
+          email: jane@example.com
+          name: Jane Doe
         key: 7KQ2M-X9ZPA-H4TRC-WN6EY-B3JDF
         createdAt: 2026-01-15T09:30:00.000Z
         expiresAt: 2027-01-15T09:30:00.000Z
@@ -7528,6 +7542,8 @@ components:
         customerId:
           example: c9Wd3RtE
           type: string
+        customer:
+          $ref: "#/components/schemas/LicenseCustomer"
         key:
           description: "Unique within the product. Case sensitive: `validateKey` compares\
             \ keys exactly."
@@ -7637,6 +7653,7 @@ components:
       - cancellationComment
       - cancellationReason
       - createdAt
+      - customer
       - customerId
       - expiresAt
       - id
@@ -7654,6 +7671,29 @@ components:
       - stripeRefundId
       - subscription
       - updatedAt
+    LicenseCustomer:
+      description: "Customer the license belongs to, the one of `customerId`."
+      example:
+        id: c9Wd3RtE
+        email: jane@example.com
+        name: Jane Doe
+      properties:
+        id:
+          example: c9Wd3RtE
+          type: string
+        email:
+          example: jane@example.com
+          format: email
+          type: string
+        name:
+          description: Display name of the customer. `null` when unknown.
+          example: Jane Doe
+          nullable: true
+          type: string
+      required:
+      - email
+      - id
+      - name
     LicenseMaxVersion:
       description: "Latest version of the product the license can use: its hard-coded\
         \ `version`, else the versions released before its locks. All `null` when\

@@ -59,6 +59,7 @@ namespace LicenseManager.Model
         /// <param name="productId">productId (required).</param>
         /// <param name="policyId">policyId (required).</param>
         /// <param name="customerId">customerId (required).</param>
+        /// <param name="customer">customer (required).</param>
         /// <param name="key">Unique within the product. Case sensitive: &#x60;validateKey&#x60; compares keys exactly. (required).</param>
         /// <param name="createdAt">createdAt (required).</param>
         /// <param name="expiresAt">&#x60;null&#x60; when the license never expires. (required).</param>
@@ -78,7 +79,7 @@ namespace LicenseManager.Model
         /// <param name="cancellationComment">Comment given when the license was canceled. &#x60;null&#x60; when there&#39;s none. (required).</param>
         /// <param name="stripeRefundId">Id of the Stripe refund of the license&#39;s payment once it was canceled, through the Stripe integration. &#x60;null&#x60; otherwise. (required).</param>
         /// <param name="updatedAt">Last time the license&#39;s settings were edited, not when its key was validated. (required).</param>
-        public License(string id = default, string productId = default, string policyId = default, string customerId = default, string key = default, DateTime createdAt = default, DateTime? expiresAt = default, Dictionary<string, Object> meta = default, string stripePaymentIntentId = default, int? maxMachines = default, int maxOfflineDurationSeconds = default, int activeMachineCount = default, DateTime? lastActivatedAt = default, LicenseMaxVersion maxVersion = default, Price price = default, LicenseStatus status = default, DateTime? cancellableUntil = default, DateTime? canceledAt = default, CancellationReason cancellationReason = default, LicenseSubscription subscription = default, string cancellationComment = default, string stripeRefundId = default, DateTime updatedAt = default)
+        public License(string id = default, string productId = default, string policyId = default, string customerId = default, LicenseCustomer customer = default, string key = default, DateTime createdAt = default, DateTime? expiresAt = default, Dictionary<string, Object> meta = default, string stripePaymentIntentId = default, int? maxMachines = default, int maxOfflineDurationSeconds = default, int activeMachineCount = default, DateTime? lastActivatedAt = default, LicenseMaxVersion maxVersion = default, Price price = default, LicenseStatus status = default, DateTime? cancellableUntil = default, DateTime? canceledAt = default, CancellationReason cancellationReason = default, LicenseSubscription subscription = default, string cancellationComment = default, string stripeRefundId = default, DateTime updatedAt = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -104,6 +105,12 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("customerId is a required property for License and cannot be null");
             }
             this.CustomerId = customerId;
+            // to ensure "customer" is required (not null)
+            if (customer == null)
+            {
+                throw new ArgumentNullException("customer is a required property for License and cannot be null");
+            }
+            this.Customer = customer;
             // to ensure "key" is required (not null)
             if (key == null)
             {
@@ -226,6 +233,12 @@ namespace LicenseManager.Model
         */
         [DataMember(Name = "customerId", IsRequired = true, EmitDefaultValue = true)]
         public string CustomerId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Customer
+        /// </summary>
+        [DataMember(Name = "customer", IsRequired = true, EmitDefaultValue = true)]
+        public LicenseCustomer Customer { get; set; }
 
         /// <summary>
         /// Unique within the product. Case sensitive: &#x60;validateKey&#x60; compares keys exactly.
@@ -402,6 +415,7 @@ namespace LicenseManager.Model
             sb.Append("  ProductId: ").Append(ProductId).Append("\n");
             sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
             sb.Append("  CustomerId: ").Append(CustomerId).Append("\n");
+            sb.Append("  Customer: ").Append(Customer).Append("\n");
             sb.Append("  Key: ").Append(Key).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  ExpiresAt: ").Append(ExpiresAt).Append("\n");

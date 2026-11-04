@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ProductId** | **string** |  | 
 **PolicyId** | **string** |  | 
 **CustomerId** | **string** |  | 
+**Customer** | [**LicenseCustomer**](LicenseCustomer.md) |  | 
 **Key** | **string** | Unique within the product. Case sensitive: &#x60;validateKey&#x60; compares keys exactly. | 
 **CreatedAt** | **DateTime** |  | 
 **ExpiresAt** | **DateTime?** | &#x60;null&#x60; when the license never expires. | 

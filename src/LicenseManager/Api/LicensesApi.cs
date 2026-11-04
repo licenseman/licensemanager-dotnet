@@ -166,7 +166,7 @@ namespace LicenseManager.Api
         /// <param name="page">Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. (optional, default to 1)</param>
         /// <param name="pageSize">Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. (optional, default to 20)</param>
         /// <param name="sort">Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. (optional, default to -createdAt)</param>
-        /// <param name="search">Case-insensitive text the key contains. (optional)</param>
+        /// <param name="search">Case-insensitive text the key or the email of the customer contains. (optional)</param>
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
@@ -198,7 +198,7 @@ namespace LicenseManager.Api
         /// <param name="page">Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. (optional, default to 1)</param>
         /// <param name="pageSize">Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. (optional, default to 20)</param>
         /// <param name="sort">Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. (optional, default to -createdAt)</param>
-        /// <param name="search">Case-insensitive text the key contains. (optional)</param>
+        /// <param name="search">Case-insensitive text the key or the email of the customer contains. (optional)</param>
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
@@ -229,7 +229,7 @@ namespace LicenseManager.Api
         /// <param name="page">Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. (optional, default to 1)</param>
         /// <param name="pageSize">Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. (optional, default to 20)</param>
         /// <param name="sort">Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. (optional, default to -createdAt)</param>
-        /// <param name="search">Case-insensitive text the key contains. (optional)</param>
+        /// <param name="search">Case-insensitive text the key or the email of the customer contains. (optional)</param>
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="customerId">Only returns the licenses of this customer. (optional)</param>
@@ -262,7 +262,7 @@ namespace LicenseManager.Api
         /// <param name="page">Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. (optional, default to 1)</param>
         /// <param name="pageSize">Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. (optional, default to 20)</param>
         /// <param name="sort">Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. (optional, default to -createdAt)</param>
-        /// <param name="search">Case-insensitive text the key contains. (optional)</param>
+        /// <param name="search">Case-insensitive text the key or the email of the customer contains. (optional)</param>
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="customerId">Only returns the licenses of this customer. (optional)</param>
@@ -510,7 +510,7 @@ namespace LicenseManager.Api
         /// <param name="page">Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. (optional, default to 1)</param>
         /// <param name="pageSize">Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. (optional, default to 20)</param>
         /// <param name="sort">Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. (optional, default to -createdAt)</param>
-        /// <param name="search">Case-insensitive text the key contains. (optional)</param>
+        /// <param name="search">Case-insensitive text the key or the email of the customer contains. (optional)</param>
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
@@ -543,7 +543,7 @@ namespace LicenseManager.Api
         /// <param name="page">Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. (optional, default to 1)</param>
         /// <param name="pageSize">Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. (optional, default to 20)</param>
         /// <param name="sort">Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. (optional, default to -createdAt)</param>
-        /// <param name="search">Case-insensitive text the key contains. (optional)</param>
+        /// <param name="search">Case-insensitive text the key or the email of the customer contains. (optional)</param>
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
@@ -575,7 +575,7 @@ namespace LicenseManager.Api
         /// <param name="page">Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. (optional, default to 1)</param>
         /// <param name="pageSize">Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. (optional, default to 20)</param>
         /// <param name="sort">Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. (optional, default to -createdAt)</param>
-        /// <param name="search">Case-insensitive text the key contains. (optional)</param>
+        /// <param name="search">Case-insensitive text the key or the email of the customer contains. (optional)</param>
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="customerId">Only returns the licenses of this customer. (optional)</param>
@@ -609,7 +609,7 @@ namespace LicenseManager.Api
         /// <param name="page">Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. (optional, default to 1)</param>
         /// <param name="pageSize">Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. (optional, default to 20)</param>
         /// <param name="sort">Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. (optional, default to -createdAt)</param>
-        /// <param name="search">Case-insensitive text the key contains. (optional)</param>
+        /// <param name="search">Case-insensitive text the key or the email of the customer contains. (optional)</param>
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="customerId">Only returns the licenses of this customer. (optional)</param>
@@ -1715,7 +1715,7 @@ namespace LicenseManager.Api
         /// <param name="page">Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. (optional, default to 1)</param>
         /// <param name="pageSize">Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. (optional, default to 20)</param>
         /// <param name="sort">Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. (optional, default to -createdAt)</param>
-        /// <param name="search">Case-insensitive text the key contains. (optional)</param>
+        /// <param name="search">Case-insensitive text the key or the email of the customer contains. (optional)</param>
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
@@ -1748,7 +1748,7 @@ namespace LicenseManager.Api
         /// <param name="page">Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. (optional, default to 1)</param>
         /// <param name="pageSize">Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. (optional, default to 20)</param>
         /// <param name="sort">Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. (optional, default to -createdAt)</param>
-        /// <param name="search">Case-insensitive text the key contains. (optional)</param>
+        /// <param name="search">Case-insensitive text the key or the email of the customer contains. (optional)</param>
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
@@ -1907,7 +1907,7 @@ namespace LicenseManager.Api
         /// <param name="page">Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. (optional, default to 1)</param>
         /// <param name="pageSize">Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. (optional, default to 20)</param>
         /// <param name="sort">Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. (optional, default to -createdAt)</param>
-        /// <param name="search">Case-insensitive text the key contains. (optional)</param>
+        /// <param name="search">Case-insensitive text the key or the email of the customer contains. (optional)</param>
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
@@ -1941,7 +1941,7 @@ namespace LicenseManager.Api
         /// <param name="page">Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. (optional, default to 1)</param>
         /// <param name="pageSize">Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. (optional, default to 20)</param>
         /// <param name="sort">Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. (optional, default to -createdAt)</param>
-        /// <param name="search">Case-insensitive text the key contains. (optional)</param>
+        /// <param name="search">Case-insensitive text the key or the email of the customer contains. (optional)</param>
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
@@ -2104,7 +2104,7 @@ namespace LicenseManager.Api
         /// <param name="page">Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. (optional, default to 1)</param>
         /// <param name="pageSize">Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. (optional, default to 20)</param>
         /// <param name="sort">Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. (optional, default to -createdAt)</param>
-        /// <param name="search">Case-insensitive text the key contains. (optional)</param>
+        /// <param name="search">Case-insensitive text the key or the email of the customer contains. (optional)</param>
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="customerId">Only returns the licenses of this customer. (optional)</param>
@@ -2138,7 +2138,7 @@ namespace LicenseManager.Api
         /// <param name="page">Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. (optional, default to 1)</param>
         /// <param name="pageSize">Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. (optional, default to 20)</param>
         /// <param name="sort">Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. (optional, default to -createdAt)</param>
-        /// <param name="search">Case-insensitive text the key contains. (optional)</param>
+        /// <param name="search">Case-insensitive text the key or the email of the customer contains. (optional)</param>
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="customerId">Only returns the licenses of this customer. (optional)</param>
@@ -2296,7 +2296,7 @@ namespace LicenseManager.Api
         /// <param name="page">Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. (optional, default to 1)</param>
         /// <param name="pageSize">Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. (optional, default to 20)</param>
         /// <param name="sort">Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. (optional, default to -createdAt)</param>
-        /// <param name="search">Case-insensitive text the key contains. (optional)</param>
+        /// <param name="search">Case-insensitive text the key or the email of the customer contains. (optional)</param>
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="customerId">Only returns the licenses of this customer. (optional)</param>
@@ -2331,7 +2331,7 @@ namespace LicenseManager.Api
         /// <param name="page">Page to return. Pages are numbered from 1: &#x60;1&#x60; is the first page. A page past the last one returns an empty &#x60;data&#x60;, not an error. Defaults to &#x60;1&#x60;. (optional, default to 1)</param>
         /// <param name="pageSize">Maximum number of items per page, from 1 to 100. Every page holds this many items except the last one, which can hold fewer. Defaults to &#x60;20&#x60;. (optional, default to 20)</param>
         /// <param name="sort">Field to sort by, prefixed with &#x60;-&#x60; for descending order. Defaults to &#x60;-createdAt&#x60;. (optional, default to -createdAt)</param>
-        /// <param name="search">Case-insensitive text the key contains. (optional)</param>
+        /// <param name="search">Case-insensitive text the key or the email of the customer contains. (optional)</param>
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="customerId">Only returns the licenses of this customer. (optional)</param>
