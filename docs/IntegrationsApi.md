@@ -4,15 +4,127 @@ All URIs are relative to *https://api.licensemanager.dev*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
+| [**AuthorizeSlack**](IntegrationsApi.md#authorizeslack) | **POST** /v1/products/{productId}/integrations/slack/authorize | Start connecting a Slack channel |
 | [**CheckIntegration**](IntegrationsApi.md#checkintegration) | **POST** /v1/integrations/{id}/check | Check an integration |
 | [**ConnectStripe**](IntegrationsApi.md#connectstripe) | **PUT** /v1/products/{productId}/integrations/stripe | Connect Stripe |
 | [**CreateStripeMapping**](IntegrationsApi.md#createstripemapping) | **POST** /v1/products/{productId}/integrations/stripe/mappings | Map a Stripe price to a policy |
+| [**DeleteSlackConnection**](IntegrationsApi.md#deleteslackconnection) | **DELETE** /v1/slack-connections/{id} | Remove a Slack connection |
 | [**DeleteStripeMapping**](IntegrationsApi.md#deletestripemapping) | **DELETE** /v1/integration-mappings/{id} | Delete a mapping |
 | [**DisconnectIntegration**](IntegrationsApi.md#disconnectintegration) | **DELETE** /v1/integrations/{id} | Disconnect an integration |
+| [**GetSlackIntegration**](IntegrationsApi.md#getslackintegration) | **GET** /v1/products/{productId}/integrations/slack | Get the Slack integration of a product |
 | [**GetStripeIntegration**](IntegrationsApi.md#getstripeintegration) | **GET** /v1/products/{productId}/integrations/stripe | Get the Stripe integration of a product |
 | [**ListStripePrices**](IntegrationsApi.md#liststripeprices) | **GET** /v1/integrations/{id}/stripe/prices | List the Stripe prices of an integration |
+| [**TestSlackConnection**](IntegrationsApi.md#testslackconnection) | **POST** /v1/slack-connections/{id}/test | Send a test message to a Slack channel |
 | [**UpdateIntegration**](IntegrationsApi.md#updateintegration) | **PATCH** /v1/integrations/{id} | Update an integration |
+| [**UpdateSlackConnection**](IntegrationsApi.md#updateslackconnection) | **PATCH** /v1/slack-connections/{id} | Update a Slack connection |
 | [**UpdateStripeMapping**](IntegrationsApi.md#updatestripemapping) | **PATCH** /v1/integration-mappings/{id} | Change the policy of a mapping |
+
+<a id="authorizeslack"></a>
+# **AuthorizeSlack**
+> SlackAuthorize AuthorizeSlack (string productId)
+
+Start connecting a Slack channel
+
+Returns the URL of Slack's consent screen, where the user picks the channel getting the product's notifications. Slack then redirects to the app's integrations page. Doesn't accept tokens: only API keys and sessions.  **Required role permission**: `integration:create` when called with a session, granted by the member's role. API keys aren't limited by roles.
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using LicenseManager.Api;
+using LicenseManager.Client;
+using LicenseManager.Model;
+
+namespace Example
+{
+    public class AuthorizeSlackExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.licensemanager.dev";
+            // Configure API key authorization: apiKey
+            config.AddApiKey("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("x-api-key", "Bearer");
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new IntegrationsApi(httpClient, config, httpClientHandler);
+            var productId = x7Kp2QaZ;  // string | 
+
+            try
+            {
+                // Start connecting a Slack channel
+                SlackAuthorize result = apiInstance.AuthorizeSlack(productId);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling IntegrationsApi.AuthorizeSlack: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the AuthorizeSlackWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Start connecting a Slack channel
+    ApiResponse<SlackAuthorize> response = apiInstance.AuthorizeSlackWithHttpInfo(productId);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling IntegrationsApi.AuthorizeSlackWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **productId** | **string** |  |  |
+
+### Return type
+
+[**SlackAuthorize**](SlackAuthorize.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Consent screen |  -  |
+| **401** | &#x60;unauthorized&#x60;: no credentials. &#x60;invalid_api_key&#x60;: the API key doesn&#39;t exist, was revoked or has expired. &#x60;invalid_token&#x60;: the token&#39;s signature is invalid, it has expired, or the resource it&#39;s scoped to was deleted |  -  |
+| **402** | &#x60;plan_limit_exceeded&#x60;: the organization stayed over its plan&#39;s limits after the grace period, its API is blocked until it upgrades. &#x60;plan_limit_reached&#x60;: creating the resource would go over the plan&#39;s limit |  -  |
+| **403** | &#x60;token_not_allowed&#x60;: the endpoint doesn&#39;t accept tokens, or not of this type. &#x60;insufficient_scope&#x60;: the token lacks the permission. &#x60;no_active_organization&#x60; or &#x60;forbidden&#x60;: the session has no organization, or isn&#39;t a member of the one requested |  -  |
+| **404** | Product not found |  -  |
+| **409** | &#x60;slack_not_configured&#x60;: the server has no Slack app (&#x60;SLACK_CLIENT_ID&#x60; and &#x60;SLACK_CLIENT_SECRET&#x60;) |  -  |
+| **422** | &#x60;validation_error&#x60;: invalid path, query or body, with the &#x60;issues&#x60; |  -  |
+| **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 <a id="checkintegration"></a>
 # **CheckIntegration**
@@ -342,6 +454,108 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="deleteslackconnection"></a>
+# **DeleteSlackConnection**
+> void DeleteSlackConnection (string id)
+
+Remove a Slack connection
+
+Stops posting to the channel and revokes the installation's token in Slack. Doesn't accept tokens: only API keys and sessions.  **Required role permission**: `integration:delete` when called with a session, granted by the member's role. API keys aren't limited by roles.
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using LicenseManager.Api;
+using LicenseManager.Client;
+using LicenseManager.Model;
+
+namespace Example
+{
+    public class DeleteSlackConnectionExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.licensemanager.dev";
+            // Configure API key authorization: apiKey
+            config.AddApiKey("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("x-api-key", "Bearer");
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new IntegrationsApi(httpClient, config, httpClientHandler);
+            var id = s4Hq8ZpLm;  // string | 
+
+            try
+            {
+                // Remove a Slack connection
+                apiInstance.DeleteSlackConnection(id);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling IntegrationsApi.DeleteSlackConnection: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the DeleteSlackConnectionWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Remove a Slack connection
+    apiInstance.DeleteSlackConnectionWithHttpInfo(id);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling IntegrationsApi.DeleteSlackConnectionWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **id** | **string** |  |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Removed |  -  |
+| **401** | &#x60;unauthorized&#x60;: no credentials. &#x60;invalid_api_key&#x60;: the API key doesn&#39;t exist, was revoked or has expired. &#x60;invalid_token&#x60;: the token&#39;s signature is invalid, it has expired, or the resource it&#39;s scoped to was deleted |  -  |
+| **402** | &#x60;plan_limit_exceeded&#x60;: the organization stayed over its plan&#39;s limits after the grace period, its API is blocked until it upgrades. &#x60;plan_limit_reached&#x60;: creating the resource would go over the plan&#39;s limit |  -  |
+| **403** | &#x60;token_not_allowed&#x60;: the endpoint doesn&#39;t accept tokens, or not of this type. &#x60;insufficient_scope&#x60;: the token lacks the permission. &#x60;no_active_organization&#x60; or &#x60;forbidden&#x60;: the session has no organization, or isn&#39;t a member of the one requested |  -  |
+| **404** | Slack connection not found |  -  |
+| **422** | &#x60;validation_error&#x60;: invalid path, query or body, with the &#x60;issues&#x60; |  -  |
+| **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="deletestripemapping"></a>
 # **DeleteStripeMapping**
 > void DeleteStripeMapping (string id)
@@ -544,6 +758,112 @@ void (empty response body)
 | **422** | &#x60;missing_permission&#x60;: the key can&#39;t delete the webhook endpoint |  -  |
 | **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
 | **502** | &#x60;provider_unavailable&#x60;: Stripe couldn&#39;t be reached |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="getslackintegration"></a>
+# **GetSlackIntegration**
+> SlackIntegration GetSlackIntegration (string productId)
+
+Get the Slack integration of a product
+
+Slack channels getting notifications about the product's licenses: purchases, renewals, failed payments and cancellations. Doesn't accept tokens: only API keys and sessions.
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using LicenseManager.Api;
+using LicenseManager.Client;
+using LicenseManager.Model;
+
+namespace Example
+{
+    public class GetSlackIntegrationExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.licensemanager.dev";
+            // Configure API key authorization: apiKey
+            config.AddApiKey("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("x-api-key", "Bearer");
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new IntegrationsApi(httpClient, config, httpClientHandler);
+            var productId = x7Kp2QaZ;  // string | 
+
+            try
+            {
+                // Get the Slack integration of a product
+                SlackIntegration result = apiInstance.GetSlackIntegration(productId);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling IntegrationsApi.GetSlackIntegration: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the GetSlackIntegrationWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Get the Slack integration of a product
+    ApiResponse<SlackIntegration> response = apiInstance.GetSlackIntegrationWithHttpInfo(productId);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling IntegrationsApi.GetSlackIntegrationWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **productId** | **string** |  |  |
+
+### Return type
+
+[**SlackIntegration**](SlackIntegration.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Slack integration |  -  |
+| **401** | &#x60;unauthorized&#x60;: no credentials. &#x60;invalid_api_key&#x60;: the API key doesn&#39;t exist, was revoked or has expired. &#x60;invalid_token&#x60;: the token&#39;s signature is invalid, it has expired, or the resource it&#39;s scoped to was deleted |  -  |
+| **402** | &#x60;plan_limit_exceeded&#x60;: the organization stayed over its plan&#39;s limits after the grace period, its API is blocked until it upgrades. &#x60;plan_limit_reached&#x60;: creating the resource would go over the plan&#39;s limit |  -  |
+| **403** | &#x60;token_not_allowed&#x60;: the endpoint doesn&#39;t accept tokens, or not of this type. &#x60;insufficient_scope&#x60;: the token lacks the permission. &#x60;no_active_organization&#x60; or &#x60;forbidden&#x60;: the session has no organization, or isn&#39;t a member of the one requested |  -  |
+| **404** | Product not found |  -  |
+| **422** | &#x60;validation_error&#x60;: invalid path, query or body, with the &#x60;issues&#x60; |  -  |
+| **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -760,6 +1080,113 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="testslackconnection"></a>
+# **TestSlackConnection**
+> SlackConnection TestSlackConnection (string id)
+
+Send a test message to a Slack channel
+
+Posts a message to the channel, to check it gets the notifications. Marks the connection `revoked` when Slack says it won't work again. Doesn't accept tokens: only API keys and sessions.  **Required role permission**: `integration:update` when called with a session, granted by the member's role. API keys aren't limited by roles.
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using LicenseManager.Api;
+using LicenseManager.Client;
+using LicenseManager.Model;
+
+namespace Example
+{
+    public class TestSlackConnectionExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.licensemanager.dev";
+            // Configure API key authorization: apiKey
+            config.AddApiKey("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("x-api-key", "Bearer");
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new IntegrationsApi(httpClient, config, httpClientHandler);
+            var id = s4Hq8ZpLm;  // string | 
+
+            try
+            {
+                // Send a test message to a Slack channel
+                SlackConnection result = apiInstance.TestSlackConnection(id);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling IntegrationsApi.TestSlackConnection: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the TestSlackConnectionWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Send a test message to a Slack channel
+    ApiResponse<SlackConnection> response = apiInstance.TestSlackConnectionWithHttpInfo(id);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling IntegrationsApi.TestSlackConnectionWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **id** | **string** |  |  |
+
+### Return type
+
+[**SlackConnection**](SlackConnection.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Slack connection, after the test |  -  |
+| **401** | &#x60;unauthorized&#x60;: no credentials. &#x60;invalid_api_key&#x60;: the API key doesn&#39;t exist, was revoked or has expired. &#x60;invalid_token&#x60;: the token&#39;s signature is invalid, it has expired, or the resource it&#39;s scoped to was deleted |  -  |
+| **402** | &#x60;plan_limit_exceeded&#x60;: the organization stayed over its plan&#39;s limits after the grace period, its API is blocked until it upgrades. &#x60;plan_limit_reached&#x60;: creating the resource would go over the plan&#39;s limit |  -  |
+| **403** | &#x60;token_not_allowed&#x60;: the endpoint doesn&#39;t accept tokens, or not of this type. &#x60;insufficient_scope&#x60;: the token lacks the permission. &#x60;no_active_organization&#x60; or &#x60;forbidden&#x60;: the session has no organization, or isn&#39;t a member of the one requested |  -  |
+| **404** | Slack connection not found |  -  |
+| **422** | &#x60;validation_error&#x60;: invalid path, query or body, with the &#x60;issues&#x60; |  -  |
+| **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
+| **502** | &#x60;slack_error&#x60;: Slack refused the message |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="updateintegration"></a>
 # **UpdateIntegration**
 > Integration UpdateIntegration (string id, UpdateIntegration updateIntegration)
@@ -864,6 +1291,114 @@ catch (ApiException e)
 | **403** | &#x60;token_not_allowed&#x60;: the endpoint doesn&#39;t accept tokens, or not of this type. &#x60;insufficient_scope&#x60;: the token lacks the permission. &#x60;no_active_organization&#x60; or &#x60;forbidden&#x60;: the session has no organization, or isn&#39;t a member of the one requested |  -  |
 | **404** | Integration not found |  -  |
 | **422** | &#x60;validation_error&#x60;: invalid body. &#x60;missing_permission&#x60;: turning &#x60;autoRefund&#x60; on while the API key lacks the Refunds: Write permission |  -  |
+| **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="updateslackconnection"></a>
+# **UpdateSlackConnection**
+> SlackConnection UpdateSlackConnection (string id, UpdateSlackConnection updateSlackConnection)
+
+Update a Slack connection
+
+Changes the notifications the channel gets. Doesn't accept tokens: only API keys and sessions.  **Required role permission**: `integration:update` when called with a session, granted by the member's role. API keys aren't limited by roles.
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using LicenseManager.Api;
+using LicenseManager.Client;
+using LicenseManager.Model;
+
+namespace Example
+{
+    public class UpdateSlackConnectionExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.licensemanager.dev";
+            // Configure API key authorization: apiKey
+            config.AddApiKey("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("x-api-key", "Bearer");
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new IntegrationsApi(httpClient, config, httpClientHandler);
+            var id = s4Hq8ZpLm;  // string | 
+            var updateSlackConnection = new UpdateSlackConnection(); // UpdateSlackConnection | 
+
+            try
+            {
+                // Update a Slack connection
+                SlackConnection result = apiInstance.UpdateSlackConnection(id, updateSlackConnection);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling IntegrationsApi.UpdateSlackConnection: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the UpdateSlackConnectionWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Update a Slack connection
+    ApiResponse<SlackConnection> response = apiInstance.UpdateSlackConnectionWithHttpInfo(id, updateSlackConnection);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling IntegrationsApi.UpdateSlackConnectionWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **id** | **string** |  |  |
+| **updateSlackConnection** | [**UpdateSlackConnection**](UpdateSlackConnection.md) |  |  |
+
+### Return type
+
+[**SlackConnection**](SlackConnection.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Updated Slack connection |  -  |
+| **401** | &#x60;unauthorized&#x60;: no credentials. &#x60;invalid_api_key&#x60;: the API key doesn&#39;t exist, was revoked or has expired. &#x60;invalid_token&#x60;: the token&#39;s signature is invalid, it has expired, or the resource it&#39;s scoped to was deleted |  -  |
+| **402** | &#x60;plan_limit_exceeded&#x60;: the organization stayed over its plan&#39;s limits after the grace period, its API is blocked until it upgrades. &#x60;plan_limit_reached&#x60;: creating the resource would go over the plan&#39;s limit |  -  |
+| **403** | &#x60;token_not_allowed&#x60;: the endpoint doesn&#39;t accept tokens, or not of this type. &#x60;insufficient_scope&#x60;: the token lacks the permission. &#x60;no_active_organization&#x60; or &#x60;forbidden&#x60;: the session has no organization, or isn&#39;t a member of the one requested |  -  |
+| **404** | Slack connection not found |  -  |
+| **422** | &#x60;validation_error&#x60;: invalid path, query or body, with the &#x60;issues&#x60; |  -  |
 | **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.2 (2026-11-05)
+
+### Changes
+
+- `GET /v1/products/{productId}/integrations/slack`: endpoint added
+- `POST /v1/products/{productId}/integrations/slack/authorize`: endpoint added
+- `DELETE /v1/slack-connections/{id}`: endpoint added
+- `PATCH /v1/slack-connections/{id}`: endpoint added
+- `POST /v1/slack-connections/{id}/test`: endpoint added
+
 ## 0.3.1 (2026-11-04)
 
 ### Changes

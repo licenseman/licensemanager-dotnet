@@ -103,6 +103,9 @@ docs/Revenue.md
 docs/SendLicenseKeys.md
 docs/SendPortalLink.md
 docs/SigningKey.md
+docs/SlackAuthorize.md
+docs/SlackConnection.md
+docs/SlackIntegration.md
 docs/StripeIntegration.md
 docs/StripePermission.md
 docs/StripePrice.md
@@ -118,6 +121,7 @@ docs/UpdatePolicy.md
 docs/UpdateProduct.md
 docs/UpdateProductPortal.md
 docs/UpdateRelease.md
+docs/UpdateSlackConnection.md
 docs/ValidateKey.md
 docs/ValidateKeyError.md
 docs/ValidateKeyErrorError.md
@@ -223,6 +227,9 @@ src/LicenseManager.Test/Model/RevenueTests.cs
 src/LicenseManager.Test/Model/SendLicenseKeysTests.cs
 src/LicenseManager.Test/Model/SendPortalLinkTests.cs
 src/LicenseManager.Test/Model/SigningKeyTests.cs
+src/LicenseManager.Test/Model/SlackAuthorizeTests.cs
+src/LicenseManager.Test/Model/SlackConnectionTests.cs
+src/LicenseManager.Test/Model/SlackIntegrationTests.cs
 src/LicenseManager.Test/Model/StripeIntegrationTests.cs
 src/LicenseManager.Test/Model/StripePermissionTests.cs
 src/LicenseManager.Test/Model/StripePriceRecurringTests.cs
@@ -237,6 +244,7 @@ src/LicenseManager.Test/Model/UpdatePolicyTests.cs
 src/LicenseManager.Test/Model/UpdateProductPortalTests.cs
 src/LicenseManager.Test/Model/UpdateProductTests.cs
 src/LicenseManager.Test/Model/UpdateReleaseTests.cs
+src/LicenseManager.Test/Model/UpdateSlackConnectionTests.cs
 src/LicenseManager.Test/Model/ValidateKeyErrorErrorTests.cs
 src/LicenseManager.Test/Model/ValidateKeyErrorTests.cs
 src/LicenseManager.Test/Model/ValidateKeyTests.cs
@@ -359,6 +367,9 @@ src/LicenseManager/Model/Revenue.cs
 src/LicenseManager/Model/SendLicenseKeys.cs
 src/LicenseManager/Model/SendPortalLink.cs
 src/LicenseManager/Model/SigningKey.cs
+src/LicenseManager/Model/SlackAuthorize.cs
+src/LicenseManager/Model/SlackConnection.cs
+src/LicenseManager/Model/SlackIntegration.cs
 src/LicenseManager/Model/StripeIntegration.cs
 src/LicenseManager/Model/StripePermission.cs
 src/LicenseManager/Model/StripePrice.cs
@@ -373,6 +384,7 @@ src/LicenseManager/Model/UpdatePolicy.cs
 src/LicenseManager/Model/UpdateProduct.cs
 src/LicenseManager/Model/UpdateProductPortal.cs
 src/LicenseManager/Model/UpdateRelease.cs
+src/LicenseManager/Model/UpdateSlackConnection.cs
 src/LicenseManager/Model/ValidateKey.cs
 src/LicenseManager/Model/ValidateKeyError.cs
 src/LicenseManager/Model/ValidateKeyErrorError.cs

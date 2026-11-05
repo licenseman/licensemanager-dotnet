@@ -28,6 +28,27 @@ namespace LicenseManager.Api
     {
         #region Synchronous Operations
         /// <summary>
+        /// Start connecting a Slack channel
+        /// </summary>
+        /// <remarks>
+        /// Returns the URL of Slack&#39;s consent screen, where the user picks the channel getting the product&#39;s notifications. Slack then redirects to the app&#39;s integrations page. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <returns>SlackAuthorize</returns>
+        SlackAuthorize AuthorizeSlack(string productId);
+
+        /// <summary>
+        /// Start connecting a Slack channel
+        /// </summary>
+        /// <remarks>
+        /// Returns the URL of Slack&#39;s consent screen, where the user picks the channel getting the product&#39;s notifications. Slack then redirects to the app&#39;s integrations page. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <returns>ApiResponse of SlackAuthorize</returns>
+        ApiResponse<SlackAuthorize> AuthorizeSlackWithHttpInfo(string productId);
+        /// <summary>
         /// Check an integration
         /// </summary>
         /// <remarks>
@@ -95,6 +116,27 @@ namespace LicenseManager.Api
         /// <returns>ApiResponse of IntegrationMapping</returns>
         ApiResponse<IntegrationMapping> CreateStripeMappingWithHttpInfo(string productId, CreateIntegrationMapping createIntegrationMapping);
         /// <summary>
+        /// Remove a Slack connection
+        /// </summary>
+        /// <remarks>
+        /// Stops posting to the channel and revokes the installation&#39;s token in Slack. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:delete&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        void DeleteSlackConnection(string id);
+
+        /// <summary>
+        /// Remove a Slack connection
+        /// </summary>
+        /// <remarks>
+        /// Stops posting to the channel and revokes the installation&#39;s token in Slack. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:delete&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteSlackConnectionWithHttpInfo(string id);
+        /// <summary>
         /// Delete a mapping
         /// </summary>
         /// <remarks>
@@ -136,6 +178,27 @@ namespace LicenseManager.Api
         /// <param name="id"></param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DisconnectIntegrationWithHttpInfo(string id);
+        /// <summary>
+        /// Get the Slack integration of a product
+        /// </summary>
+        /// <remarks>
+        /// Slack channels getting notifications about the product&#39;s licenses: purchases, renewals, failed payments and cancellations. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <returns>SlackIntegration</returns>
+        SlackIntegration GetSlackIntegration(string productId);
+
+        /// <summary>
+        /// Get the Slack integration of a product
+        /// </summary>
+        /// <remarks>
+        /// Slack channels getting notifications about the product&#39;s licenses: purchases, renewals, failed payments and cancellations. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <returns>ApiResponse of SlackIntegration</returns>
+        ApiResponse<SlackIntegration> GetSlackIntegrationWithHttpInfo(string productId);
         /// <summary>
         /// Get the Stripe integration of a product
         /// </summary>
@@ -179,6 +242,27 @@ namespace LicenseManager.Api
         /// <returns>ApiResponse of ListStripePrices200Response</returns>
         ApiResponse<ListStripePrices200Response> ListStripePricesWithHttpInfo(string id);
         /// <summary>
+        /// Send a test message to a Slack channel
+        /// </summary>
+        /// <remarks>
+        /// Posts a message to the channel, to check it gets the notifications. Marks the connection &#x60;revoked&#x60; when Slack says it won&#39;t work again. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>SlackConnection</returns>
+        SlackConnection TestSlackConnection(string id);
+
+        /// <summary>
+        /// Send a test message to a Slack channel
+        /// </summary>
+        /// <remarks>
+        /// Posts a message to the channel, to check it gets the notifications. Marks the connection &#x60;revoked&#x60; when Slack says it won&#39;t work again. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>ApiResponse of SlackConnection</returns>
+        ApiResponse<SlackConnection> TestSlackConnectionWithHttpInfo(string id);
+        /// <summary>
         /// Update an integration
         /// </summary>
         /// <remarks>
@@ -201,6 +285,29 @@ namespace LicenseManager.Api
         /// <param name="updateIntegration"></param>
         /// <returns>ApiResponse of Integration</returns>
         ApiResponse<Integration> UpdateIntegrationWithHttpInfo(string id, UpdateIntegration updateIntegration);
+        /// <summary>
+        /// Update a Slack connection
+        /// </summary>
+        /// <remarks>
+        /// Changes the notifications the channel gets. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="updateSlackConnection"></param>
+        /// <returns>SlackConnection</returns>
+        SlackConnection UpdateSlackConnection(string id, UpdateSlackConnection updateSlackConnection);
+
+        /// <summary>
+        /// Update a Slack connection
+        /// </summary>
+        /// <remarks>
+        /// Changes the notifications the channel gets. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="updateSlackConnection"></param>
+        /// <returns>ApiResponse of SlackConnection</returns>
+        ApiResponse<SlackConnection> UpdateSlackConnectionWithHttpInfo(string id, UpdateSlackConnection updateSlackConnection);
         /// <summary>
         /// Change the policy of a mapping
         /// </summary>
@@ -233,6 +340,29 @@ namespace LicenseManager.Api
     public interface IIntegrationsApiAsync : IApiAccessor
     {
         #region Asynchronous Operations
+        /// <summary>
+        /// Start connecting a Slack channel
+        /// </summary>
+        /// <remarks>
+        /// Returns the URL of Slack&#39;s consent screen, where the user picks the channel getting the product&#39;s notifications. Slack then redirects to the app&#39;s integrations page. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SlackAuthorize</returns>
+        System.Threading.Tasks.Task<SlackAuthorize> AuthorizeSlackAsync(string productId, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Start connecting a Slack channel
+        /// </summary>
+        /// <remarks>
+        /// Returns the URL of Slack&#39;s consent screen, where the user picks the channel getting the product&#39;s notifications. Slack then redirects to the app&#39;s integrations page. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SlackAuthorize)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SlackAuthorize>> AuthorizeSlackWithHttpInfoAsync(string productId, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Check an integration
         /// </summary>
@@ -307,6 +437,29 @@ namespace LicenseManager.Api
         /// <returns>Task of ApiResponse (IntegrationMapping)</returns>
         System.Threading.Tasks.Task<ApiResponse<IntegrationMapping>> CreateStripeMappingWithHttpInfoAsync(string productId, CreateIntegrationMapping createIntegrationMapping, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
+        /// Remove a Slack connection
+        /// </summary>
+        /// <remarks>
+        /// Stops posting to the channel and revokes the installation&#39;s token in Slack. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:delete&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteSlackConnectionAsync(string id, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Remove a Slack connection
+        /// </summary>
+        /// <remarks>
+        /// Stops posting to the channel and revokes the installation&#39;s token in Slack. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:delete&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteSlackConnectionWithHttpInfoAsync(string id, System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
         /// Delete a mapping
         /// </summary>
         /// <remarks>
@@ -352,6 +505,29 @@ namespace LicenseManager.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DisconnectIntegrationWithHttpInfoAsync(string id, System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Get the Slack integration of a product
+        /// </summary>
+        /// <remarks>
+        /// Slack channels getting notifications about the product&#39;s licenses: purchases, renewals, failed payments and cancellations. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SlackIntegration</returns>
+        System.Threading.Tasks.Task<SlackIntegration> GetSlackIntegrationAsync(string productId, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get the Slack integration of a product
+        /// </summary>
+        /// <remarks>
+        /// Slack channels getting notifications about the product&#39;s licenses: purchases, renewals, failed payments and cancellations. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SlackIntegration)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SlackIntegration>> GetSlackIntegrationWithHttpInfoAsync(string productId, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get the Stripe integration of a product
         /// </summary>
@@ -399,6 +575,29 @@ namespace LicenseManager.Api
         /// <returns>Task of ApiResponse (ListStripePrices200Response)</returns>
         System.Threading.Tasks.Task<ApiResponse<ListStripePrices200Response>> ListStripePricesWithHttpInfoAsync(string id, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
+        /// Send a test message to a Slack channel
+        /// </summary>
+        /// <remarks>
+        /// Posts a message to the channel, to check it gets the notifications. Marks the connection &#x60;revoked&#x60; when Slack says it won&#39;t work again. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SlackConnection</returns>
+        System.Threading.Tasks.Task<SlackConnection> TestSlackConnectionAsync(string id, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Send a test message to a Slack channel
+        /// </summary>
+        /// <remarks>
+        /// Posts a message to the channel, to check it gets the notifications. Marks the connection &#x60;revoked&#x60; when Slack says it won&#39;t work again. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SlackConnection)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SlackConnection>> TestSlackConnectionWithHttpInfoAsync(string id, System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
         /// Update an integration
         /// </summary>
         /// <remarks>
@@ -423,6 +622,31 @@ namespace LicenseManager.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Integration)</returns>
         System.Threading.Tasks.Task<ApiResponse<Integration>> UpdateIntegrationWithHttpInfoAsync(string id, UpdateIntegration updateIntegration, System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Update a Slack connection
+        /// </summary>
+        /// <remarks>
+        /// Changes the notifications the channel gets. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="updateSlackConnection"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SlackConnection</returns>
+        System.Threading.Tasks.Task<SlackConnection> UpdateSlackConnectionAsync(string id, UpdateSlackConnection updateSlackConnection, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update a Slack connection
+        /// </summary>
+        /// <remarks>
+        /// Changes the notifications the channel gets. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="updateSlackConnection"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SlackConnection)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SlackConnection>> UpdateSlackConnectionWithHttpInfoAsync(string id, UpdateSlackConnection updateSlackConnection, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Change the policy of a mapping
         /// </summary>
@@ -659,6 +883,131 @@ namespace LicenseManager.Api
                 return _exceptionFactory;
             }
             set { _exceptionFactory = value; }
+        }
+
+        /// <summary>
+        /// Start connecting a Slack channel Returns the URL of Slack&#39;s consent screen, where the user picks the channel getting the product&#39;s notifications. Slack then redirects to the app&#39;s integrations page. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <returns>SlackAuthorize</returns>
+        public SlackAuthorize AuthorizeSlack(string productId)
+        {
+            LicenseManager.Client.ApiResponse<SlackAuthorize> localVarResponse = AuthorizeSlackWithHttpInfo(productId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Start connecting a Slack channel Returns the URL of Slack&#39;s consent screen, where the user picks the channel getting the product&#39;s notifications. Slack then redirects to the app&#39;s integrations page. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <returns>ApiResponse of SlackAuthorize</returns>
+        public LicenseManager.Client.ApiResponse<SlackAuthorize> AuthorizeSlackWithHttpInfo(string productId)
+        {
+            // verify the required parameter 'productId' is set
+            if (productId == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'productId' when calling IntegrationsApi->AuthorizeSlack");
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("productId", LicenseManager.Client.ClientUtils.ParameterToString(productId)); // path parameter
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<SlackAuthorize>("/v1/products/{productId}/integrations/slack/authorize", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("AuthorizeSlack", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Start connecting a Slack channel Returns the URL of Slack&#39;s consent screen, where the user picks the channel getting the product&#39;s notifications. Slack then redirects to the app&#39;s integrations page. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SlackAuthorize</returns>
+        public async System.Threading.Tasks.Task<SlackAuthorize> AuthorizeSlackAsync(string productId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            LicenseManager.Client.ApiResponse<SlackAuthorize> localVarResponse = await AuthorizeSlackWithHttpInfoAsync(productId, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Start connecting a Slack channel Returns the URL of Slack&#39;s consent screen, where the user picks the channel getting the product&#39;s notifications. Slack then redirects to the app&#39;s integrations page. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SlackAuthorize)</returns>
+        public async System.Threading.Tasks.Task<LicenseManager.Client.ApiResponse<SlackAuthorize>> AuthorizeSlackWithHttpInfoAsync(string productId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'productId' is set
+            if (productId == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'productId' when calling IntegrationsApi->AuthorizeSlack");
+
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("productId", LicenseManager.Client.ClientUtils.ParameterToString(productId)); // path parameter
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<SlackAuthorize>("/v1/products/{productId}/integrations/slack/authorize", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("AuthorizeSlack", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1069,6 +1418,129 @@ namespace LicenseManager.Api
         }
 
         /// <summary>
+        /// Remove a Slack connection Stops posting to the channel and revokes the installation&#39;s token in Slack. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:delete&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public void DeleteSlackConnection(string id)
+        {
+            DeleteSlackConnectionWithHttpInfo(id);
+        }
+
+        /// <summary>
+        /// Remove a Slack connection Stops posting to the channel and revokes the installation&#39;s token in Slack. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:delete&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public LicenseManager.Client.ApiResponse<Object> DeleteSlackConnectionWithHttpInfo(string id)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'id' when calling IntegrationsApi->DeleteSlackConnection");
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", LicenseManager.Client.ClientUtils.ParameterToString(id)); // path parameter
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Delete<Object>("/v1/slack-connections/{id}", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DeleteSlackConnection", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Remove a Slack connection Stops posting to the channel and revokes the installation&#39;s token in Slack. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:delete&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteSlackConnectionAsync(string id, System.Threading.CancellationToken cancellationToken = default)
+        {
+            await DeleteSlackConnectionWithHttpInfoAsync(id, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Remove a Slack connection Stops posting to the channel and revokes the installation&#39;s token in Slack. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:delete&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<LicenseManager.Client.ApiResponse<Object>> DeleteSlackConnectionWithHttpInfoAsync(string id, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'id' when calling IntegrationsApi->DeleteSlackConnection");
+
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", LicenseManager.Client.ClientUtils.ParameterToString(id)); // path parameter
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.DeleteAsync<Object>("/v1/slack-connections/{id}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DeleteSlackConnection", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
         /// Delete a mapping Paying the price no longer creates licenses. The licenses it created stay. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
         /// </summary>
         /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
@@ -1308,6 +1780,131 @@ namespace LicenseManager.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("DisconnectIntegration", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get the Slack integration of a product Slack channels getting notifications about the product&#39;s licenses: purchases, renewals, failed payments and cancellations. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <returns>SlackIntegration</returns>
+        public SlackIntegration GetSlackIntegration(string productId)
+        {
+            LicenseManager.Client.ApiResponse<SlackIntegration> localVarResponse = GetSlackIntegrationWithHttpInfo(productId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get the Slack integration of a product Slack channels getting notifications about the product&#39;s licenses: purchases, renewals, failed payments and cancellations. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <returns>ApiResponse of SlackIntegration</returns>
+        public LicenseManager.Client.ApiResponse<SlackIntegration> GetSlackIntegrationWithHttpInfo(string productId)
+        {
+            // verify the required parameter 'productId' is set
+            if (productId == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'productId' when calling IntegrationsApi->GetSlackIntegration");
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("productId", LicenseManager.Client.ClientUtils.ParameterToString(productId)); // path parameter
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<SlackIntegration>("/v1/products/{productId}/integrations/slack", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetSlackIntegration", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get the Slack integration of a product Slack channels getting notifications about the product&#39;s licenses: purchases, renewals, failed payments and cancellations. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SlackIntegration</returns>
+        public async System.Threading.Tasks.Task<SlackIntegration> GetSlackIntegrationAsync(string productId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            LicenseManager.Client.ApiResponse<SlackIntegration> localVarResponse = await GetSlackIntegrationWithHttpInfoAsync(productId, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get the Slack integration of a product Slack channels getting notifications about the product&#39;s licenses: purchases, renewals, failed payments and cancellations. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SlackIntegration)</returns>
+        public async System.Threading.Tasks.Task<LicenseManager.Client.ApiResponse<SlackIntegration>> GetSlackIntegrationWithHttpInfoAsync(string productId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'productId' is set
+            if (productId == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'productId' when calling IntegrationsApi->GetSlackIntegration");
+
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("productId", LicenseManager.Client.ClientUtils.ParameterToString(productId)); // path parameter
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.GetAsync<SlackIntegration>("/v1/products/{productId}/integrations/slack", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetSlackIntegration", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -1565,6 +2162,131 @@ namespace LicenseManager.Api
         }
 
         /// <summary>
+        /// Send a test message to a Slack channel Posts a message to the channel, to check it gets the notifications. Marks the connection &#x60;revoked&#x60; when Slack says it won&#39;t work again. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>SlackConnection</returns>
+        public SlackConnection TestSlackConnection(string id)
+        {
+            LicenseManager.Client.ApiResponse<SlackConnection> localVarResponse = TestSlackConnectionWithHttpInfo(id);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Send a test message to a Slack channel Posts a message to the channel, to check it gets the notifications. Marks the connection &#x60;revoked&#x60; when Slack says it won&#39;t work again. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>ApiResponse of SlackConnection</returns>
+        public LicenseManager.Client.ApiResponse<SlackConnection> TestSlackConnectionWithHttpInfo(string id)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'id' when calling IntegrationsApi->TestSlackConnection");
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", LicenseManager.Client.ClientUtils.ParameterToString(id)); // path parameter
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<SlackConnection>("/v1/slack-connections/{id}/test", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("TestSlackConnection", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Send a test message to a Slack channel Posts a message to the channel, to check it gets the notifications. Marks the connection &#x60;revoked&#x60; when Slack says it won&#39;t work again. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SlackConnection</returns>
+        public async System.Threading.Tasks.Task<SlackConnection> TestSlackConnectionAsync(string id, System.Threading.CancellationToken cancellationToken = default)
+        {
+            LicenseManager.Client.ApiResponse<SlackConnection> localVarResponse = await TestSlackConnectionWithHttpInfoAsync(id, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Send a test message to a Slack channel Posts a message to the channel, to check it gets the notifications. Marks the connection &#x60;revoked&#x60; when Slack says it won&#39;t work again. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SlackConnection)</returns>
+        public async System.Threading.Tasks.Task<LicenseManager.Client.ApiResponse<SlackConnection>> TestSlackConnectionWithHttpInfoAsync(string id, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'id' when calling IntegrationsApi->TestSlackConnection");
+
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", LicenseManager.Client.ClientUtils.ParameterToString(id)); // path parameter
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<SlackConnection>("/v1/slack-connections/{id}/test", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("TestSlackConnection", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
         /// Update an integration Changes the settings of the integration, for every product of its mode. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
         /// </summary>
         /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
@@ -1699,6 +2421,147 @@ namespace LicenseManager.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("UpdateIntegration", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Update a Slack connection Changes the notifications the channel gets. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="updateSlackConnection"></param>
+        /// <returns>SlackConnection</returns>
+        public SlackConnection UpdateSlackConnection(string id, UpdateSlackConnection updateSlackConnection)
+        {
+            LicenseManager.Client.ApiResponse<SlackConnection> localVarResponse = UpdateSlackConnectionWithHttpInfo(id, updateSlackConnection);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update a Slack connection Changes the notifications the channel gets. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="updateSlackConnection"></param>
+        /// <returns>ApiResponse of SlackConnection</returns>
+        public LicenseManager.Client.ApiResponse<SlackConnection> UpdateSlackConnectionWithHttpInfo(string id, UpdateSlackConnection updateSlackConnection)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'id' when calling IntegrationsApi->UpdateSlackConnection");
+
+            // verify the required parameter 'updateSlackConnection' is set
+            if (updateSlackConnection == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'updateSlackConnection' when calling IntegrationsApi->UpdateSlackConnection");
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", LicenseManager.Client.ClientUtils.ParameterToString(id)); // path parameter
+            localVarRequestOptions.Data = updateSlackConnection;
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Patch<SlackConnection>("/v1/slack-connections/{id}", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateSlackConnection", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Update a Slack connection Changes the notifications the channel gets. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="updateSlackConnection"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SlackConnection</returns>
+        public async System.Threading.Tasks.Task<SlackConnection> UpdateSlackConnectionAsync(string id, UpdateSlackConnection updateSlackConnection, System.Threading.CancellationToken cancellationToken = default)
+        {
+            LicenseManager.Client.ApiResponse<SlackConnection> localVarResponse = await UpdateSlackConnectionWithHttpInfoAsync(id, updateSlackConnection, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update a Slack connection Changes the notifications the channel gets. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="updateSlackConnection"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SlackConnection)</returns>
+        public async System.Threading.Tasks.Task<LicenseManager.Client.ApiResponse<SlackConnection>> UpdateSlackConnectionWithHttpInfoAsync(string id, UpdateSlackConnection updateSlackConnection, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'id' when calling IntegrationsApi->UpdateSlackConnection");
+
+            // verify the required parameter 'updateSlackConnection' is set
+            if (updateSlackConnection == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'updateSlackConnection' when calling IntegrationsApi->UpdateSlackConnection");
+
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", LicenseManager.Client.ClientUtils.ParameterToString(id)); // path parameter
+            localVarRequestOptions.Data = updateSlackConnection;
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PatchAsync<SlackConnection>("/v1/slack-connections/{id}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateSlackConnection", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

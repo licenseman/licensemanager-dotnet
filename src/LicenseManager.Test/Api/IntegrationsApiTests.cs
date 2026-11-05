@@ -54,6 +54,18 @@ namespace LicenseManager.Test.Api
         }
 
         /// <summary>
+        /// Test AuthorizeSlack
+        /// </summary>
+        [Fact]
+        public void AuthorizeSlackTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string productId = null;
+            //var response = instance.AuthorizeSlack(productId);
+            //Assert.IsType<SlackAuthorize>(response);
+        }
+
+        /// <summary>
         /// Test CheckIntegration
         /// </summary>
         [Fact]
@@ -92,6 +104,17 @@ namespace LicenseManager.Test.Api
         }
 
         /// <summary>
+        /// Test DeleteSlackConnection
+        /// </summary>
+        [Fact]
+        public void DeleteSlackConnectionTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string id = null;
+            //instance.DeleteSlackConnection(id);
+        }
+
+        /// <summary>
         /// Test DeleteStripeMapping
         /// </summary>
         [Fact]
@@ -111,6 +134,18 @@ namespace LicenseManager.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string id = null;
             //instance.DisconnectIntegration(id);
+        }
+
+        /// <summary>
+        /// Test GetSlackIntegration
+        /// </summary>
+        [Fact]
+        public void GetSlackIntegrationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string productId = null;
+            //var response = instance.GetSlackIntegration(productId);
+            //Assert.IsType<SlackIntegration>(response);
         }
 
         /// <summary>
@@ -138,6 +173,18 @@ namespace LicenseManager.Test.Api
         }
 
         /// <summary>
+        /// Test TestSlackConnection
+        /// </summary>
+        [Fact]
+        public void TestSlackConnectionTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string id = null;
+            //var response = instance.TestSlackConnection(id);
+            //Assert.IsType<SlackConnection>(response);
+        }
+
+        /// <summary>
         /// Test UpdateIntegration
         /// </summary>
         [Fact]
@@ -148,6 +195,19 @@ namespace LicenseManager.Test.Api
             //UpdateIntegration updateIntegration = null;
             //var response = instance.UpdateIntegration(id, updateIntegration);
             //Assert.IsType<Integration>(response);
+        }
+
+        /// <summary>
+        /// Test UpdateSlackConnection
+        /// </summary>
+        [Fact]
+        public void UpdateSlackConnectionTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string id = null;
+            //UpdateSlackConnection updateSlackConnection = null;
+            //var response = instance.UpdateSlackConnection(id, updateSlackConnection);
+            //Assert.IsType<SlackConnection>(response);
         }
 
         /// <summary>

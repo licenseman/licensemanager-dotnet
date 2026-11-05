@@ -3930,6 +3930,154 @@
         "required": [
           "policyId"
         ]
+      },
+      "SlackIntegration": {
+        "type": "object",
+        "properties": {
+          "configured": {
+            "type": "boolean",
+            "description": "Whether the server has a Slack app to connect channels with: `SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET` are set."
+          },
+          "connections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SlackConnection"
+            },
+            "description": "Slack channels getting the product's notifications."
+          }
+        },
+        "required": [
+          "configured",
+          "connections"
+        ]
+      },
+      "SlackConnection": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "s4Hq8ZpLm"
+          },
+          "teamId": {
+            "type": "string",
+            "example": "T0123ABCD"
+          },
+          "teamName": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "Acme"
+          },
+          "channelId": {
+            "type": "string",
+            "example": "C0456EFGH"
+          },
+          "channelName": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Name of the channel when it was connected, with its `#`.",
+            "example": "#sales"
+          },
+          "configurationUrl": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Page of the installation in Slack."
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "purchased",
+                "renewed",
+                "payment_failed",
+                "canceled"
+              ]
+            },
+            "description": "Notifications the channel gets: `purchased` (a license bought through Stripe), `renewed` (a subscription renewal paid), `payment_failed` (a subscription payment failed) and `canceled` (a license canceled, or its subscription ended)."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "revoked"
+            ],
+            "description": "`revoked` once Slack refuses the messages, like when the app was removed from the workspace or the channel deleted: remove it and add it again."
+          },
+          "statusReason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "lastSentAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "teamId",
+          "teamName",
+          "channelId",
+          "channelName",
+          "configurationUrl",
+          "events",
+          "status",
+          "statusReason",
+          "lastSentAt",
+          "createdAt"
+        ]
+      },
+      "SlackAuthorize": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "Slack's consent screen: open it in the browser to pick the channel. Valid 10 minutes.",
+            "example": "https://slack.com/oauth/v2/authorize?client_id=…"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "UpdateSlackConnection": {
+        "type": "object",
+        "properties": {
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "purchased",
+                "renewed",
+                "payment_failed",
+                "canceled"
+              ]
+            },
+            "description": "Notifications the channel gets.",
+            "example": [
+              "purchased",
+              "canceled"
+            ]
+          }
+        },
+        "required": [
+          "events"
+        ]
       }
     },
     "parameters": {}
@@ -10928,6 +11076,504 @@
           },
           "429": {
             "description": "`rate_limited`: the API key made more than 10 requests in the last second. Wait for the `Retry-After` seconds",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/products/{productId}/integrations/slack": {
+      "get": {
+        "tags": [
+          "Integrations"
+        ],
+        "operationId": "getSlackIntegration",
+        "summary": "Get the Slack integration of a product",
+        "description": "Slack channels getting notifications about the product's licenses: purchases, renewals, failed payments and cancellations. Doesn't accept tokens: only API keys and sessions.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "x7Kp2QaZ"
+            },
+            "required": true,
+            "name": "productId",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Slack integration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlackIntegration"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "`unauthorized`: no credentials. `invalid_api_key`: the API key doesn't exist, was revoked or has expired. `invalid_token`: the token's signature is invalid, it has expired, or the resource it's scoped to was deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "`plan_limit_exceeded`: the organization stayed over its plan's limits after the grace period, its API is blocked until it upgrades. `plan_limit_reached`: creating the resource would go over the plan's limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "`token_not_allowed`: the endpoint doesn't accept tokens, or not of this type. `insufficient_scope`: the token lacks the permission. `no_active_organization` or `forbidden`: the session has no organization, or isn't a member of the one requested",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "`validation_error`: invalid path, query or body, with the `issues`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "`rate_limited`: the API key made more than 10 requests in the last second. Wait for the `Retry-After` seconds",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/products/{productId}/integrations/slack/authorize": {
+      "post": {
+        "tags": [
+          "Integrations"
+        ],
+        "operationId": "authorizeSlack",
+        "summary": "Start connecting a Slack channel",
+        "description": "Returns the URL of Slack's consent screen, where the user picks the channel getting the product's notifications. Slack then redirects to the app's integrations page. Doesn't accept tokens: only API keys and sessions.\n\n**Required role permission**: `integration:create` when called with a session, granted by the member's role. API keys aren't limited by roles.",
+        "x-required-permissions": [
+          "integration:create"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "x7Kp2QaZ"
+            },
+            "required": true,
+            "name": "productId",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consent screen",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlackAuthorize"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "`unauthorized`: no credentials. `invalid_api_key`: the API key doesn't exist, was revoked or has expired. `invalid_token`: the token's signature is invalid, it has expired, or the resource it's scoped to was deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "`plan_limit_exceeded`: the organization stayed over its plan's limits after the grace period, its API is blocked until it upgrades. `plan_limit_reached`: creating the resource would go over the plan's limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "`token_not_allowed`: the endpoint doesn't accept tokens, or not of this type. `insufficient_scope`: the token lacks the permission. `no_active_organization` or `forbidden`: the session has no organization, or isn't a member of the one requested",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "`slack_not_configured`: the server has no Slack app (`SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "`validation_error`: invalid path, query or body, with the `issues`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "`rate_limited`: the API key made more than 10 requests in the last second. Wait for the `Retry-After` seconds",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/slack-connections/{id}": {
+      "patch": {
+        "tags": [
+          "Integrations"
+        ],
+        "operationId": "updateSlackConnection",
+        "summary": "Update a Slack connection",
+        "description": "Changes the notifications the channel gets. Doesn't accept tokens: only API keys and sessions.\n\n**Required role permission**: `integration:update` when called with a session, granted by the member's role. API keys aren't limited by roles.",
+        "x-required-permissions": [
+          "integration:update"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "s4Hq8ZpLm"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSlackConnection"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated Slack connection",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlackConnection"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "`unauthorized`: no credentials. `invalid_api_key`: the API key doesn't exist, was revoked or has expired. `invalid_token`: the token's signature is invalid, it has expired, or the resource it's scoped to was deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "`plan_limit_exceeded`: the organization stayed over its plan's limits after the grace period, its API is blocked until it upgrades. `plan_limit_reached`: creating the resource would go over the plan's limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "`token_not_allowed`: the endpoint doesn't accept tokens, or not of this type. `insufficient_scope`: the token lacks the permission. `no_active_organization` or `forbidden`: the session has no organization, or isn't a member of the one requested",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Slack connection not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "`validation_error`: invalid path, query or body, with the `issues`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "`rate_limited`: the API key made more than 10 requests in the last second. Wait for the `Retry-After` seconds",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Integrations"
+        ],
+        "operationId": "deleteSlackConnection",
+        "summary": "Remove a Slack connection",
+        "description": "Stops posting to the channel and revokes the installation's token in Slack. Doesn't accept tokens: only API keys and sessions.\n\n**Required role permission**: `integration:delete` when called with a session, granted by the member's role. API keys aren't limited by roles.",
+        "x-required-permissions": [
+          "integration:delete"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "s4Hq8ZpLm"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Removed"
+          },
+          "401": {
+            "description": "`unauthorized`: no credentials. `invalid_api_key`: the API key doesn't exist, was revoked or has expired. `invalid_token`: the token's signature is invalid, it has expired, or the resource it's scoped to was deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "`plan_limit_exceeded`: the organization stayed over its plan's limits after the grace period, its API is blocked until it upgrades. `plan_limit_reached`: creating the resource would go over the plan's limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "`token_not_allowed`: the endpoint doesn't accept tokens, or not of this type. `insufficient_scope`: the token lacks the permission. `no_active_organization` or `forbidden`: the session has no organization, or isn't a member of the one requested",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Slack connection not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "`validation_error`: invalid path, query or body, with the `issues`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "`rate_limited`: the API key made more than 10 requests in the last second. Wait for the `Retry-After` seconds",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/slack-connections/{id}/test": {
+      "post": {
+        "tags": [
+          "Integrations"
+        ],
+        "operationId": "testSlackConnection",
+        "summary": "Send a test message to a Slack channel",
+        "description": "Posts a message to the channel, to check it gets the notifications. Marks the connection `revoked` when Slack says it won't work again. Doesn't accept tokens: only API keys and sessions.\n\n**Required role permission**: `integration:update` when called with a session, granted by the member's role. API keys aren't limited by roles.",
+        "x-required-permissions": [
+          "integration:update"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "s4Hq8ZpLm"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Slack connection, after the test",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlackConnection"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "`unauthorized`: no credentials. `invalid_api_key`: the API key doesn't exist, was revoked or has expired. `invalid_token`: the token's signature is invalid, it has expired, or the resource it's scoped to was deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "`plan_limit_exceeded`: the organization stayed over its plan's limits after the grace period, its API is blocked until it upgrades. `plan_limit_reached`: creating the resource would go over the plan's limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "`token_not_allowed`: the endpoint doesn't accept tokens, or not of this type. `insufficient_scope`: the token lacks the permission. `no_active_organization` or `forbidden`: the session has no organization, or isn't a member of the one requested",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Slack connection not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "`validation_error`: invalid path, query or body, with the `issues`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "`rate_limited`: the API key made more than 10 requests in the last second. Wait for the `Retry-After` seconds",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "`slack_error`: Slack refused the message",
             "content": {
               "application/json": {
                 "schema": {
