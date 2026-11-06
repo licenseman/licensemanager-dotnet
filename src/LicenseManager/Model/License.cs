@@ -40,8 +40,9 @@ namespace LicenseManager.Model
         public LicenseStatus Status { get; set; }
 
         /// <summary>
-        /// Gets or Sets CancellationReason
+        /// Why the license was canceled. &#x60;null&#x60; when it wasn&#39;t.
         /// </summary>
+        /// <value>Why the license was canceled. &#x60;null&#x60; when it wasn&#39;t.</value>
         [DataMember(Name = "cancellationReason", IsRequired = true, EmitDefaultValue = true)]
         public CancellationReason CancellationReason { get; set; }
         /// <summary>
@@ -74,7 +75,7 @@ namespace LicenseManager.Model
         /// <param name="status">status (required).</param>
         /// <param name="cancellableUntil">End of the money back guarantee: until then, the customer can cancel the license from the customer portal, or with a token. Set from the policy&#39;s &#x60;moneyBackGuaranteeDays&#x60; when the license is created. &#x60;null&#x60; when the customer can&#39;t cancel it. (required).</param>
         /// <param name="canceledAt">When the license was canceled: validating its key fails since. &#x60;null&#x60; when it wasn&#39;t. (required).</param>
-        /// <param name="cancellationReason">cancellationReason (required).</param>
+        /// <param name="cancellationReason">Why the license was canceled. &#x60;null&#x60; when it wasn&#39;t. (required).</param>
         /// <param name="subscription">subscription (required).</param>
         /// <param name="cancellationComment">Comment given when the license was canceled. &#x60;null&#x60; when there&#39;s none. (required).</param>
         /// <param name="stripeRefundId">Id of the Stripe refund of the license&#39;s payment once it was canceled, through the Stripe integration. &#x60;null&#x60; otherwise. (required).</param>

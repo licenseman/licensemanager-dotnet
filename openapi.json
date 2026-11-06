@@ -2199,18 +2199,15 @@
             "example": "2026-01-20T16:12:00.000Z"
           },
           "cancellationReason": {
-            "allOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/CancellationReason"
               },
               {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "description": "Why the license was canceled. `null` when it wasn't."
+                "type": "null"
               }
-            ]
+            ],
+            "description": "Why the license was canceled. `null` when it wasn't."
           },
           "subscription": {
             "$ref": "#/components/schemas/LicenseSubscription"

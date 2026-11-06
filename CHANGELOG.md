@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.3.3 (2026-11-06)
+
+### Potentially breaking changes
+
+- `GET /v1/customers/{customerId}/licenses`: removed `#/components/schemas/CancellationReason, subschema #2` from the `data/items/cancellationReason` response property `allOf` list for the response status `200`
+- `GET /v1/customers/{customerId}/licenses`: added `#/components/schemas/CancellationReason, subschema #2` to the `data/items/cancellationReason` response property `anyOf` list for the response status `200`
+- `GET /v1/licenses/{id}`: removed `#/components/schemas/CancellationReason, subschema #2` from the `cancellationReason` response property `allOf` list for the response status `200`
+- `GET /v1/licenses/{id}`: added `#/components/schemas/CancellationReason, subschema #2` to the `cancellationReason` response property `anyOf` list for the response status `200`
+- `PATCH /v1/licenses/{id}`: removed `#/components/schemas/CancellationReason, subschema #2` from the `cancellationReason` response property `allOf` list for the response status `200`
+- `PATCH /v1/licenses/{id}`: added `#/components/schemas/CancellationReason, subschema #2` to the `cancellationReason` response property `anyOf` list for the response status `200`
+- `POST /v1/licenses/{id}/cancel`: removed `#/components/schemas/CancellationReason, subschema #2` from the `cancellationReason` response property `allOf` list for the response status `200`
+- `POST /v1/licenses/{id}/cancel`: added `#/components/schemas/CancellationReason, subschema #2` to the `cancellationReason` response property `anyOf` list for the response status `200`
+- `GET /v1/products/{productId}/licenses`: removed `#/components/schemas/CancellationReason, subschema #2` from the `data/items/cancellationReason` response property `allOf` list for the response status `200`
+- `GET /v1/products/{productId}/licenses`: added `#/components/schemas/CancellationReason, subschema #2` to the `data/items/cancellationReason` response property `anyOf` list for the response status `200`
+- `POST /v1/products/{productId}/licenses`: removed `#/components/schemas/CancellationReason, subschema #2` from the `cancellationReason` response property `allOf` list for the response status `201`
+- `POST /v1/products/{productId}/licenses`: added `#/components/schemas/CancellationReason, subschema #2` to the `cancellationReason` response property `anyOf` list for the response status `201`
+
 ## 0.3.2 (2026-11-05)
 
 ### Changes

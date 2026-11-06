@@ -12,7 +12,7 @@
     <Description>C# client for the LicenseManager API: products, policies, customers, licenses, machines and releases.</Description>
     <Copyright>LicenseManager</Copyright>
     <RootNamespace>LicenseManager</RootNamespace>
-    <Version>0.3.2</Version>
+    <Version>0.3.3</Version>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\LicenseManager.xml</DocumentationFile>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/licenseman/licensemanager-dotnet.git</RepositoryUrl>
@@ -20,7 +20,7 @@
     <PackageReleaseNotes>https://github.com/licenseman/licensemanager-dotnet/blob/main/CHANGELOG.md</PackageReleaseNotes>
     <PackageTags>licensemanager;licensing;license-keys;api;sdk</PackageTags>
     <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
-    <PackageProjectUrl>https://licensemanager.dev</PackageProjectUrl>
+    <PackageProjectUrl>https://licensemanager.dev/docs/sdks/csharp</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 

@@ -8009,9 +8009,8 @@ components:
         cancellationReason:
           allOf:
           - $ref: "#/components/schemas/CancellationReason"
-          - description: Why the license was canceled. `null` when it wasn't.
-            nullable: true
-            type: string
+          description: Why the license was canceled. `null` when it wasn't.
+          nullable: true
         subscription:
           $ref: "#/components/schemas/LicenseSubscription"
         cancellationComment:
