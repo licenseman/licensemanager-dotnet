@@ -140,6 +140,7 @@ namespace LicenseManager.Test.Api
             //string key = null;
             //string policyId = null;
             //string machineVersion = null;
+            //string machinePlatform = null;
             //LicenseStatus? status = null;
             //DateTime? createdFrom = null;
             //DateTime? createdTo = null;
@@ -154,7 +155,7 @@ namespace LicenseManager.Test.Api
             //decimal? priceMin = null;
             //decimal? priceMax = null;
             //string hasPrice = null;
-            //var response = instance.ListCustomerLicenses(customerId, page, pageSize, sort, search, key, policyId, machineVersion, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice);
+            //var response = instance.ListCustomerLicenses(customerId, page, pageSize, sort, search, key, policyId, machineVersion, machinePlatform, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice);
             //Assert.IsType<LicenseList>(response);
         }
 
@@ -174,6 +175,7 @@ namespace LicenseManager.Test.Api
             //string policyId = null;
             //string customerId = null;
             //string machineVersion = null;
+            //string machinePlatform = null;
             //LicenseStatus? status = null;
             //DateTime? createdFrom = null;
             //DateTime? createdTo = null;
@@ -188,7 +190,7 @@ namespace LicenseManager.Test.Api
             //decimal? priceMin = null;
             //decimal? priceMax = null;
             //string hasPrice = null;
-            //var response = instance.ListLicenses(productId, page, pageSize, sort, search, key, policyId, customerId, machineVersion, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice);
+            //var response = instance.ListLicenses(productId, page, pageSize, sort, search, key, policyId, customerId, machineVersion, machinePlatform, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice);
             //Assert.IsType<LicenseList>(response);
         }
 

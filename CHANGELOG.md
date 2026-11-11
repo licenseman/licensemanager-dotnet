@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.4 (2026-11-11)
+
+### Changes
+
+- `GET /v1/customers/{customerId}/licenses`: added the new optional `query` request parameter `machinePlatform`
+- `GET /v1/products/{productId}/licenses`: added the new optional `query` request parameter `machinePlatform`
+
 ## 0.3.3 (2026-11-06)
 
 ### Potentially breaking changes

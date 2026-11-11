@@ -170,6 +170,7 @@ namespace LicenseManager.Api
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
+        /// <param name="machinePlatform">Only returns the licenses with at least one active machine on this platform. (optional)</param>
         /// <param name="status">Only returns the licenses with this status. (optional)</param>
         /// <param name="createdFrom">Only returns the licenses created at or after this date. (optional)</param>
         /// <param name="createdTo">Only returns the licenses created at or before this date. (optional)</param>
@@ -185,7 +186,7 @@ namespace LicenseManager.Api
         /// <param name="priceMax">Only returns the licenses paid at most this amount, in major units of its currency: combine with &#x60;currency&#x60; to compare amounts of one currency. Licenses without a price are left out. (optional)</param>
         /// <param name="hasPrice">&#x60;true&#x60; only returns the licenses with a price, &#x60;false&#x60; only the ones without. (optional)</param>
         /// <returns>LicenseList</returns>
-        LicenseList ListCustomerLicenses(string customerId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string machineVersion = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default);
+        LicenseList ListCustomerLicenses(string customerId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string machineVersion = default, string machinePlatform = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default);
 
         /// <summary>
         /// List the licenses of a customer
@@ -202,6 +203,7 @@ namespace LicenseManager.Api
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
+        /// <param name="machinePlatform">Only returns the licenses with at least one active machine on this platform. (optional)</param>
         /// <param name="status">Only returns the licenses with this status. (optional)</param>
         /// <param name="createdFrom">Only returns the licenses created at or after this date. (optional)</param>
         /// <param name="createdTo">Only returns the licenses created at or before this date. (optional)</param>
@@ -217,7 +219,7 @@ namespace LicenseManager.Api
         /// <param name="priceMax">Only returns the licenses paid at most this amount, in major units of its currency: combine with &#x60;currency&#x60; to compare amounts of one currency. Licenses without a price are left out. (optional)</param>
         /// <param name="hasPrice">&#x60;true&#x60; only returns the licenses with a price, &#x60;false&#x60; only the ones without. (optional)</param>
         /// <returns>ApiResponse of LicenseList</returns>
-        ApiResponse<LicenseList> ListCustomerLicensesWithHttpInfo(string customerId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string machineVersion = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default);
+        ApiResponse<LicenseList> ListCustomerLicensesWithHttpInfo(string customerId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string machineVersion = default, string machinePlatform = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default);
         /// <summary>
         /// List the licenses of a product
         /// </summary>
@@ -234,6 +236,7 @@ namespace LicenseManager.Api
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="customerId">Only returns the licenses of this customer. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
+        /// <param name="machinePlatform">Only returns the licenses with at least one active machine on this platform. (optional)</param>
         /// <param name="status">Only returns the licenses with this status. (optional)</param>
         /// <param name="createdFrom">Only returns the licenses created at or after this date. (optional)</param>
         /// <param name="createdTo">Only returns the licenses created at or before this date. (optional)</param>
@@ -249,7 +252,7 @@ namespace LicenseManager.Api
         /// <param name="priceMax">Only returns the licenses paid at most this amount, in major units of its currency: combine with &#x60;currency&#x60; to compare amounts of one currency. Licenses without a price are left out. (optional)</param>
         /// <param name="hasPrice">&#x60;true&#x60; only returns the licenses with a price, &#x60;false&#x60; only the ones without. (optional)</param>
         /// <returns>LicenseList</returns>
-        LicenseList ListLicenses(string productId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string customerId = default, string machineVersion = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default);
+        LicenseList ListLicenses(string productId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string customerId = default, string machineVersion = default, string machinePlatform = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default);
 
         /// <summary>
         /// List the licenses of a product
@@ -267,6 +270,7 @@ namespace LicenseManager.Api
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="customerId">Only returns the licenses of this customer. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
+        /// <param name="machinePlatform">Only returns the licenses with at least one active machine on this platform. (optional)</param>
         /// <param name="status">Only returns the licenses with this status. (optional)</param>
         /// <param name="createdFrom">Only returns the licenses created at or after this date. (optional)</param>
         /// <param name="createdTo">Only returns the licenses created at or before this date. (optional)</param>
@@ -282,7 +286,7 @@ namespace LicenseManager.Api
         /// <param name="priceMax">Only returns the licenses paid at most this amount, in major units of its currency: combine with &#x60;currency&#x60; to compare amounts of one currency. Licenses without a price are left out. (optional)</param>
         /// <param name="hasPrice">&#x60;true&#x60; only returns the licenses with a price, &#x60;false&#x60; only the ones without. (optional)</param>
         /// <returns>ApiResponse of LicenseList</returns>
-        ApiResponse<LicenseList> ListLicensesWithHttpInfo(string productId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string customerId = default, string machineVersion = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default);
+        ApiResponse<LicenseList> ListLicensesWithHttpInfo(string productId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string customerId = default, string machineVersion = default, string machinePlatform = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default);
         /// <summary>
         /// Email license keys to their customers
         /// </summary>
@@ -514,6 +518,7 @@ namespace LicenseManager.Api
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
+        /// <param name="machinePlatform">Only returns the licenses with at least one active machine on this platform. (optional)</param>
         /// <param name="status">Only returns the licenses with this status. (optional)</param>
         /// <param name="createdFrom">Only returns the licenses created at or after this date. (optional)</param>
         /// <param name="createdTo">Only returns the licenses created at or before this date. (optional)</param>
@@ -530,7 +535,7 @@ namespace LicenseManager.Api
         /// <param name="hasPrice">&#x60;true&#x60; only returns the licenses with a price, &#x60;false&#x60; only the ones without. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of LicenseList</returns>
-        System.Threading.Tasks.Task<LicenseList> ListCustomerLicensesAsync(string customerId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string machineVersion = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<LicenseList> ListCustomerLicensesAsync(string customerId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string machineVersion = default, string machinePlatform = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List the licenses of a customer
@@ -547,6 +552,7 @@ namespace LicenseManager.Api
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
+        /// <param name="machinePlatform">Only returns the licenses with at least one active machine on this platform. (optional)</param>
         /// <param name="status">Only returns the licenses with this status. (optional)</param>
         /// <param name="createdFrom">Only returns the licenses created at or after this date. (optional)</param>
         /// <param name="createdTo">Only returns the licenses created at or before this date. (optional)</param>
@@ -563,7 +569,7 @@ namespace LicenseManager.Api
         /// <param name="hasPrice">&#x60;true&#x60; only returns the licenses with a price, &#x60;false&#x60; only the ones without. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (LicenseList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LicenseList>> ListCustomerLicensesWithHttpInfoAsync(string customerId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string machineVersion = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<LicenseList>> ListCustomerLicensesWithHttpInfoAsync(string customerId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string machineVersion = default, string machinePlatform = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// List the licenses of a product
         /// </summary>
@@ -580,6 +586,7 @@ namespace LicenseManager.Api
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="customerId">Only returns the licenses of this customer. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
+        /// <param name="machinePlatform">Only returns the licenses with at least one active machine on this platform. (optional)</param>
         /// <param name="status">Only returns the licenses with this status. (optional)</param>
         /// <param name="createdFrom">Only returns the licenses created at or after this date. (optional)</param>
         /// <param name="createdTo">Only returns the licenses created at or before this date. (optional)</param>
@@ -596,7 +603,7 @@ namespace LicenseManager.Api
         /// <param name="hasPrice">&#x60;true&#x60; only returns the licenses with a price, &#x60;false&#x60; only the ones without. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of LicenseList</returns>
-        System.Threading.Tasks.Task<LicenseList> ListLicensesAsync(string productId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string customerId = default, string machineVersion = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<LicenseList> ListLicensesAsync(string productId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string customerId = default, string machineVersion = default, string machinePlatform = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List the licenses of a product
@@ -614,6 +621,7 @@ namespace LicenseManager.Api
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="customerId">Only returns the licenses of this customer. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
+        /// <param name="machinePlatform">Only returns the licenses with at least one active machine on this platform. (optional)</param>
         /// <param name="status">Only returns the licenses with this status. (optional)</param>
         /// <param name="createdFrom">Only returns the licenses created at or after this date. (optional)</param>
         /// <param name="createdTo">Only returns the licenses created at or before this date. (optional)</param>
@@ -630,7 +638,7 @@ namespace LicenseManager.Api
         /// <param name="hasPrice">&#x60;true&#x60; only returns the licenses with a price, &#x60;false&#x60; only the ones without. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (LicenseList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LicenseList>> ListLicensesWithHttpInfoAsync(string productId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string customerId = default, string machineVersion = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<LicenseList>> ListLicensesWithHttpInfoAsync(string productId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string customerId = default, string machineVersion = default, string machinePlatform = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Email license keys to their customers
         /// </summary>
@@ -1719,6 +1727,7 @@ namespace LicenseManager.Api
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
+        /// <param name="machinePlatform">Only returns the licenses with at least one active machine on this platform. (optional)</param>
         /// <param name="status">Only returns the licenses with this status. (optional)</param>
         /// <param name="createdFrom">Only returns the licenses created at or after this date. (optional)</param>
         /// <param name="createdTo">Only returns the licenses created at or before this date. (optional)</param>
@@ -1734,9 +1743,9 @@ namespace LicenseManager.Api
         /// <param name="priceMax">Only returns the licenses paid at most this amount, in major units of its currency: combine with &#x60;currency&#x60; to compare amounts of one currency. Licenses without a price are left out. (optional)</param>
         /// <param name="hasPrice">&#x60;true&#x60; only returns the licenses with a price, &#x60;false&#x60; only the ones without. (optional)</param>
         /// <returns>LicenseList</returns>
-        public LicenseList ListCustomerLicenses(string customerId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string machineVersion = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default)
+        public LicenseList ListCustomerLicenses(string customerId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string machineVersion = default, string machinePlatform = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default)
         {
-            LicenseManager.Client.ApiResponse<LicenseList> localVarResponse = ListCustomerLicensesWithHttpInfo(customerId, page, pageSize, sort, search, key, policyId, machineVersion, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice);
+            LicenseManager.Client.ApiResponse<LicenseList> localVarResponse = ListCustomerLicensesWithHttpInfo(customerId, page, pageSize, sort, search, key, policyId, machineVersion, machinePlatform, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice);
             return localVarResponse.Data;
         }
 
@@ -1752,6 +1761,7 @@ namespace LicenseManager.Api
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
+        /// <param name="machinePlatform">Only returns the licenses with at least one active machine on this platform. (optional)</param>
         /// <param name="status">Only returns the licenses with this status. (optional)</param>
         /// <param name="createdFrom">Only returns the licenses created at or after this date. (optional)</param>
         /// <param name="createdTo">Only returns the licenses created at or before this date. (optional)</param>
@@ -1767,7 +1777,7 @@ namespace LicenseManager.Api
         /// <param name="priceMax">Only returns the licenses paid at most this amount, in major units of its currency: combine with &#x60;currency&#x60; to compare amounts of one currency. Licenses without a price are left out. (optional)</param>
         /// <param name="hasPrice">&#x60;true&#x60; only returns the licenses with a price, &#x60;false&#x60; only the ones without. (optional)</param>
         /// <returns>ApiResponse of LicenseList</returns>
-        public LicenseManager.Client.ApiResponse<LicenseList> ListCustomerLicensesWithHttpInfo(string customerId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string machineVersion = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default)
+        public LicenseManager.Client.ApiResponse<LicenseList> ListCustomerLicensesWithHttpInfo(string customerId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string machineVersion = default, string machinePlatform = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default)
         {
             // verify the required parameter 'customerId' is set
             if (customerId == null)
@@ -1817,6 +1827,10 @@ namespace LicenseManager.Api
             if (machineVersion != null)
             {
                 localVarRequestOptions.QueryParameters.Add(LicenseManager.Client.ClientUtils.ParameterToMultiMap("", "machineVersion", machineVersion));
+            }
+            if (machinePlatform != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(LicenseManager.Client.ClientUtils.ParameterToMultiMap("", "machinePlatform", machinePlatform));
             }
             if (status != null)
             {
@@ -1911,6 +1925,7 @@ namespace LicenseManager.Api
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
+        /// <param name="machinePlatform">Only returns the licenses with at least one active machine on this platform. (optional)</param>
         /// <param name="status">Only returns the licenses with this status. (optional)</param>
         /// <param name="createdFrom">Only returns the licenses created at or after this date. (optional)</param>
         /// <param name="createdTo">Only returns the licenses created at or before this date. (optional)</param>
@@ -1927,9 +1942,9 @@ namespace LicenseManager.Api
         /// <param name="hasPrice">&#x60;true&#x60; only returns the licenses with a price, &#x60;false&#x60; only the ones without. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of LicenseList</returns>
-        public async System.Threading.Tasks.Task<LicenseList> ListCustomerLicensesAsync(string customerId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string machineVersion = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<LicenseList> ListCustomerLicensesAsync(string customerId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string machineVersion = default, string machinePlatform = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default, System.Threading.CancellationToken cancellationToken = default)
         {
-            LicenseManager.Client.ApiResponse<LicenseList> localVarResponse = await ListCustomerLicensesWithHttpInfoAsync(customerId, page, pageSize, sort, search, key, policyId, machineVersion, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice, cancellationToken).ConfigureAwait(false);
+            LicenseManager.Client.ApiResponse<LicenseList> localVarResponse = await ListCustomerLicensesWithHttpInfoAsync(customerId, page, pageSize, sort, search, key, policyId, machineVersion, machinePlatform, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1945,6 +1960,7 @@ namespace LicenseManager.Api
         /// <param name="key">Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)</param>
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
+        /// <param name="machinePlatform">Only returns the licenses with at least one active machine on this platform. (optional)</param>
         /// <param name="status">Only returns the licenses with this status. (optional)</param>
         /// <param name="createdFrom">Only returns the licenses created at or after this date. (optional)</param>
         /// <param name="createdTo">Only returns the licenses created at or before this date. (optional)</param>
@@ -1961,7 +1977,7 @@ namespace LicenseManager.Api
         /// <param name="hasPrice">&#x60;true&#x60; only returns the licenses with a price, &#x60;false&#x60; only the ones without. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (LicenseList)</returns>
-        public async System.Threading.Tasks.Task<LicenseManager.Client.ApiResponse<LicenseList>> ListCustomerLicensesWithHttpInfoAsync(string customerId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string machineVersion = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<LicenseManager.Client.ApiResponse<LicenseList>> ListCustomerLicensesWithHttpInfoAsync(string customerId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string machineVersion = default, string machinePlatform = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'customerId' is set
             if (customerId == null)
@@ -2013,6 +2029,10 @@ namespace LicenseManager.Api
             if (machineVersion != null)
             {
                 localVarRequestOptions.QueryParameters.Add(LicenseManager.Client.ClientUtils.ParameterToMultiMap("", "machineVersion", machineVersion));
+            }
+            if (machinePlatform != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(LicenseManager.Client.ClientUtils.ParameterToMultiMap("", "machinePlatform", machinePlatform));
             }
             if (status != null)
             {
@@ -2109,6 +2129,7 @@ namespace LicenseManager.Api
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="customerId">Only returns the licenses of this customer. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
+        /// <param name="machinePlatform">Only returns the licenses with at least one active machine on this platform. (optional)</param>
         /// <param name="status">Only returns the licenses with this status. (optional)</param>
         /// <param name="createdFrom">Only returns the licenses created at or after this date. (optional)</param>
         /// <param name="createdTo">Only returns the licenses created at or before this date. (optional)</param>
@@ -2124,9 +2145,9 @@ namespace LicenseManager.Api
         /// <param name="priceMax">Only returns the licenses paid at most this amount, in major units of its currency: combine with &#x60;currency&#x60; to compare amounts of one currency. Licenses without a price are left out. (optional)</param>
         /// <param name="hasPrice">&#x60;true&#x60; only returns the licenses with a price, &#x60;false&#x60; only the ones without. (optional)</param>
         /// <returns>LicenseList</returns>
-        public LicenseList ListLicenses(string productId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string customerId = default, string machineVersion = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default)
+        public LicenseList ListLicenses(string productId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string customerId = default, string machineVersion = default, string machinePlatform = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default)
         {
-            LicenseManager.Client.ApiResponse<LicenseList> localVarResponse = ListLicensesWithHttpInfo(productId, page, pageSize, sort, search, key, policyId, customerId, machineVersion, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice);
+            LicenseManager.Client.ApiResponse<LicenseList> localVarResponse = ListLicensesWithHttpInfo(productId, page, pageSize, sort, search, key, policyId, customerId, machineVersion, machinePlatform, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice);
             return localVarResponse.Data;
         }
 
@@ -2143,6 +2164,7 @@ namespace LicenseManager.Api
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="customerId">Only returns the licenses of this customer. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
+        /// <param name="machinePlatform">Only returns the licenses with at least one active machine on this platform. (optional)</param>
         /// <param name="status">Only returns the licenses with this status. (optional)</param>
         /// <param name="createdFrom">Only returns the licenses created at or after this date. (optional)</param>
         /// <param name="createdTo">Only returns the licenses created at or before this date. (optional)</param>
@@ -2158,7 +2180,7 @@ namespace LicenseManager.Api
         /// <param name="priceMax">Only returns the licenses paid at most this amount, in major units of its currency: combine with &#x60;currency&#x60; to compare amounts of one currency. Licenses without a price are left out. (optional)</param>
         /// <param name="hasPrice">&#x60;true&#x60; only returns the licenses with a price, &#x60;false&#x60; only the ones without. (optional)</param>
         /// <returns>ApiResponse of LicenseList</returns>
-        public LicenseManager.Client.ApiResponse<LicenseList> ListLicensesWithHttpInfo(string productId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string customerId = default, string machineVersion = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default)
+        public LicenseManager.Client.ApiResponse<LicenseList> ListLicensesWithHttpInfo(string productId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string customerId = default, string machineVersion = default, string machinePlatform = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default)
         {
             // verify the required parameter 'productId' is set
             if (productId == null)
@@ -2212,6 +2234,10 @@ namespace LicenseManager.Api
             if (machineVersion != null)
             {
                 localVarRequestOptions.QueryParameters.Add(LicenseManager.Client.ClientUtils.ParameterToMultiMap("", "machineVersion", machineVersion));
+            }
+            if (machinePlatform != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(LicenseManager.Client.ClientUtils.ParameterToMultiMap("", "machinePlatform", machinePlatform));
             }
             if (status != null)
             {
@@ -2301,6 +2327,7 @@ namespace LicenseManager.Api
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="customerId">Only returns the licenses of this customer. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
+        /// <param name="machinePlatform">Only returns the licenses with at least one active machine on this platform. (optional)</param>
         /// <param name="status">Only returns the licenses with this status. (optional)</param>
         /// <param name="createdFrom">Only returns the licenses created at or after this date. (optional)</param>
         /// <param name="createdTo">Only returns the licenses created at or before this date. (optional)</param>
@@ -2317,9 +2344,9 @@ namespace LicenseManager.Api
         /// <param name="hasPrice">&#x60;true&#x60; only returns the licenses with a price, &#x60;false&#x60; only the ones without. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of LicenseList</returns>
-        public async System.Threading.Tasks.Task<LicenseList> ListLicensesAsync(string productId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string customerId = default, string machineVersion = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<LicenseList> ListLicensesAsync(string productId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string customerId = default, string machineVersion = default, string machinePlatform = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default, System.Threading.CancellationToken cancellationToken = default)
         {
-            LicenseManager.Client.ApiResponse<LicenseList> localVarResponse = await ListLicensesWithHttpInfoAsync(productId, page, pageSize, sort, search, key, policyId, customerId, machineVersion, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice, cancellationToken).ConfigureAwait(false);
+            LicenseManager.Client.ApiResponse<LicenseList> localVarResponse = await ListLicensesWithHttpInfoAsync(productId, page, pageSize, sort, search, key, policyId, customerId, machineVersion, machinePlatform, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -2336,6 +2363,7 @@ namespace LicenseManager.Api
         /// <param name="policyId">Only returns the licenses following this policy. (optional)</param>
         /// <param name="customerId">Only returns the licenses of this customer. (optional)</param>
         /// <param name="machineVersion">Only returns the licenses with at least one active machine running this version of the product. (optional)</param>
+        /// <param name="machinePlatform">Only returns the licenses with at least one active machine on this platform. (optional)</param>
         /// <param name="status">Only returns the licenses with this status. (optional)</param>
         /// <param name="createdFrom">Only returns the licenses created at or after this date. (optional)</param>
         /// <param name="createdTo">Only returns the licenses created at or before this date. (optional)</param>
@@ -2352,7 +2380,7 @@ namespace LicenseManager.Api
         /// <param name="hasPrice">&#x60;true&#x60; only returns the licenses with a price, &#x60;false&#x60; only the ones without. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (LicenseList)</returns>
-        public async System.Threading.Tasks.Task<LicenseManager.Client.ApiResponse<LicenseList>> ListLicensesWithHttpInfoAsync(string productId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string customerId = default, string machineVersion = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<LicenseManager.Client.ApiResponse<LicenseList>> ListLicensesWithHttpInfoAsync(string productId, int? page = default, int? pageSize = default, string sort = default, string search = default, string key = default, string policyId = default, string customerId = default, string machineVersion = default, string machinePlatform = default, LicenseStatus? status = default, DateTime? createdFrom = default, DateTime? createdTo = default, DateTime? lastActivatedFrom = default, DateTime? lastActivatedTo = default, string neverActivated = default, DateTime? expiresFrom = default, DateTime? expiresTo = default, string neverExpires = default, string currency = default, decimal? price = default, decimal? priceMin = default, decimal? priceMax = default, string hasPrice = default, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'productId' is set
             if (productId == null)
@@ -2408,6 +2436,10 @@ namespace LicenseManager.Api
             if (machineVersion != null)
             {
                 localVarRequestOptions.QueryParameters.Add(LicenseManager.Client.ClientUtils.ParameterToMultiMap("", "machineVersion", machineVersion));
+            }
+            if (machinePlatform != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(LicenseManager.Client.ClientUtils.ParameterToMultiMap("", "machinePlatform", machinePlatform));
             }
             if (status != null)
             {

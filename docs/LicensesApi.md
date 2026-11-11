@@ -655,7 +655,7 @@ This endpoint does not need any parameter.
 
 <a id="listcustomerlicenses"></a>
 # **ListCustomerLicenses**
-> LicenseList ListCustomerLicenses (string customerId, int? page = null, int? pageSize = null, string sort = null, string search = null, string key = null, string policyId = null, string machineVersion = null, LicenseStatus? status = null, DateTime? createdFrom = null, DateTime? createdTo = null, DateTime? lastActivatedFrom = null, DateTime? lastActivatedTo = null, string neverActivated = null, DateTime? expiresFrom = null, DateTime? expiresTo = null, string neverExpires = null, string currency = null, decimal? price = null, decimal? priceMin = null, decimal? priceMax = null, string hasPrice = null)
+> LicenseList ListCustomerLicenses (string customerId, int? page = null, int? pageSize = null, string sort = null, string search = null, string key = null, string policyId = null, string machineVersion = null, string machinePlatform = null, LicenseStatus? status = null, DateTime? createdFrom = null, DateTime? createdTo = null, DateTime? lastActivatedFrom = null, DateTime? lastActivatedTo = null, string neverActivated = null, DateTime? expiresFrom = null, DateTime? expiresTo = null, string neverExpires = null, string currency = null, decimal? price = null, decimal? priceMin = null, decimal? priceMax = null, string hasPrice = null)
 
 List the licenses of a customer
 
@@ -697,6 +697,7 @@ namespace Example
             var key = 7KQ2M-X9ZPA-H4TRC-WN6EY-B3JDF;  // string | Only returns the license with this exact key, case included. Keys of test products start with `TEST-`. (optional) 
             var policyId = p4Rt8LmQ;  // string | Only returns the licenses following this policy. (optional) 
             var machineVersion = 2.3.1;  // string | Only returns the licenses with at least one active machine running this version of the product. (optional) 
+            var machinePlatform = macOS 15.1;  // string | Only returns the licenses with at least one active machine on this platform. (optional) 
             var status = (LicenseStatus) "active";  // LicenseStatus? | Only returns the licenses with this status. (optional) 
             var createdFrom = 2026-01-01T00:00:00.000Z;  // DateTime? | Only returns the licenses created at or after this date. (optional) 
             var createdTo = 2026-02-01T00:00:00.000Z;  // DateTime? | Only returns the licenses created at or before this date. (optional) 
@@ -715,7 +716,7 @@ namespace Example
             try
             {
                 // List the licenses of a customer
-                LicenseList result = apiInstance.ListCustomerLicenses(customerId, page, pageSize, sort, search, key, policyId, machineVersion, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice);
+                LicenseList result = apiInstance.ListCustomerLicenses(customerId, page, pageSize, sort, search, key, policyId, machineVersion, machinePlatform, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -736,7 +737,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List the licenses of a customer
-    ApiResponse<LicenseList> response = apiInstance.ListCustomerLicensesWithHttpInfo(customerId, page, pageSize, sort, search, key, policyId, machineVersion, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice);
+    ApiResponse<LicenseList> response = apiInstance.ListCustomerLicensesWithHttpInfo(customerId, page, pageSize, sort, search, key, policyId, machineVersion, machinePlatform, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -761,6 +762,7 @@ catch (ApiException e)
 | **key** | **string** | Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. | [optional]  |
 | **policyId** | **string** | Only returns the licenses following this policy. | [optional]  |
 | **machineVersion** | **string** | Only returns the licenses with at least one active machine running this version of the product. | [optional]  |
+| **machinePlatform** | **string** | Only returns the licenses with at least one active machine on this platform. | [optional]  |
 | **status** | **LicenseStatus?** | Only returns the licenses with this status. | [optional]  |
 | **createdFrom** | **DateTime?** | Only returns the licenses created at or after this date. | [optional]  |
 | **createdTo** | **DateTime?** | Only returns the licenses created at or before this date. | [optional]  |
@@ -805,7 +807,7 @@ catch (ApiException e)
 
 <a id="listlicenses"></a>
 # **ListLicenses**
-> LicenseList ListLicenses (string productId, int? page = null, int? pageSize = null, string sort = null, string search = null, string key = null, string policyId = null, string customerId = null, string machineVersion = null, LicenseStatus? status = null, DateTime? createdFrom = null, DateTime? createdTo = null, DateTime? lastActivatedFrom = null, DateTime? lastActivatedTo = null, string neverActivated = null, DateTime? expiresFrom = null, DateTime? expiresTo = null, string neverExpires = null, string currency = null, decimal? price = null, decimal? priceMin = null, decimal? priceMax = null, string hasPrice = null)
+> LicenseList ListLicenses (string productId, int? page = null, int? pageSize = null, string sort = null, string search = null, string key = null, string policyId = null, string customerId = null, string machineVersion = null, string machinePlatform = null, LicenseStatus? status = null, DateTime? createdFrom = null, DateTime? createdTo = null, DateTime? lastActivatedFrom = null, DateTime? lastActivatedTo = null, string neverActivated = null, DateTime? expiresFrom = null, DateTime? expiresTo = null, string neverExpires = null, string currency = null, decimal? price = null, decimal? priceMin = null, decimal? priceMax = null, string hasPrice = null)
 
 List the licenses of a product
 
@@ -846,6 +848,7 @@ namespace Example
             var policyId = p4Rt8LmQ;  // string | Only returns the licenses following this policy. (optional) 
             var customerId = c9Wd3RtE;  // string | Only returns the licenses of this customer. (optional) 
             var machineVersion = 2.3.1;  // string | Only returns the licenses with at least one active machine running this version of the product. (optional) 
+            var machinePlatform = macOS 15.1;  // string | Only returns the licenses with at least one active machine on this platform. (optional) 
             var status = (LicenseStatus) "active";  // LicenseStatus? | Only returns the licenses with this status. (optional) 
             var createdFrom = 2026-01-01T00:00:00.000Z;  // DateTime? | Only returns the licenses created at or after this date. (optional) 
             var createdTo = 2026-02-01T00:00:00.000Z;  // DateTime? | Only returns the licenses created at or before this date. (optional) 
@@ -864,7 +867,7 @@ namespace Example
             try
             {
                 // List the licenses of a product
-                LicenseList result = apiInstance.ListLicenses(productId, page, pageSize, sort, search, key, policyId, customerId, machineVersion, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice);
+                LicenseList result = apiInstance.ListLicenses(productId, page, pageSize, sort, search, key, policyId, customerId, machineVersion, machinePlatform, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -885,7 +888,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List the licenses of a product
-    ApiResponse<LicenseList> response = apiInstance.ListLicensesWithHttpInfo(productId, page, pageSize, sort, search, key, policyId, customerId, machineVersion, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice);
+    ApiResponse<LicenseList> response = apiInstance.ListLicensesWithHttpInfo(productId, page, pageSize, sort, search, key, policyId, customerId, machineVersion, machinePlatform, status, createdFrom, createdTo, lastActivatedFrom, lastActivatedTo, neverActivated, expiresFrom, expiresTo, neverExpires, currency, price, priceMin, priceMax, hasPrice);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -911,6 +914,7 @@ catch (ApiException e)
 | **policyId** | **string** | Only returns the licenses following this policy. | [optional]  |
 | **customerId** | **string** | Only returns the licenses of this customer. | [optional]  |
 | **machineVersion** | **string** | Only returns the licenses with at least one active machine running this version of the product. | [optional]  |
+| **machinePlatform** | **string** | Only returns the licenses with at least one active machine on this platform. | [optional]  |
 | **status** | **LicenseStatus?** | Only returns the licenses with this status. | [optional]  |
 | **createdFrom** | **DateTime?** | Only returns the licenses created at or after this date. | [optional]  |
 | **createdTo** | **DateTime?** | Only returns the licenses created at or before this date. | [optional]  |
