@@ -16,7 +16,7 @@ All URIs are relative to *https://api.licensemanager.dev*
 
 Open the Stripe customer portal of a customer
 
-Link to the Stripe customer portal of the customer's Stripe customer, where they manage their subscriptions: change their plan or payment method, see their invoices, cancel. Needs the Stripe integration's `canBillingPortal`, and the customer portal configured in the Stripe account's settings. The changes come back through the integration's webhook, keeping the subscription licenses in line.  **Token access**: customer tokens with the `customer:billing` permission (or the matching write one). A customer token reaches its own customer.  **Required role permission**: `portalLink:create` when called with a session, granted by the member's role. API keys aren't limited by roles.
+Link to the customer portal of the customer's Stripe or Paddle customer, where they manage their subscriptions: change their plan or payment method, see their invoices, cancel. Needs the integration's `canBillingPortal`, and for Stripe, the customer portal configured in the Stripe account's settings. The changes come back through the integration's webhook, keeping the subscription licenses in line.  **Token access**: customer tokens with the `customer:billing` permission (or the matching write one). A customer token reaches its own customer.  **Required role permission**: `portalLink:create` when called with a session, granted by the member's role. API keys aren't limited by roles.
 
 ### Example
 ```csharp
@@ -115,10 +115,10 @@ catch (ApiException e)
 | **402** | &#x60;plan_limit_exceeded&#x60;: the organization stayed over its plan&#39;s limits after the grace period, its API is blocked until it upgrades. &#x60;plan_limit_reached&#x60;: creating the resource would go over the plan&#39;s limit |  -  |
 | **403** | &#x60;token_not_allowed&#x60;: the endpoint doesn&#39;t accept tokens, or not of this type. &#x60;insufficient_scope&#x60;: the token lacks the permission. &#x60;no_active_organization&#x60; or &#x60;forbidden&#x60;: the session has no organization, or isn&#39;t a member of the one requested |  -  |
 | **404** | Customer not found |  -  |
-| **409** | &#x60;no_stripe_customer&#x60;: the customer didn&#39;t pay through the Stripe integration. &#x60;billing_portal_unavailable&#x60;: the Stripe integration isn&#39;t connected, or its API key lacks the Customer portal: Write permission |  -  |
+| **409** | &#x60;no_stripe_customer&#x60;: the customer didn&#39;t pay through the Stripe or Paddle integration. &#x60;billing_portal_unavailable&#x60;: the integration isn&#39;t connected, or its API key lacks the customer portal permission (Stripe: Customer portal: Write, Paddle: Customer portal sessions: Write) |  -  |
 | **422** | &#x60;validation_error&#x60;: invalid path, query or body, with the &#x60;issues&#x60; |  -  |
 | **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
-| **502** | &#x60;provider_unavailable&#x60;: Stripe refused or couldn&#39;t be reached, like when its customer portal isn&#39;t configured |  -  |
+| **502** | &#x60;provider_unavailable&#x60;: Stripe or Paddle refused or couldn&#39;t be reached, like when the Stripe customer portal isn&#39;t configured |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **ExpiresAt** | **DateTime?** | &#x60;null&#x60; when the license never expires. | 
 **Meta** | **Dictionary&lt;string, Object&gt;** | Free-form JSON object. | 
 **StripePaymentIntentId** | **string** | Id of the Stripe payment intent that paid the license, when it was bought through the Stripe integration. &#x60;null&#x60; otherwise, or when nothing was paid. | 
+**PaddleTransactionId** | **string** | Id of the Paddle transaction that paid the license, when it was bought through the Paddle integration. &#x60;null&#x60; otherwise. | 
 **MaxMachines** | **int?** | Maximum number of active machines the license can be used on. &#x60;null&#x60; when there&#39;s no limit. Can be lower than &#x60;activeMachineCount&#x60; after it was lowered: machines aren&#39;t deactivated to match it. | 
 **MaxOfflineDurationSeconds** | **int** | Longest the applications can run offline with the license: the license tokens returned by &#x60;validateKey&#x60; expire this long after they&#39;re issued, unless the license expires sooner. | 
 **ActiveMachineCount** | **int** | Number of active machines the license is used on. | 
@@ -27,6 +28,8 @@ Name | Type | Description | Notes
 **Subscription** | [**LicenseSubscription**](LicenseSubscription.md) |  | 
 **CancellationComment** | **string** | Comment given when the license was canceled. &#x60;null&#x60; when there&#39;s none. | 
 **StripeRefundId** | **string** | Id of the Stripe refund of the license&#39;s payment once it was canceled, through the Stripe integration. &#x60;null&#x60; otherwise. | 
+**PaddleAdjustmentId** | **string** | Id of the Paddle refund adjustment of the license&#39;s transaction once it was canceled, through the Paddle integration. &#x60;null&#x60; otherwise. | 
+**PaddleRefundStatus** | **string** | Outcome of the Paddle refund: &#x60;pending_approval&#x60; while Paddle reviews it, then &#x60;approved&#x60; or &#x60;rejected&#x60;. &#x60;null&#x60; without a Paddle refund. | 
 **UpdatedAt** | **DateTime** | Last time the license&#39;s settings were edited, not when its key was validated. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

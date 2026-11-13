@@ -46,6 +46,48 @@ namespace LicenseManager.Model
         [DataMember(Name = "cancellationReason", IsRequired = true, EmitDefaultValue = true)]
         public CancellationReason CancellationReason { get; set; }
         /// <summary>
+        /// Outcome of the Paddle refund: &#x60;pending_approval&#x60; while Paddle reviews it, then &#x60;approved&#x60; or &#x60;rejected&#x60;. &#x60;null&#x60; without a Paddle refund.
+        /// </summary>
+        /// <value>Outcome of the Paddle refund: &#x60;pending_approval&#x60; while Paddle reviews it, then &#x60;approved&#x60; or &#x60;rejected&#x60;. &#x60;null&#x60; without a Paddle refund.</value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum PaddleRefundStatusEnum
+        {
+            /// <summary>
+            /// Enum PendingApproval for value: pending_approval
+            /// </summary>
+            [EnumMember(Value = "pending_approval")]
+            PendingApproval = 1,
+
+            /// <summary>
+            /// Enum Approved for value: approved
+            /// </summary>
+            [EnumMember(Value = "approved")]
+            Approved = 2,
+
+            /// <summary>
+            /// Enum Rejected for value: rejected
+            /// </summary>
+            [EnumMember(Value = "rejected")]
+            Rejected = 3,
+
+            /// <summary>
+            /// Enum UnknownDefaultOpenApi for value: unknown_default_open_api
+            /// </summary>
+            [EnumMember(Value = "unknown_default_open_api")]
+            UnknownDefaultOpenApi = 4
+        }
+
+
+        /// <summary>
+        /// Outcome of the Paddle refund: &#x60;pending_approval&#x60; while Paddle reviews it, then &#x60;approved&#x60; or &#x60;rejected&#x60;. &#x60;null&#x60; without a Paddle refund.
+        /// </summary>
+        /// <value>Outcome of the Paddle refund: &#x60;pending_approval&#x60; while Paddle reviews it, then &#x60;approved&#x60; or &#x60;rejected&#x60;. &#x60;null&#x60; without a Paddle refund.</value>
+        /*
+        <example>approved</example>
+        */
+        [DataMember(Name = "paddleRefundStatus", IsRequired = true, EmitDefaultValue = true)]
+        public PaddleRefundStatusEnum PaddleRefundStatus { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="License" /> class.
         /// </summary>
         [JsonConstructorAttribute]
@@ -66,6 +108,7 @@ namespace LicenseManager.Model
         /// <param name="expiresAt">&#x60;null&#x60; when the license never expires. (required).</param>
         /// <param name="meta">Free-form JSON object. (required).</param>
         /// <param name="stripePaymentIntentId">Id of the Stripe payment intent that paid the license, when it was bought through the Stripe integration. &#x60;null&#x60; otherwise, or when nothing was paid. (required).</param>
+        /// <param name="paddleTransactionId">Id of the Paddle transaction that paid the license, when it was bought through the Paddle integration. &#x60;null&#x60; otherwise. (required).</param>
         /// <param name="maxMachines">Maximum number of active machines the license can be used on. &#x60;null&#x60; when there&#39;s no limit. Can be lower than &#x60;activeMachineCount&#x60; after it was lowered: machines aren&#39;t deactivated to match it. (required).</param>
         /// <param name="maxOfflineDurationSeconds">Longest the applications can run offline with the license: the license tokens returned by &#x60;validateKey&#x60; expire this long after they&#39;re issued, unless the license expires sooner. (required).</param>
         /// <param name="activeMachineCount">Number of active machines the license is used on. (required).</param>
@@ -79,8 +122,10 @@ namespace LicenseManager.Model
         /// <param name="subscription">subscription (required).</param>
         /// <param name="cancellationComment">Comment given when the license was canceled. &#x60;null&#x60; when there&#39;s none. (required).</param>
         /// <param name="stripeRefundId">Id of the Stripe refund of the license&#39;s payment once it was canceled, through the Stripe integration. &#x60;null&#x60; otherwise. (required).</param>
+        /// <param name="paddleAdjustmentId">Id of the Paddle refund adjustment of the license&#39;s transaction once it was canceled, through the Paddle integration. &#x60;null&#x60; otherwise. (required).</param>
+        /// <param name="paddleRefundStatus">Outcome of the Paddle refund: &#x60;pending_approval&#x60; while Paddle reviews it, then &#x60;approved&#x60; or &#x60;rejected&#x60;. &#x60;null&#x60; without a Paddle refund. (required).</param>
         /// <param name="updatedAt">Last time the license&#39;s settings were edited, not when its key was validated. (required).</param>
-        public License(string id = default, string productId = default, string policyId = default, string customerId = default, LicenseCustomer customer = default, string key = default, DateTime createdAt = default, DateTime? expiresAt = default, Dictionary<string, Object> meta = default, string stripePaymentIntentId = default, int? maxMachines = default, int maxOfflineDurationSeconds = default, int activeMachineCount = default, DateTime? lastActivatedAt = default, LicenseMaxVersion maxVersion = default, Price price = default, LicenseStatus status = default, DateTime? cancellableUntil = default, DateTime? canceledAt = default, CancellationReason cancellationReason = default, LicenseSubscription subscription = default, string cancellationComment = default, string stripeRefundId = default, DateTime updatedAt = default)
+        public License(string id = default, string productId = default, string policyId = default, string customerId = default, LicenseCustomer customer = default, string key = default, DateTime createdAt = default, DateTime? expiresAt = default, Dictionary<string, Object> meta = default, string stripePaymentIntentId = default, string paddleTransactionId = default, int? maxMachines = default, int maxOfflineDurationSeconds = default, int activeMachineCount = default, DateTime? lastActivatedAt = default, LicenseMaxVersion maxVersion = default, Price price = default, LicenseStatus status = default, DateTime? cancellableUntil = default, DateTime? canceledAt = default, CancellationReason cancellationReason = default, LicenseSubscription subscription = default, string cancellationComment = default, string stripeRefundId = default, string paddleAdjustmentId = default, PaddleRefundStatusEnum paddleRefundStatus = default, DateTime updatedAt = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -137,6 +182,12 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("stripePaymentIntentId is a required property for License and cannot be null");
             }
             this.StripePaymentIntentId = stripePaymentIntentId;
+            // to ensure "paddleTransactionId" is required (not null)
+            if (paddleTransactionId == null)
+            {
+                throw new ArgumentNullException("paddleTransactionId is a required property for License and cannot be null");
+            }
+            this.PaddleTransactionId = paddleTransactionId;
             // to ensure "maxMachines" is required (not null)
             if (maxMachines == null)
             {
@@ -195,6 +246,13 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("stripeRefundId is a required property for License and cannot be null");
             }
             this.StripeRefundId = stripeRefundId;
+            // to ensure "paddleAdjustmentId" is required (not null)
+            if (paddleAdjustmentId == null)
+            {
+                throw new ArgumentNullException("paddleAdjustmentId is a required property for License and cannot be null");
+            }
+            this.PaddleAdjustmentId = paddleAdjustmentId;
+            this.PaddleRefundStatus = paddleRefundStatus;
             this.UpdatedAt = updatedAt;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
@@ -289,6 +347,16 @@ namespace LicenseManager.Model
         */
         [DataMember(Name = "stripePaymentIntentId", IsRequired = true, EmitDefaultValue = true)]
         public string StripePaymentIntentId { get; set; }
+
+        /// <summary>
+        /// Id of the Paddle transaction that paid the license, when it was bought through the Paddle integration. &#x60;null&#x60; otherwise.
+        /// </summary>
+        /// <value>Id of the Paddle transaction that paid the license, when it was bought through the Paddle integration. &#x60;null&#x60; otherwise.</value>
+        /*
+        <example>txn_01h04vsc0qhwtsbsxh3422wjs4</example>
+        */
+        [DataMember(Name = "paddleTransactionId", IsRequired = true, EmitDefaultValue = true)]
+        public string PaddleTransactionId { get; set; }
 
         /// <summary>
         /// Maximum number of active machines the license can be used on. &#x60;null&#x60; when there&#39;s no limit. Can be lower than &#x60;activeMachineCount&#x60; after it was lowered: machines aren&#39;t deactivated to match it.
@@ -389,6 +457,16 @@ namespace LicenseManager.Model
         public string StripeRefundId { get; set; }
 
         /// <summary>
+        /// Id of the Paddle refund adjustment of the license&#39;s transaction once it was canceled, through the Paddle integration. &#x60;null&#x60; otherwise.
+        /// </summary>
+        /// <value>Id of the Paddle refund adjustment of the license&#39;s transaction once it was canceled, through the Paddle integration. &#x60;null&#x60; otherwise.</value>
+        /*
+        <example>adj_01h04vsc0qhwtsbsxh3422wjs4</example>
+        */
+        [DataMember(Name = "paddleAdjustmentId", IsRequired = true, EmitDefaultValue = true)]
+        public string PaddleAdjustmentId { get; set; }
+
+        /// <summary>
         /// Last time the license&#39;s settings were edited, not when its key was validated.
         /// </summary>
         /// <value>Last time the license&#39;s settings were edited, not when its key was validated.</value>
@@ -422,6 +500,7 @@ namespace LicenseManager.Model
             sb.Append("  ExpiresAt: ").Append(ExpiresAt).Append("\n");
             sb.Append("  Meta: ").Append(Meta).Append("\n");
             sb.Append("  StripePaymentIntentId: ").Append(StripePaymentIntentId).Append("\n");
+            sb.Append("  PaddleTransactionId: ").Append(PaddleTransactionId).Append("\n");
             sb.Append("  MaxMachines: ").Append(MaxMachines).Append("\n");
             sb.Append("  MaxOfflineDurationSeconds: ").Append(MaxOfflineDurationSeconds).Append("\n");
             sb.Append("  ActiveMachineCount: ").Append(ActiveMachineCount).Append("\n");
@@ -435,6 +514,8 @@ namespace LicenseManager.Model
             sb.Append("  Subscription: ").Append(Subscription).Append("\n");
             sb.Append("  CancellationComment: ").Append(CancellationComment).Append("\n");
             sb.Append("  StripeRefundId: ").Append(StripeRefundId).Append("\n");
+            sb.Append("  PaddleAdjustmentId: ").Append(PaddleAdjustmentId).Append("\n");
+            sb.Append("  PaddleRefundStatus: ").Append(PaddleRefundStatus).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");

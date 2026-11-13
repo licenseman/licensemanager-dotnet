@@ -78,6 +78,19 @@ namespace LicenseManager.Test.Api
         }
 
         /// <summary>
+        /// Test ConnectPaddle
+        /// </summary>
+        [Fact]
+        public void ConnectPaddleTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string productId = null;
+            //ConnectPaddle connectPaddle = null;
+            //var response = instance.ConnectPaddle(productId, connectPaddle);
+            //Assert.IsType<PaddleIntegration>(response);
+        }
+
+        /// <summary>
         /// Test ConnectStripe
         /// </summary>
         [Fact]
@@ -88,6 +101,19 @@ namespace LicenseManager.Test.Api
             //ConnectStripe connectStripe = null;
             //var response = instance.ConnectStripe(productId, connectStripe);
             //Assert.IsType<StripeIntegration>(response);
+        }
+
+        /// <summary>
+        /// Test CreatePaddleMapping
+        /// </summary>
+        [Fact]
+        public void CreatePaddleMappingTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string productId = null;
+            //CreatePaddleMapping createPaddleMapping = null;
+            //var response = instance.CreatePaddleMapping(productId, createPaddleMapping);
+            //Assert.IsType<IntegrationMapping>(response);
         }
 
         /// <summary>
@@ -137,6 +163,18 @@ namespace LicenseManager.Test.Api
         }
 
         /// <summary>
+        /// Test GetPaddleIntegration
+        /// </summary>
+        [Fact]
+        public void GetPaddleIntegrationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string productId = null;
+            //var response = instance.GetPaddleIntegration(productId);
+            //Assert.IsType<PaddleIntegration>(response);
+        }
+
+        /// <summary>
         /// Test GetSlackIntegration
         /// </summary>
         [Fact]
@@ -158,6 +196,18 @@ namespace LicenseManager.Test.Api
             //string productId = null;
             //var response = instance.GetStripeIntegration(productId);
             //Assert.IsType<StripeIntegration>(response);
+        }
+
+        /// <summary>
+        /// Test ListPaddlePrices
+        /// </summary>
+        [Fact]
+        public void ListPaddlePricesTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string id = null;
+            //var response = instance.ListPaddlePrices(id);
+            //Assert.IsType<ListPaddlePrices200Response>(response);
         }
 
         /// <summary>

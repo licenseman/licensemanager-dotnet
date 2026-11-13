@@ -45,10 +45,16 @@ namespace LicenseManager.Model
             Stripe = 1,
 
             /// <summary>
+            /// Enum Paddle for value: paddle
+            /// </summary>
+            [EnumMember(Value = "paddle")]
+            Paddle = 2,
+
+            /// <summary>
             /// Enum UnknownDefaultOpenApi for value: unknown_default_open_api
             /// </summary>
             [EnumMember(Value = "unknown_default_open_api")]
-            UnknownDefaultOpenApi = 2
+            UnknownDefaultOpenApi = 3
         }
 
 
@@ -77,18 +83,18 @@ namespace LicenseManager.Model
         /// <param name="id">id (required).</param>
         /// <param name="provider">provider (required).</param>
         /// <param name="livemode">Whether it&#39;s connected in live mode, for the live products, or in test mode, for the test products. (required).</param>
-        /// <param name="accountName">Name of the Stripe account, &#x60;null&#x60; when the API key can&#39;t read it. (required).</param>
+        /// <param name="accountName">Name of the Stripe account, &#x60;null&#x60; when the API key can&#39;t read it, and for Paddle, whose API doesn&#39;t give it. (required).</param>
         /// <param name="apiKeyHint">Start and end of the API key, to recognize it. (required).</param>
-        /// <param name="webhookUrl">URL of the webhook endpoint created on the Stripe account. (required).</param>
+        /// <param name="webhookUrl">URL of the webhook endpoint created on the Stripe account, or of the notification destination created on the Paddle account. (required).</param>
         /// <param name="status">status (required).</param>
         /// <param name="statusReason">Why the integration isn&#39;t &#x60;active&#x60;, &#x60;null&#x60; when it is. (required).</param>
         /// <param name="lastCheckedAt">Last time its health was checked, done every day. (required).</param>
         /// <param name="lastEventAt">Last time it received an event from the provider. (required).</param>
-        /// <param name="autoRefund">Whether canceling a license bought through Stripe refunds its payment. On by default, always off when &#x60;canRefund&#x60; is false. (required).</param>
-        /// <param name="canRefund">Whether the API key has the optional Refunds: Write permission, checked when connecting and every day. Without it, canceled licenses aren&#39;t refunded: refund their payments from Stripe. (required).</param>
-        /// <param name="canManageSubscriptions">Whether the API key has the optional Subscriptions: Write permission, checked when connecting and every day. Without it, subscription licenses can&#39;t be canceled from the app: cancel their subscriptions from Stripe. (required).</param>
-        /// <param name="canBillingPortal">Whether the API key has the optional Customer portal: Write permission, checked when connecting and every day. Without it, the license portal doesn&#39;t link to the Stripe customer portal. (required).</param>
-        /// <param name="subscriptionGraceDays">Days a subscription license stays valid after its period ends while its renewal is unpaid, as Stripe retries the payment. 7 by default. (required).</param>
+        /// <param name="autoRefund">Whether canceling a license bought through the integration refunds its payment. On by default, always off when &#x60;canRefund&#x60; is false. (required).</param>
+        /// <param name="canRefund">Whether the API key has the optional refund permission (Stripe: Refunds: Write, Paddle: Adjustments: Write), checked when connecting and every day. Without it, canceled licenses aren&#39;t refunded: refund their payments from the provider. (required).</param>
+        /// <param name="canManageSubscriptions">Whether the API key has the optional Subscriptions: Write permission, checked when connecting and every day. Without it, subscription licenses can&#39;t be canceled from the app: cancel their subscriptions from the provider. (required).</param>
+        /// <param name="canBillingPortal">Whether the API key has the optional customer portal permission (Stripe: Customer portal: Write, Paddle: Customer portal sessions: Write), checked when connecting and every day. Without it, the license portal doesn&#39;t link to the provider&#39;s customer portal. (required).</param>
+        /// <param name="subscriptionGraceDays">Days a subscription license stays valid after its period ends while its renewal is unpaid, as the provider retries the payment. 7 by default. (required).</param>
         /// <param name="createdAt">createdAt (required).</param>
         public Integration(string id = default, ProviderEnum provider = default, bool livemode = default, string accountName = default, string apiKeyHint = default, string webhookUrl = default, IntegrationStatus status = default, string statusReason = default, DateTime? lastCheckedAt = default, DateTime? lastEventAt = default, bool autoRefund = default, bool canRefund = default, bool canManageSubscriptions = default, bool canBillingPortal = default, int subscriptionGraceDays = default, DateTime createdAt = default)
         {
@@ -163,9 +169,9 @@ namespace LicenseManager.Model
         public bool Livemode { get; set; }
 
         /// <summary>
-        /// Name of the Stripe account, &#x60;null&#x60; when the API key can&#39;t read it.
+        /// Name of the Stripe account, &#x60;null&#x60; when the API key can&#39;t read it, and for Paddle, whose API doesn&#39;t give it.
         /// </summary>
-        /// <value>Name of the Stripe account, &#x60;null&#x60; when the API key can&#39;t read it.</value>
+        /// <value>Name of the Stripe account, &#x60;null&#x60; when the API key can&#39;t read it, and for Paddle, whose API doesn&#39;t give it.</value>
         /*
         <example>Acme Inc.</example>
         */
@@ -183,9 +189,9 @@ namespace LicenseManager.Model
         public string ApiKeyHint { get; set; }
 
         /// <summary>
-        /// URL of the webhook endpoint created on the Stripe account.
+        /// URL of the webhook endpoint created on the Stripe account, or of the notification destination created on the Paddle account.
         /// </summary>
-        /// <value>URL of the webhook endpoint created on the Stripe account.</value>
+        /// <value>URL of the webhook endpoint created on the Stripe account, or of the notification destination created on the Paddle account.</value>
         /*
         <example>https://api.licensemanager.dev/v1/webhooks/stripe/i8Fz4QnRt</example>
         */
@@ -217,9 +223,9 @@ namespace LicenseManager.Model
         public DateTime? LastEventAt { get; set; }
 
         /// <summary>
-        /// Whether canceling a license bought through Stripe refunds its payment. On by default, always off when &#x60;canRefund&#x60; is false.
+        /// Whether canceling a license bought through the integration refunds its payment. On by default, always off when &#x60;canRefund&#x60; is false.
         /// </summary>
-        /// <value>Whether canceling a license bought through Stripe refunds its payment. On by default, always off when &#x60;canRefund&#x60; is false.</value>
+        /// <value>Whether canceling a license bought through the integration refunds its payment. On by default, always off when &#x60;canRefund&#x60; is false.</value>
         /*
         <example>true</example>
         */
@@ -227,9 +233,9 @@ namespace LicenseManager.Model
         public bool AutoRefund { get; set; }
 
         /// <summary>
-        /// Whether the API key has the optional Refunds: Write permission, checked when connecting and every day. Without it, canceled licenses aren&#39;t refunded: refund their payments from Stripe.
+        /// Whether the API key has the optional refund permission (Stripe: Refunds: Write, Paddle: Adjustments: Write), checked when connecting and every day. Without it, canceled licenses aren&#39;t refunded: refund their payments from the provider.
         /// </summary>
-        /// <value>Whether the API key has the optional Refunds: Write permission, checked when connecting and every day. Without it, canceled licenses aren&#39;t refunded: refund their payments from Stripe.</value>
+        /// <value>Whether the API key has the optional refund permission (Stripe: Refunds: Write, Paddle: Adjustments: Write), checked when connecting and every day. Without it, canceled licenses aren&#39;t refunded: refund their payments from the provider.</value>
         /*
         <example>true</example>
         */
@@ -237,9 +243,9 @@ namespace LicenseManager.Model
         public bool CanRefund { get; set; }
 
         /// <summary>
-        /// Whether the API key has the optional Subscriptions: Write permission, checked when connecting and every day. Without it, subscription licenses can&#39;t be canceled from the app: cancel their subscriptions from Stripe.
+        /// Whether the API key has the optional Subscriptions: Write permission, checked when connecting and every day. Without it, subscription licenses can&#39;t be canceled from the app: cancel their subscriptions from the provider.
         /// </summary>
-        /// <value>Whether the API key has the optional Subscriptions: Write permission, checked when connecting and every day. Without it, subscription licenses can&#39;t be canceled from the app: cancel their subscriptions from Stripe.</value>
+        /// <value>Whether the API key has the optional Subscriptions: Write permission, checked when connecting and every day. Without it, subscription licenses can&#39;t be canceled from the app: cancel their subscriptions from the provider.</value>
         /*
         <example>true</example>
         */
@@ -247,9 +253,9 @@ namespace LicenseManager.Model
         public bool CanManageSubscriptions { get; set; }
 
         /// <summary>
-        /// Whether the API key has the optional Customer portal: Write permission, checked when connecting and every day. Without it, the license portal doesn&#39;t link to the Stripe customer portal.
+        /// Whether the API key has the optional customer portal permission (Stripe: Customer portal: Write, Paddle: Customer portal sessions: Write), checked when connecting and every day. Without it, the license portal doesn&#39;t link to the provider&#39;s customer portal.
         /// </summary>
-        /// <value>Whether the API key has the optional Customer portal: Write permission, checked when connecting and every day. Without it, the license portal doesn&#39;t link to the Stripe customer portal.</value>
+        /// <value>Whether the API key has the optional customer portal permission (Stripe: Customer portal: Write, Paddle: Customer portal sessions: Write), checked when connecting and every day. Without it, the license portal doesn&#39;t link to the provider&#39;s customer portal.</value>
         /*
         <example>true</example>
         */
@@ -257,9 +263,9 @@ namespace LicenseManager.Model
         public bool CanBillingPortal { get; set; }
 
         /// <summary>
-        /// Days a subscription license stays valid after its period ends while its renewal is unpaid, as Stripe retries the payment. 7 by default.
+        /// Days a subscription license stays valid after its period ends while its renewal is unpaid, as the provider retries the payment. 7 by default.
         /// </summary>
-        /// <value>Days a subscription license stays valid after its period ends while its renewal is unpaid, as Stripe retries the payment. 7 by default.</value>
+        /// <value>Days a subscription license stays valid after its period ends while its renewal is unpaid, as the provider retries the payment. 7 by default.</value>
         /*
         <example>7</example>
         */

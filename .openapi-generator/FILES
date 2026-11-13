@@ -9,11 +9,13 @@ docs/CancelLicense.md
 docs/CancellationReason.md
 docs/CancellationStats.md
 docs/CancellationStatsByReasonInner.md
+docs/ConnectPaddle.md
 docs/ConnectStripe.md
 docs/CreateBillingPortalSession.md
 docs/CreateCustomer.md
 docs/CreateIntegrationMapping.md
 docs/CreateLicense.md
+docs/CreatePaddleMapping.md
 docs/CreatePolicy.md
 docs/CreatePortalLink.md
 docs/CreateProduct.md
@@ -56,6 +58,7 @@ docs/LicenseStatus.md
 docs/LicenseSubscription.md
 docs/LicenseToken.md
 docs/LicensesApi.md
+docs/ListPaddlePrices200Response.md
 docs/ListPolicyEventsTypeParameter.md
 docs/ListStripePrices200Response.md
 docs/LockMaxVersion.md
@@ -69,6 +72,9 @@ docs/MachinesApi.md
 docs/Mrr.md
 docs/MrrByIntervalInner.md
 docs/MrrByPolicyInner.md
+docs/PaddleIntegration.md
+docs/PaddlePermission.md
+docs/PaddlePrice.md
 docs/Pagination.md
 docs/PoliciesApi.md
 docs/Policy.md
@@ -142,11 +148,13 @@ src/LicenseManager.Test/Model/CancelLicenseTests.cs
 src/LicenseManager.Test/Model/CancellationReasonTests.cs
 src/LicenseManager.Test/Model/CancellationStatsByReasonInnerTests.cs
 src/LicenseManager.Test/Model/CancellationStatsTests.cs
+src/LicenseManager.Test/Model/ConnectPaddleTests.cs
 src/LicenseManager.Test/Model/ConnectStripeTests.cs
 src/LicenseManager.Test/Model/CreateBillingPortalSessionTests.cs
 src/LicenseManager.Test/Model/CreateCustomerTests.cs
 src/LicenseManager.Test/Model/CreateIntegrationMappingTests.cs
 src/LicenseManager.Test/Model/CreateLicenseTests.cs
+src/LicenseManager.Test/Model/CreatePaddleMappingTests.cs
 src/LicenseManager.Test/Model/CreatePolicyTests.cs
 src/LicenseManager.Test/Model/CreatePortalLinkTests.cs
 src/LicenseManager.Test/Model/CreateProductTests.cs
@@ -185,6 +193,7 @@ src/LicenseManager.Test/Model/LicenseStatusTests.cs
 src/LicenseManager.Test/Model/LicenseSubscriptionTests.cs
 src/LicenseManager.Test/Model/LicenseTests.cs
 src/LicenseManager.Test/Model/LicenseTokenTests.cs
+src/LicenseManager.Test/Model/ListPaddlePrices200ResponseTests.cs
 src/LicenseManager.Test/Model/ListPolicyEventsTypeParameterTests.cs
 src/LicenseManager.Test/Model/ListStripePrices200ResponseTests.cs
 src/LicenseManager.Test/Model/LockMaxVersionMajorAfterOneOf1Tests.cs
@@ -197,6 +206,9 @@ src/LicenseManager.Test/Model/MachineTests.cs
 src/LicenseManager.Test/Model/MrrByIntervalInnerTests.cs
 src/LicenseManager.Test/Model/MrrByPolicyInnerTests.cs
 src/LicenseManager.Test/Model/MrrTests.cs
+src/LicenseManager.Test/Model/PaddleIntegrationTests.cs
+src/LicenseManager.Test/Model/PaddlePermissionTests.cs
+src/LicenseManager.Test/Model/PaddlePriceTests.cs
 src/LicenseManager.Test/Model/PaginationTests.cs
 src/LicenseManager.Test/Model/PolicyDurationTests.cs
 src/LicenseManager.Test/Model/PolicyListTests.cs
@@ -282,11 +294,13 @@ src/LicenseManager/Model/CancelLicense.cs
 src/LicenseManager/Model/CancellationReason.cs
 src/LicenseManager/Model/CancellationStats.cs
 src/LicenseManager/Model/CancellationStatsByReasonInner.cs
+src/LicenseManager/Model/ConnectPaddle.cs
 src/LicenseManager/Model/ConnectStripe.cs
 src/LicenseManager/Model/CreateBillingPortalSession.cs
 src/LicenseManager/Model/CreateCustomer.cs
 src/LicenseManager/Model/CreateIntegrationMapping.cs
 src/LicenseManager/Model/CreateLicense.cs
+src/LicenseManager/Model/CreatePaddleMapping.cs
 src/LicenseManager/Model/CreatePolicy.cs
 src/LicenseManager/Model/CreatePortalLink.cs
 src/LicenseManager/Model/CreateProduct.cs
@@ -325,6 +339,7 @@ src/LicenseManager/Model/LicenseStatsActivationsByVersionInner.cs
 src/LicenseManager/Model/LicenseStatus.cs
 src/LicenseManager/Model/LicenseSubscription.cs
 src/LicenseManager/Model/LicenseToken.cs
+src/LicenseManager/Model/ListPaddlePrices200Response.cs
 src/LicenseManager/Model/ListPolicyEventsTypeParameter.cs
 src/LicenseManager/Model/ListStripePrices200Response.cs
 src/LicenseManager/Model/LockMaxVersion.cs
@@ -337,6 +352,9 @@ src/LicenseManager/Model/MachineList.cs
 src/LicenseManager/Model/Mrr.cs
 src/LicenseManager/Model/MrrByIntervalInner.cs
 src/LicenseManager/Model/MrrByPolicyInner.cs
+src/LicenseManager/Model/PaddleIntegration.cs
+src/LicenseManager/Model/PaddlePermission.cs
+src/LicenseManager/Model/PaddlePrice.cs
 src/LicenseManager/Model/Pagination.cs
 src/LicenseManager/Model/Policy.cs
 src/LicenseManager/Model/PolicyDuration.cs

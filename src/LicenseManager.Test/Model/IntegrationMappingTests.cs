@@ -73,6 +73,15 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Provider'
+        /// </summary>
+        [Fact]
+        public void ProviderTest()
+        {
+            // TODO unit test for the property 'Provider'
+        }
+
+        /// <summary>
         /// Test the property 'ProductId'
         /// </summary>
         [Fact]
@@ -88,6 +97,24 @@ namespace LicenseManager.Test.Model
         public void PolicyIdTest()
         {
             // TODO unit test for the property 'PolicyId'
+        }
+
+        /// <summary>
+        /// Test the property 'ExternalProductId'
+        /// </summary>
+        [Fact]
+        public void ExternalProductIdTest()
+        {
+            // TODO unit test for the property 'ExternalProductId'
+        }
+
+        /// <summary>
+        /// Test the property 'ExternalPriceId'
+        /// </summary>
+        [Fact]
+        public void ExternalPriceIdTest()
+        {
+            // TODO unit test for the property 'ExternalPriceId'
         }
 
         /// <summary>

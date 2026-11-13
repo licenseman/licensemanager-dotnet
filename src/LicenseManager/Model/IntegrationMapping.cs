@@ -33,6 +33,37 @@ namespace LicenseManager.Model
     public partial class IntegrationMapping : IValidatableObject
     {
         /// <summary>
+        /// Defines Provider
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ProviderEnum
+        {
+            /// <summary>
+            /// Enum Stripe for value: stripe
+            /// </summary>
+            [EnumMember(Value = "stripe")]
+            Stripe = 1,
+
+            /// <summary>
+            /// Enum Paddle for value: paddle
+            /// </summary>
+            [EnumMember(Value = "paddle")]
+            Paddle = 2,
+
+            /// <summary>
+            /// Enum UnknownDefaultOpenApi for value: unknown_default_open_api
+            /// </summary>
+            [EnumMember(Value = "unknown_default_open_api")]
+            UnknownDefaultOpenApi = 3
+        }
+
+
+        /// <summary>
+        /// Gets or Sets Provider
+        /// </summary>
+        [DataMember(Name = "provider", IsRequired = true, EmitDefaultValue = true)]
+        public ProviderEnum Provider { get; set; }
+        /// <summary>
         /// &#x60;error&#x60; when the price can no longer be paid, explained by &#x60;statusReason&#x60;.
         /// </summary>
         /// <value>&#x60;error&#x60; when the price can no longer be paid, explained by &#x60;statusReason&#x60;.</value>
@@ -78,17 +109,20 @@ namespace LicenseManager.Model
         /// </summary>
         /// <param name="id">id (required).</param>
         /// <param name="integrationId">integrationId (required).</param>
+        /// <param name="provider">provider (required).</param>
         /// <param name="productId">productId (required).</param>
         /// <param name="policyId">policyId (required).</param>
-        /// <param name="stripeProductId">stripeProductId (required).</param>
-        /// <param name="stripePriceId">stripePriceId (required).</param>
-        /// <param name="productName">Name of the Stripe product when it was mapped. (required).</param>
+        /// <param name="externalProductId">Id of the product in the provider: &#x60;prod_…&#x60; in Stripe, &#x60;pro_…&#x60; in Paddle. (required).</param>
+        /// <param name="externalPriceId">Id of the price in the provider: &#x60;price_…&#x60; in Stripe, &#x60;pri_…&#x60; in Paddle. (required).</param>
+        /// <param name="stripeProductId">Deprecated: use &#x60;externalProductId&#x60;, which it equals. (required).</param>
+        /// <param name="stripePriceId">Deprecated: use &#x60;externalPriceId&#x60;, which it equals. (required).</param>
+        /// <param name="productName">Name of the provider&#39;s product when it was mapped. (required).</param>
         /// <param name="price">price (required).</param>
         /// <param name="recurring">recurring (required).</param>
         /// <param name="status">&#x60;error&#x60; when the price can no longer be paid, explained by &#x60;statusReason&#x60;. (required).</param>
         /// <param name="statusReason">statusReason (required).</param>
         /// <param name="createdAt">createdAt (required).</param>
-        public IntegrationMapping(string id = default, string integrationId = default, string productId = default, string policyId = default, string stripeProductId = default, string stripePriceId = default, string productName = default, Price price = default, IntegrationMappingRecurring recurring = default, StatusEnum status = default, string statusReason = default, DateTime createdAt = default)
+        public IntegrationMapping(string id = default, string integrationId = default, ProviderEnum provider = default, string productId = default, string policyId = default, string externalProductId = default, string externalPriceId = default, string stripeProductId = default, string stripePriceId = default, string productName = default, Price price = default, IntegrationMappingRecurring recurring = default, StatusEnum status = default, string statusReason = default, DateTime createdAt = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -102,6 +136,7 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("integrationId is a required property for IntegrationMapping and cannot be null");
             }
             this.IntegrationId = integrationId;
+            this.Provider = provider;
             // to ensure "productId" is required (not null)
             if (productId == null)
             {
@@ -114,6 +149,18 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("policyId is a required property for IntegrationMapping and cannot be null");
             }
             this.PolicyId = policyId;
+            // to ensure "externalProductId" is required (not null)
+            if (externalProductId == null)
+            {
+                throw new ArgumentNullException("externalProductId is a required property for IntegrationMapping and cannot be null");
+            }
+            this.ExternalProductId = externalProductId;
+            // to ensure "externalPriceId" is required (not null)
+            if (externalPriceId == null)
+            {
+                throw new ArgumentNullException("externalPriceId is a required property for IntegrationMapping and cannot be null");
+            }
+            this.ExternalPriceId = externalPriceId;
             // to ensure "stripeProductId" is required (not null)
             if (stripeProductId == null)
             {
@@ -192,27 +239,51 @@ namespace LicenseManager.Model
         public string PolicyId { get; set; }
 
         /// <summary>
-        /// Gets or Sets StripeProductId
+        /// Id of the product in the provider: &#x60;prod_…&#x60; in Stripe, &#x60;pro_…&#x60; in Paddle.
         /// </summary>
+        /// <value>Id of the product in the provider: &#x60;prod_…&#x60; in Stripe, &#x60;pro_…&#x60; in Paddle.</value>
+        /*
+        <example>prod_NWjs8kKbJWmuuc</example>
+        */
+        [DataMember(Name = "externalProductId", IsRequired = true, EmitDefaultValue = true)]
+        public string ExternalProductId { get; set; }
+
+        /// <summary>
+        /// Id of the price in the provider: &#x60;price_…&#x60; in Stripe, &#x60;pri_…&#x60; in Paddle.
+        /// </summary>
+        /// <value>Id of the price in the provider: &#x60;price_…&#x60; in Stripe, &#x60;pri_…&#x60; in Paddle.</value>
+        /*
+        <example>price_1MoBy5LkdIwHu7ix</example>
+        */
+        [DataMember(Name = "externalPriceId", IsRequired = true, EmitDefaultValue = true)]
+        public string ExternalPriceId { get; set; }
+
+        /// <summary>
+        /// Deprecated: use &#x60;externalProductId&#x60;, which it equals.
+        /// </summary>
+        /// <value>Deprecated: use &#x60;externalProductId&#x60;, which it equals.</value>
         /*
         <example>prod_NWjs8kKbJWmuuc</example>
         */
         [DataMember(Name = "stripeProductId", IsRequired = true, EmitDefaultValue = true)]
+        [Obsolete]
         public string StripeProductId { get; set; }
 
         /// <summary>
-        /// Gets or Sets StripePriceId
+        /// Deprecated: use &#x60;externalPriceId&#x60;, which it equals.
         /// </summary>
+        /// <value>Deprecated: use &#x60;externalPriceId&#x60;, which it equals.</value>
         /*
         <example>price_1MoBy5LkdIwHu7ix</example>
         */
         [DataMember(Name = "stripePriceId", IsRequired = true, EmitDefaultValue = true)]
+        [Obsolete]
         public string StripePriceId { get; set; }
 
         /// <summary>
-        /// Name of the Stripe product when it was mapped.
+        /// Name of the provider&#39;s product when it was mapped.
         /// </summary>
-        /// <value>Name of the Stripe product when it was mapped.</value>
+        /// <value>Name of the provider&#39;s product when it was mapped.</value>
         /*
         <example>Acme Pro</example>
         */
@@ -262,8 +333,11 @@ namespace LicenseManager.Model
             sb.Append("class IntegrationMapping {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  IntegrationId: ").Append(IntegrationId).Append("\n");
+            sb.Append("  Provider: ").Append(Provider).Append("\n");
             sb.Append("  ProductId: ").Append(ProductId).Append("\n");
             sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
+            sb.Append("  ExternalProductId: ").Append(ExternalProductId).Append("\n");
+            sb.Append("  ExternalPriceId: ").Append(ExternalPriceId).Append("\n");
             sb.Append("  StripeProductId: ").Append(StripeProductId).Append("\n");
             sb.Append("  StripePriceId: ").Append(StripePriceId).Append("\n");
             sb.Append("  ProductName: ").Append(ProductName).Append("\n");

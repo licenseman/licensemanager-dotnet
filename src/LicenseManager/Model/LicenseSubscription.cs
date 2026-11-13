@@ -27,11 +27,44 @@ using OpenAPIDateConverter = LicenseManager.Client.OpenAPIDateConverter;
 namespace LicenseManager.Model
 {
     /// <summary>
-    /// The Stripe subscription keeping the license valid, &#x60;null&#x60; when it isn&#39;t a subscription license. The license expires when it stops being paid, includes every update, and can&#39;t be canceled during a money back guarantee.
+    /// The Stripe or Paddle subscription keeping the license valid, &#x60;null&#x60; when it isn&#39;t a subscription license. The license expires when it stops being paid, includes every update, and can&#39;t be canceled during a money back guarantee.
     /// </summary>
     [DataContract(Name = "LicenseSubscription")]
     public partial class LicenseSubscription : IValidatableObject
     {
+        /// <summary>
+        /// Provider of the subscription.
+        /// </summary>
+        /// <value>Provider of the subscription.</value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ProviderEnum
+        {
+            /// <summary>
+            /// Enum Stripe for value: stripe
+            /// </summary>
+            [EnumMember(Value = "stripe")]
+            Stripe = 1,
+
+            /// <summary>
+            /// Enum Paddle for value: paddle
+            /// </summary>
+            [EnumMember(Value = "paddle")]
+            Paddle = 2,
+
+            /// <summary>
+            /// Enum UnknownDefaultOpenApi for value: unknown_default_open_api
+            /// </summary>
+            [EnumMember(Value = "unknown_default_open_api")]
+            UnknownDefaultOpenApi = 3
+        }
+
+
+        /// <summary>
+        /// Provider of the subscription.
+        /// </summary>
+        /// <value>Provider of the subscription.</value>
+        [DataMember(Name = "provider", IsRequired = true, EmitDefaultValue = true)]
+        public ProviderEnum Provider { get; set; }
         /// <summary>
         /// Defines Interval
         /// </summary>
@@ -86,8 +119,10 @@ namespace LicenseManager.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="LicenseSubscription" /> class.
         /// </summary>
-        /// <param name="stripeSubscriptionId">stripeSubscriptionId (required).</param>
-        /// <param name="status">Status of the subscription in Stripe: &#x60;active&#x60;, &#x60;trialing&#x60;, &#x60;past_due&#x60; while a failed payment is retried, &#x60;canceled&#x60;, &#x60;unpaid&#x60;, &#x60;paused&#x60;, &#x60;incomplete&#x60; or &#x60;incomplete_expired&#x60;. (required).</param>
+        /// <param name="provider">Provider of the subscription. (required).</param>
+        /// <param name="externalId">Id of the subscription in the provider: &#x60;sub_…&#x60; in Stripe and in Paddle. (required).</param>
+        /// <param name="stripeSubscriptionId">Deprecated: use &#x60;externalId&#x60;, which it equals. (required).</param>
+        /// <param name="status">Status of the subscription in the provider. Stripe: &#x60;active&#x60;, &#x60;trialing&#x60;, &#x60;past_due&#x60; while a failed payment is retried, &#x60;canceled&#x60;, &#x60;unpaid&#x60;, &#x60;paused&#x60;, &#x60;incomplete&#x60; or &#x60;incomplete_expired&#x60;. Paddle: &#x60;active&#x60;, &#x60;trialing&#x60;, &#x60;past_due&#x60;, &#x60;paused&#x60; or &#x60;canceled&#x60;. (required).</param>
         /// <param name="interval">interval (required).</param>
         /// <param name="intervalCount">Number of intervals between payments. (required).</param>
         /// <param name="quantity">Units subscribed, multiplying the policy&#39;s machines. (required).</param>
@@ -95,8 +130,15 @@ namespace LicenseManager.Model
         /// <param name="currentPeriodEnd">End of the paid period, when the subscription renews or ends. (required).</param>
         /// <param name="cancelAtPeriodEnd">Whether the subscription ends at the end of the period. (required).</param>
         /// <param name="endedAt">endedAt (required).</param>
-        public LicenseSubscription(string stripeSubscriptionId = default, string status = default, IntervalEnum interval = default, int intervalCount = default, int quantity = default, Price price = default, DateTime currentPeriodEnd = default, bool cancelAtPeriodEnd = default, DateTime? endedAt = default)
+        public LicenseSubscription(ProviderEnum provider = default, string externalId = default, string stripeSubscriptionId = default, string status = default, IntervalEnum interval = default, int intervalCount = default, int quantity = default, Price price = default, DateTime currentPeriodEnd = default, bool cancelAtPeriodEnd = default, DateTime? endedAt = default)
         {
+            this.Provider = provider;
+            // to ensure "externalId" is required (not null)
+            if (externalId == null)
+            {
+                throw new ArgumentNullException("externalId is a required property for LicenseSubscription and cannot be null");
+            }
+            this.ExternalId = externalId;
             // to ensure "stripeSubscriptionId" is required (not null)
             if (stripeSubscriptionId == null)
             {
@@ -130,18 +172,30 @@ namespace LicenseManager.Model
         }
 
         /// <summary>
-        /// Gets or Sets StripeSubscriptionId
+        /// Id of the subscription in the provider: &#x60;sub_…&#x60; in Stripe and in Paddle.
         /// </summary>
+        /// <value>Id of the subscription in the provider: &#x60;sub_…&#x60; in Stripe and in Paddle.</value>
+        /*
+        <example>sub_1MowQVLkdIwHu7ix</example>
+        */
+        [DataMember(Name = "externalId", IsRequired = true, EmitDefaultValue = true)]
+        public string ExternalId { get; set; }
+
+        /// <summary>
+        /// Deprecated: use &#x60;externalId&#x60;, which it equals.
+        /// </summary>
+        /// <value>Deprecated: use &#x60;externalId&#x60;, which it equals.</value>
         /*
         <example>sub_1MowQVLkdIwHu7ix</example>
         */
         [DataMember(Name = "stripeSubscriptionId", IsRequired = true, EmitDefaultValue = true)]
+        [Obsolete]
         public string StripeSubscriptionId { get; set; }
 
         /// <summary>
-        /// Status of the subscription in Stripe: &#x60;active&#x60;, &#x60;trialing&#x60;, &#x60;past_due&#x60; while a failed payment is retried, &#x60;canceled&#x60;, &#x60;unpaid&#x60;, &#x60;paused&#x60;, &#x60;incomplete&#x60; or &#x60;incomplete_expired&#x60;.
+        /// Status of the subscription in the provider. Stripe: &#x60;active&#x60;, &#x60;trialing&#x60;, &#x60;past_due&#x60; while a failed payment is retried, &#x60;canceled&#x60;, &#x60;unpaid&#x60;, &#x60;paused&#x60;, &#x60;incomplete&#x60; or &#x60;incomplete_expired&#x60;. Paddle: &#x60;active&#x60;, &#x60;trialing&#x60;, &#x60;past_due&#x60;, &#x60;paused&#x60; or &#x60;canceled&#x60;.
         /// </summary>
-        /// <value>Status of the subscription in Stripe: &#x60;active&#x60;, &#x60;trialing&#x60;, &#x60;past_due&#x60; while a failed payment is retried, &#x60;canceled&#x60;, &#x60;unpaid&#x60;, &#x60;paused&#x60;, &#x60;incomplete&#x60; or &#x60;incomplete_expired&#x60;.</value>
+        /// <value>Status of the subscription in the provider. Stripe: &#x60;active&#x60;, &#x60;trialing&#x60;, &#x60;past_due&#x60; while a failed payment is retried, &#x60;canceled&#x60;, &#x60;unpaid&#x60;, &#x60;paused&#x60;, &#x60;incomplete&#x60; or &#x60;incomplete_expired&#x60;. Paddle: &#x60;active&#x60;, &#x60;trialing&#x60;, &#x60;past_due&#x60;, &#x60;paused&#x60; or &#x60;canceled&#x60;.</value>
         /*
         <example>active</example>
         */
@@ -209,6 +263,8 @@ namespace LicenseManager.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class LicenseSubscription {\n");
+            sb.Append("  Provider: ").Append(Provider).Append("\n");
+            sb.Append("  ExternalId: ").Append(ExternalId).Append("\n");
             sb.Append("  StripeSubscriptionId: ").Append(StripeSubscriptionId).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Interval: ").Append(Interval).Append("\n");

@@ -43,7 +43,7 @@ namespace LicenseManager.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="BillingPortalSession" /> class.
         /// </summary>
-        /// <param name="url">Link to the Stripe customer portal, to open right away: it expires shortly. (required).</param>
+        /// <param name="url">Link to the Stripe or Paddle customer portal, to open right away: it expires shortly. (required).</param>
         public BillingPortalSession(string url = default)
         {
             // to ensure "url" is required (not null)
@@ -56,9 +56,9 @@ namespace LicenseManager.Model
         }
 
         /// <summary>
-        /// Link to the Stripe customer portal, to open right away: it expires shortly.
+        /// Link to the Stripe or Paddle customer portal, to open right away: it expires shortly.
         /// </summary>
-        /// <value>Link to the Stripe customer portal, to open right away: it expires shortly.</value>
+        /// <value>Link to the Stripe or Paddle customer portal, to open right away: it expires shortly.</value>
         /*
         <example>https://billing.stripe.com/p/session/test_YWNjdF8x</example>
         */

@@ -49,8 +49,9 @@ namespace LicenseManager.Model
         /// <param name="name">Display name of the customer. &#x60;null&#x60; when unknown. (required).</param>
         /// <param name="licenseCount">Number of licenses of this customer. (required).</param>
         /// <param name="stripeCustomerId">Id of the Stripe customer, when the customer bought licenses through the Stripe integration as a Stripe customer. &#x60;null&#x60; otherwise, e.g. for a guest checkout. (required).</param>
+        /// <param name="paddleCustomerId">Id of the Paddle customer, when the customer bought licenses through the Paddle integration. &#x60;null&#x60; otherwise. (required).</param>
         /// <param name="createdAt">createdAt (required).</param>
-        public Customer(string id = default, string productId = default, string email = default, string name = default, int licenseCount = default, string stripeCustomerId = default, DateTime createdAt = default)
+        public Customer(string id = default, string productId = default, string email = default, string name = default, int licenseCount = default, string stripeCustomerId = default, string paddleCustomerId = default, DateTime createdAt = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -83,6 +84,12 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("stripeCustomerId is a required property for Customer and cannot be null");
             }
             this.StripeCustomerId = stripeCustomerId;
+            // to ensure "paddleCustomerId" is required (not null)
+            if (paddleCustomerId == null)
+            {
+                throw new ArgumentNullException("paddleCustomerId is a required property for Customer and cannot be null");
+            }
+            this.PaddleCustomerId = paddleCustomerId;
             this.CreatedAt = createdAt;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
@@ -145,6 +152,16 @@ namespace LicenseManager.Model
         public string StripeCustomerId { get; set; }
 
         /// <summary>
+        /// Id of the Paddle customer, when the customer bought licenses through the Paddle integration. &#x60;null&#x60; otherwise.
+        /// </summary>
+        /// <value>Id of the Paddle customer, when the customer bought licenses through the Paddle integration. &#x60;null&#x60; otherwise.</value>
+        /*
+        <example>ctm_01h04vsc0qhwtsbsxh3422wjs4</example>
+        */
+        [DataMember(Name = "paddleCustomerId", IsRequired = true, EmitDefaultValue = true)]
+        public string PaddleCustomerId { get; set; }
+
+        /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
         /*
@@ -173,6 +190,7 @@ namespace LicenseManager.Model
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  LicenseCount: ").Append(LicenseCount).Append("\n");
             sb.Append("  StripeCustomerId: ").Append(StripeCustomerId).Append("\n");
+            sb.Append("  PaddleCustomerId: ").Append(PaddleCustomerId).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");

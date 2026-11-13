@@ -109,6 +109,15 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'PaddleCustomerId'
+        /// </summary>
+        [Fact]
+        public void PaddleCustomerIdTest()
+        {
+            // TODO unit test for the property 'PaddleCustomerId'
+        }
+
+        /// <summary>
         /// Test the property 'CreatedAt'
         /// </summary>
         [Fact]

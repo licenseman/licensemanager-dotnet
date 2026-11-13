@@ -55,6 +55,24 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Provider'
+        /// </summary>
+        [Fact]
+        public void ProviderTest()
+        {
+            // TODO unit test for the property 'Provider'
+        }
+
+        /// <summary>
+        /// Test the property 'ExternalId'
+        /// </summary>
+        [Fact]
+        public void ExternalIdTest()
+        {
+            // TODO unit test for the property 'ExternalId'
+        }
+
+        /// <summary>
         /// Test the property 'StripeSubscriptionId'
         /// </summary>
         [Fact]

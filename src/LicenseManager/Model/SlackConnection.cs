@@ -119,7 +119,7 @@ namespace LicenseManager.Model
         /// <param name="channelId">channelId (required).</param>
         /// <param name="channelName">Name of the channel when it was connected, with its &#x60;#&#x60;. (required).</param>
         /// <param name="configurationUrl">Page of the installation in Slack. (required).</param>
-        /// <param name="events">Notifications the channel gets: &#x60;purchased&#x60; (a license bought through Stripe), &#x60;renewed&#x60; (a subscription renewal paid), &#x60;payment_failed&#x60; (a subscription payment failed) and &#x60;canceled&#x60; (a license canceled, or its subscription ended). (required).</param>
+        /// <param name="events">Notifications the channel gets: &#x60;purchased&#x60; (a license bought through Stripe or Paddle), &#x60;renewed&#x60; (a subscription renewal paid), &#x60;payment_failed&#x60; (a subscription payment failed) and &#x60;canceled&#x60; (a license canceled, or its subscription ended). (required).</param>
         /// <param name="status">&#x60;revoked&#x60; once Slack refuses the messages, like when the app was removed from the workspace or the channel deleted: remove it and add it again. (required).</param>
         /// <param name="statusReason">statusReason (required).</param>
         /// <param name="lastSentAt">lastSentAt (required).</param>
@@ -239,9 +239,9 @@ namespace LicenseManager.Model
         public string ConfigurationUrl { get; set; }
 
         /// <summary>
-        /// Notifications the channel gets: &#x60;purchased&#x60; (a license bought through Stripe), &#x60;renewed&#x60; (a subscription renewal paid), &#x60;payment_failed&#x60; (a subscription payment failed) and &#x60;canceled&#x60; (a license canceled, or its subscription ended).
+        /// Notifications the channel gets: &#x60;purchased&#x60; (a license bought through Stripe or Paddle), &#x60;renewed&#x60; (a subscription renewal paid), &#x60;payment_failed&#x60; (a subscription payment failed) and &#x60;canceled&#x60; (a license canceled, or its subscription ended).
         /// </summary>
-        /// <value>Notifications the channel gets: &#x60;purchased&#x60; (a license bought through Stripe), &#x60;renewed&#x60; (a subscription renewal paid), &#x60;payment_failed&#x60; (a subscription payment failed) and &#x60;canceled&#x60; (a license canceled, or its subscription ended).</value>
+        /// <value>Notifications the channel gets: &#x60;purchased&#x60; (a license bought through Stripe or Paddle), &#x60;renewed&#x60; (a subscription renewal paid), &#x60;payment_failed&#x60; (a subscription payment failed) and &#x60;canceled&#x60; (a license canceled, or its subscription ended).</value>
         [DataMember(Name = "events", IsRequired = true, EmitDefaultValue = true)]
         public List<SlackConnection.EventsEnum> Events { get; set; }
 

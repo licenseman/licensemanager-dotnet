@@ -71,10 +71,16 @@ namespace LicenseManager.Model
             Stripe = 1,
 
             /// <summary>
+            /// Enum Paddle for value: paddle
+            /// </summary>
+            [EnumMember(Value = "paddle")]
+            Paddle = 2,
+
+            /// <summary>
             /// Enum UnknownDefaultOpenApi for value: unknown_default_open_api
             /// </summary>
             [EnumMember(Value = "unknown_default_open_api")]
-            UnknownDefaultOpenApi = 2
+            UnknownDefaultOpenApi = 3
         }
 
 

@@ -1,12 +1,14 @@
 # LicenseManager.Model.LicenseSubscription
-The Stripe subscription keeping the license valid, `null` when it isn't a subscription license. The license expires when it stops being paid, includes every update, and can't be canceled during a money back guarantee.
+The Stripe or Paddle subscription keeping the license valid, `null` when it isn't a subscription license. The license expires when it stops being paid, includes every update, and can't be canceled during a money back guarantee.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**StripeSubscriptionId** | **string** |  | 
-**Status** | **string** | Status of the subscription in Stripe: &#x60;active&#x60;, &#x60;trialing&#x60;, &#x60;past_due&#x60; while a failed payment is retried, &#x60;canceled&#x60;, &#x60;unpaid&#x60;, &#x60;paused&#x60;, &#x60;incomplete&#x60; or &#x60;incomplete_expired&#x60;. | 
+**Provider** | **string** | Provider of the subscription. | 
+**ExternalId** | **string** | Id of the subscription in the provider: &#x60;sub_…&#x60; in Stripe and in Paddle. | 
+**StripeSubscriptionId** | **string** | Deprecated: use &#x60;externalId&#x60;, which it equals. | 
+**Status** | **string** | Status of the subscription in the provider. Stripe: &#x60;active&#x60;, &#x60;trialing&#x60;, &#x60;past_due&#x60; while a failed payment is retried, &#x60;canceled&#x60;, &#x60;unpaid&#x60;, &#x60;paused&#x60;, &#x60;incomplete&#x60; or &#x60;incomplete_expired&#x60;. Paddle: &#x60;active&#x60;, &#x60;trialing&#x60;, &#x60;past_due&#x60;, &#x60;paused&#x60; or &#x60;canceled&#x60;. | 
 **Interval** | **string** |  | 
 **IntervalCount** | **int** | Number of intervals between payments. | 
 **Quantity** | **int** | Units subscribed, multiplying the policy&#39;s machines. | 

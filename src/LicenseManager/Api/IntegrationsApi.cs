@@ -70,6 +70,29 @@ namespace LicenseManager.Api
         /// <returns>ApiResponse of Integration</returns>
         ApiResponse<Integration> CheckIntegrationWithHttpInfo(string id);
         /// <summary>
+        /// Connect Paddle
+        /// </summary>
+        /// <remarks>
+        /// Connects the Paddle Billing account of the API key for the organization&#39;s products of the product&#39;s mode, or replaces the key of the existing connection. Checks the key works and has the required permissions, then creates a notification destination on the account, telling the app about payments. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="connectPaddle"></param>
+        /// <returns>PaddleIntegration</returns>
+        PaddleIntegration ConnectPaddle(string productId, ConnectPaddle connectPaddle);
+
+        /// <summary>
+        /// Connect Paddle
+        /// </summary>
+        /// <remarks>
+        /// Connects the Paddle Billing account of the API key for the organization&#39;s products of the product&#39;s mode, or replaces the key of the existing connection. Checks the key works and has the required permissions, then creates a notification destination on the account, telling the app about payments. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="connectPaddle"></param>
+        /// <returns>ApiResponse of PaddleIntegration</returns>
+        ApiResponse<PaddleIntegration> ConnectPaddleWithHttpInfo(string productId, ConnectPaddle connectPaddle);
+        /// <summary>
         /// Connect Stripe
         /// </summary>
         /// <remarks>
@@ -92,6 +115,29 @@ namespace LicenseManager.Api
         /// <param name="connectStripe"></param>
         /// <returns>ApiResponse of StripeIntegration</returns>
         ApiResponse<StripeIntegration> ConnectStripeWithHttpInfo(string productId, ConnectStripe connectStripe);
+        /// <summary>
+        /// Map a Paddle price to a policy
+        /// </summary>
+        /// <remarks>
+        /// Paying the price then creates licenses of the product with the policy: one per unit bought, or one per subscription for a recurring price. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="createPaddleMapping"></param>
+        /// <returns>IntegrationMapping</returns>
+        IntegrationMapping CreatePaddleMapping(string productId, CreatePaddleMapping createPaddleMapping);
+
+        /// <summary>
+        /// Map a Paddle price to a policy
+        /// </summary>
+        /// <remarks>
+        /// Paying the price then creates licenses of the product with the policy: one per unit bought, or one per subscription for a recurring price. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="createPaddleMapping"></param>
+        /// <returns>ApiResponse of IntegrationMapping</returns>
+        ApiResponse<IntegrationMapping> CreatePaddleMappingWithHttpInfo(string productId, CreatePaddleMapping createPaddleMapping);
         /// <summary>
         /// Map a Stripe price to a policy
         /// </summary>
@@ -179,6 +225,27 @@ namespace LicenseManager.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DisconnectIntegrationWithHttpInfo(string id);
         /// <summary>
+        /// Get the Paddle integration of a product
+        /// </summary>
+        /// <remarks>
+        /// The organization connects one Paddle Billing account for its live products, and one sandbox account for its test products. Its mappings tell which Paddle prices create licenses of the product. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <returns>PaddleIntegration</returns>
+        PaddleIntegration GetPaddleIntegration(string productId);
+
+        /// <summary>
+        /// Get the Paddle integration of a product
+        /// </summary>
+        /// <remarks>
+        /// The organization connects one Paddle Billing account for its live products, and one sandbox account for its test products. Its mappings tell which Paddle prices create licenses of the product. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <returns>ApiResponse of PaddleIntegration</returns>
+        ApiResponse<PaddleIntegration> GetPaddleIntegrationWithHttpInfo(string productId);
+        /// <summary>
         /// Get the Slack integration of a product
         /// </summary>
         /// <remarks>
@@ -220,6 +287,27 @@ namespace LicenseManager.Api
         /// <param name="productId"></param>
         /// <returns>ApiResponse of StripeIntegration</returns>
         ApiResponse<StripeIntegration> GetStripeIntegrationWithHttpInfo(string productId);
+        /// <summary>
+        /// List the Paddle prices of an integration
+        /// </summary>
+        /// <remarks>
+        /// Active catalog prices of active products of the Paddle account, the ones that can be mapped, up to 500. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>ListPaddlePrices200Response</returns>
+        ListPaddlePrices200Response ListPaddlePrices(string id);
+
+        /// <summary>
+        /// List the Paddle prices of an integration
+        /// </summary>
+        /// <remarks>
+        /// Active catalog prices of active products of the Paddle account, the ones that can be mapped, up to 500. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>ApiResponse of ListPaddlePrices200Response</returns>
+        ApiResponse<ListPaddlePrices200Response> ListPaddlePricesWithHttpInfo(string id);
         /// <summary>
         /// List the Stripe prices of an integration
         /// </summary>
@@ -387,6 +475,31 @@ namespace LicenseManager.Api
         /// <returns>Task of ApiResponse (Integration)</returns>
         System.Threading.Tasks.Task<ApiResponse<Integration>> CheckIntegrationWithHttpInfoAsync(string id, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
+        /// Connect Paddle
+        /// </summary>
+        /// <remarks>
+        /// Connects the Paddle Billing account of the API key for the organization&#39;s products of the product&#39;s mode, or replaces the key of the existing connection. Checks the key works and has the required permissions, then creates a notification destination on the account, telling the app about payments. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="connectPaddle"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of PaddleIntegration</returns>
+        System.Threading.Tasks.Task<PaddleIntegration> ConnectPaddleAsync(string productId, ConnectPaddle connectPaddle, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Connect Paddle
+        /// </summary>
+        /// <remarks>
+        /// Connects the Paddle Billing account of the API key for the organization&#39;s products of the product&#39;s mode, or replaces the key of the existing connection. Checks the key works and has the required permissions, then creates a notification destination on the account, telling the app about payments. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="connectPaddle"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (PaddleIntegration)</returns>
+        System.Threading.Tasks.Task<ApiResponse<PaddleIntegration>> ConnectPaddleWithHttpInfoAsync(string productId, ConnectPaddle connectPaddle, System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
         /// Connect Stripe
         /// </summary>
         /// <remarks>
@@ -411,6 +524,31 @@ namespace LicenseManager.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StripeIntegration)</returns>
         System.Threading.Tasks.Task<ApiResponse<StripeIntegration>> ConnectStripeWithHttpInfoAsync(string productId, ConnectStripe connectStripe, System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Map a Paddle price to a policy
+        /// </summary>
+        /// <remarks>
+        /// Paying the price then creates licenses of the product with the policy: one per unit bought, or one per subscription for a recurring price. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="createPaddleMapping"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of IntegrationMapping</returns>
+        System.Threading.Tasks.Task<IntegrationMapping> CreatePaddleMappingAsync(string productId, CreatePaddleMapping createPaddleMapping, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Map a Paddle price to a policy
+        /// </summary>
+        /// <remarks>
+        /// Paying the price then creates licenses of the product with the policy: one per unit bought, or one per subscription for a recurring price. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="createPaddleMapping"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (IntegrationMapping)</returns>
+        System.Threading.Tasks.Task<ApiResponse<IntegrationMapping>> CreatePaddleMappingWithHttpInfoAsync(string productId, CreatePaddleMapping createPaddleMapping, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Map a Stripe price to a policy
         /// </summary>
@@ -506,6 +644,29 @@ namespace LicenseManager.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DisconnectIntegrationWithHttpInfoAsync(string id, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
+        /// Get the Paddle integration of a product
+        /// </summary>
+        /// <remarks>
+        /// The organization connects one Paddle Billing account for its live products, and one sandbox account for its test products. Its mappings tell which Paddle prices create licenses of the product. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of PaddleIntegration</returns>
+        System.Threading.Tasks.Task<PaddleIntegration> GetPaddleIntegrationAsync(string productId, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get the Paddle integration of a product
+        /// </summary>
+        /// <remarks>
+        /// The organization connects one Paddle Billing account for its live products, and one sandbox account for its test products. Its mappings tell which Paddle prices create licenses of the product. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (PaddleIntegration)</returns>
+        System.Threading.Tasks.Task<ApiResponse<PaddleIntegration>> GetPaddleIntegrationWithHttpInfoAsync(string productId, System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
         /// Get the Slack integration of a product
         /// </summary>
         /// <remarks>
@@ -551,6 +712,29 @@ namespace LicenseManager.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StripeIntegration)</returns>
         System.Threading.Tasks.Task<ApiResponse<StripeIntegration>> GetStripeIntegrationWithHttpInfoAsync(string productId, System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// List the Paddle prices of an integration
+        /// </summary>
+        /// <remarks>
+        /// Active catalog prices of active products of the Paddle account, the ones that can be mapped, up to 500. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ListPaddlePrices200Response</returns>
+        System.Threading.Tasks.Task<ListPaddlePrices200Response> ListPaddlePricesAsync(string id, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List the Paddle prices of an integration
+        /// </summary>
+        /// <remarks>
+        /// Active catalog prices of active products of the Paddle account, the ones that can be mapped, up to 500. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (ListPaddlePrices200Response)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ListPaddlePrices200Response>> ListPaddlePricesWithHttpInfoAsync(string id, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// List the Stripe prices of an integration
         /// </summary>
@@ -1136,6 +1320,147 @@ namespace LicenseManager.Api
         }
 
         /// <summary>
+        /// Connect Paddle Connects the Paddle Billing account of the API key for the organization&#39;s products of the product&#39;s mode, or replaces the key of the existing connection. Checks the key works and has the required permissions, then creates a notification destination on the account, telling the app about payments. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="connectPaddle"></param>
+        /// <returns>PaddleIntegration</returns>
+        public PaddleIntegration ConnectPaddle(string productId, ConnectPaddle connectPaddle)
+        {
+            LicenseManager.Client.ApiResponse<PaddleIntegration> localVarResponse = ConnectPaddleWithHttpInfo(productId, connectPaddle);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Connect Paddle Connects the Paddle Billing account of the API key for the organization&#39;s products of the product&#39;s mode, or replaces the key of the existing connection. Checks the key works and has the required permissions, then creates a notification destination on the account, telling the app about payments. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="connectPaddle"></param>
+        /// <returns>ApiResponse of PaddleIntegration</returns>
+        public LicenseManager.Client.ApiResponse<PaddleIntegration> ConnectPaddleWithHttpInfo(string productId, ConnectPaddle connectPaddle)
+        {
+            // verify the required parameter 'productId' is set
+            if (productId == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'productId' when calling IntegrationsApi->ConnectPaddle");
+
+            // verify the required parameter 'connectPaddle' is set
+            if (connectPaddle == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'connectPaddle' when calling IntegrationsApi->ConnectPaddle");
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("productId", LicenseManager.Client.ClientUtils.ParameterToString(productId)); // path parameter
+            localVarRequestOptions.Data = connectPaddle;
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Put<PaddleIntegration>("/v1/products/{productId}/integrations/paddle", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ConnectPaddle", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Connect Paddle Connects the Paddle Billing account of the API key for the organization&#39;s products of the product&#39;s mode, or replaces the key of the existing connection. Checks the key works and has the required permissions, then creates a notification destination on the account, telling the app about payments. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="connectPaddle"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of PaddleIntegration</returns>
+        public async System.Threading.Tasks.Task<PaddleIntegration> ConnectPaddleAsync(string productId, ConnectPaddle connectPaddle, System.Threading.CancellationToken cancellationToken = default)
+        {
+            LicenseManager.Client.ApiResponse<PaddleIntegration> localVarResponse = await ConnectPaddleWithHttpInfoAsync(productId, connectPaddle, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Connect Paddle Connects the Paddle Billing account of the API key for the organization&#39;s products of the product&#39;s mode, or replaces the key of the existing connection. Checks the key works and has the required permissions, then creates a notification destination on the account, telling the app about payments. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="connectPaddle"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (PaddleIntegration)</returns>
+        public async System.Threading.Tasks.Task<LicenseManager.Client.ApiResponse<PaddleIntegration>> ConnectPaddleWithHttpInfoAsync(string productId, ConnectPaddle connectPaddle, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'productId' is set
+            if (productId == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'productId' when calling IntegrationsApi->ConnectPaddle");
+
+            // verify the required parameter 'connectPaddle' is set
+            if (connectPaddle == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'connectPaddle' when calling IntegrationsApi->ConnectPaddle");
+
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("productId", LicenseManager.Client.ClientUtils.ParameterToString(productId)); // path parameter
+            localVarRequestOptions.Data = connectPaddle;
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PutAsync<PaddleIntegration>("/v1/products/{productId}/integrations/paddle", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ConnectPaddle", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
         /// Connect Stripe Connects the Stripe account of the API key for the organization&#39;s products of the product&#39;s mode, or replaces the key of the existing connection. Checks the key works and has the required permissions, then creates a webhook endpoint on the account, telling the app about payments. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
         /// </summary>
         /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
@@ -1270,6 +1595,147 @@ namespace LicenseManager.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ConnectStripe", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Map a Paddle price to a policy Paying the price then creates licenses of the product with the policy: one per unit bought, or one per subscription for a recurring price. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="createPaddleMapping"></param>
+        /// <returns>IntegrationMapping</returns>
+        public IntegrationMapping CreatePaddleMapping(string productId, CreatePaddleMapping createPaddleMapping)
+        {
+            LicenseManager.Client.ApiResponse<IntegrationMapping> localVarResponse = CreatePaddleMappingWithHttpInfo(productId, createPaddleMapping);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Map a Paddle price to a policy Paying the price then creates licenses of the product with the policy: one per unit bought, or one per subscription for a recurring price. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="createPaddleMapping"></param>
+        /// <returns>ApiResponse of IntegrationMapping</returns>
+        public LicenseManager.Client.ApiResponse<IntegrationMapping> CreatePaddleMappingWithHttpInfo(string productId, CreatePaddleMapping createPaddleMapping)
+        {
+            // verify the required parameter 'productId' is set
+            if (productId == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'productId' when calling IntegrationsApi->CreatePaddleMapping");
+
+            // verify the required parameter 'createPaddleMapping' is set
+            if (createPaddleMapping == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'createPaddleMapping' when calling IntegrationsApi->CreatePaddleMapping");
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("productId", LicenseManager.Client.ClientUtils.ParameterToString(productId)); // path parameter
+            localVarRequestOptions.Data = createPaddleMapping;
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<IntegrationMapping>("/v1/products/{productId}/integrations/paddle/mappings", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("CreatePaddleMapping", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Map a Paddle price to a policy Paying the price then creates licenses of the product with the policy: one per unit bought, or one per subscription for a recurring price. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="createPaddleMapping"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of IntegrationMapping</returns>
+        public async System.Threading.Tasks.Task<IntegrationMapping> CreatePaddleMappingAsync(string productId, CreatePaddleMapping createPaddleMapping, System.Threading.CancellationToken cancellationToken = default)
+        {
+            LicenseManager.Client.ApiResponse<IntegrationMapping> localVarResponse = await CreatePaddleMappingWithHttpInfoAsync(productId, createPaddleMapping, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Map a Paddle price to a policy Paying the price then creates licenses of the product with the policy: one per unit bought, or one per subscription for a recurring price. Doesn&#39;t accept tokens: only API keys and sessions.  **Required role permission**: &#x60;integration:update&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="createPaddleMapping"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (IntegrationMapping)</returns>
+        public async System.Threading.Tasks.Task<LicenseManager.Client.ApiResponse<IntegrationMapping>> CreatePaddleMappingWithHttpInfoAsync(string productId, CreatePaddleMapping createPaddleMapping, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'productId' is set
+            if (productId == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'productId' when calling IntegrationsApi->CreatePaddleMapping");
+
+            // verify the required parameter 'createPaddleMapping' is set
+            if (createPaddleMapping == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'createPaddleMapping' when calling IntegrationsApi->CreatePaddleMapping");
+
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("productId", LicenseManager.Client.ClientUtils.ParameterToString(productId)); // path parameter
+            localVarRequestOptions.Data = createPaddleMapping;
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<IntegrationMapping>("/v1/products/{productId}/integrations/paddle/mappings", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("CreatePaddleMapping", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -1787,6 +2253,131 @@ namespace LicenseManager.Api
         }
 
         /// <summary>
+        /// Get the Paddle integration of a product The organization connects one Paddle Billing account for its live products, and one sandbox account for its test products. Its mappings tell which Paddle prices create licenses of the product. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <returns>PaddleIntegration</returns>
+        public PaddleIntegration GetPaddleIntegration(string productId)
+        {
+            LicenseManager.Client.ApiResponse<PaddleIntegration> localVarResponse = GetPaddleIntegrationWithHttpInfo(productId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get the Paddle integration of a product The organization connects one Paddle Billing account for its live products, and one sandbox account for its test products. Its mappings tell which Paddle prices create licenses of the product. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <returns>ApiResponse of PaddleIntegration</returns>
+        public LicenseManager.Client.ApiResponse<PaddleIntegration> GetPaddleIntegrationWithHttpInfo(string productId)
+        {
+            // verify the required parameter 'productId' is set
+            if (productId == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'productId' when calling IntegrationsApi->GetPaddleIntegration");
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("productId", LicenseManager.Client.ClientUtils.ParameterToString(productId)); // path parameter
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<PaddleIntegration>("/v1/products/{productId}/integrations/paddle", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetPaddleIntegration", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get the Paddle integration of a product The organization connects one Paddle Billing account for its live products, and one sandbox account for its test products. Its mappings tell which Paddle prices create licenses of the product. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of PaddleIntegration</returns>
+        public async System.Threading.Tasks.Task<PaddleIntegration> GetPaddleIntegrationAsync(string productId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            LicenseManager.Client.ApiResponse<PaddleIntegration> localVarResponse = await GetPaddleIntegrationWithHttpInfoAsync(productId, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get the Paddle integration of a product The organization connects one Paddle Billing account for its live products, and one sandbox account for its test products. Its mappings tell which Paddle prices create licenses of the product. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (PaddleIntegration)</returns>
+        public async System.Threading.Tasks.Task<LicenseManager.Client.ApiResponse<PaddleIntegration>> GetPaddleIntegrationWithHttpInfoAsync(string productId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'productId' is set
+            if (productId == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'productId' when calling IntegrationsApi->GetPaddleIntegration");
+
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("productId", LicenseManager.Client.ClientUtils.ParameterToString(productId)); // path parameter
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.GetAsync<PaddleIntegration>("/v1/products/{productId}/integrations/paddle", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetPaddleIntegration", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
         /// Get the Slack integration of a product Slack channels getting notifications about the product&#39;s licenses: purchases, renewals, failed payments and cancellations. Doesn&#39;t accept tokens: only API keys and sessions.
         /// </summary>
         /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
@@ -2030,6 +2621,131 @@ namespace LicenseManager.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetStripeIntegration", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// List the Paddle prices of an integration Active catalog prices of active products of the Paddle account, the ones that can be mapped, up to 500. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>ListPaddlePrices200Response</returns>
+        public ListPaddlePrices200Response ListPaddlePrices(string id)
+        {
+            LicenseManager.Client.ApiResponse<ListPaddlePrices200Response> localVarResponse = ListPaddlePricesWithHttpInfo(id);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List the Paddle prices of an integration Active catalog prices of active products of the Paddle account, the ones that can be mapped, up to 500. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>ApiResponse of ListPaddlePrices200Response</returns>
+        public LicenseManager.Client.ApiResponse<ListPaddlePrices200Response> ListPaddlePricesWithHttpInfo(string id)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'id' when calling IntegrationsApi->ListPaddlePrices");
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", LicenseManager.Client.ClientUtils.ParameterToString(id)); // path parameter
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<ListPaddlePrices200Response>("/v1/integrations/{id}/paddle/prices", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ListPaddlePrices", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// List the Paddle prices of an integration Active catalog prices of active products of the Paddle account, the ones that can be mapped, up to 500. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ListPaddlePrices200Response</returns>
+        public async System.Threading.Tasks.Task<ListPaddlePrices200Response> ListPaddlePricesAsync(string id, System.Threading.CancellationToken cancellationToken = default)
+        {
+            LicenseManager.Client.ApiResponse<ListPaddlePrices200Response> localVarResponse = await ListPaddlePricesWithHttpInfoAsync(id, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List the Paddle prices of an integration Active catalog prices of active products of the Paddle account, the ones that can be mapped, up to 500. Doesn&#39;t accept tokens: only API keys and sessions.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (ListPaddlePrices200Response)</returns>
+        public async System.Threading.Tasks.Task<LicenseManager.Client.ApiResponse<ListPaddlePrices200Response>> ListPaddlePricesWithHttpInfoAsync(string id, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'id' when calling IntegrationsApi->ListPaddlePrices");
+
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", LicenseManager.Client.ClientUtils.ParameterToString(id)); // path parameter
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.GetAsync<ListPaddlePrices200Response>("/v1/integrations/{id}/paddle/prices", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ListPaddlePrices", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

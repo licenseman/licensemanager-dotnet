@@ -35,7 +35,7 @@ namespace LicenseManager.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateBillingPortalSession" /> class.
         /// </summary>
-        /// <param name="returnUrl">Where the Stripe customer portal links back to: a page of the customer portal, or of one of the product&#39;s &#x60;returnDomains&#x60;. The customer portal of the product by default..</param>
+        /// <param name="returnUrl">Where the Stripe customer portal links back to: a page of the customer portal, or of one of the product&#39;s &#x60;returnDomains&#x60;. The customer portal of the product by default. Paddle&#39;s customer portal has no link back: ignored for Paddle customers..</param>
         public CreateBillingPortalSession(string returnUrl = default)
         {
             this.ReturnUrl = returnUrl;
@@ -43,9 +43,9 @@ namespace LicenseManager.Model
         }
 
         /// <summary>
-        /// Where the Stripe customer portal links back to: a page of the customer portal, or of one of the product&#39;s &#x60;returnDomains&#x60;. The customer portal of the product by default.
+        /// Where the Stripe customer portal links back to: a page of the customer portal, or of one of the product&#39;s &#x60;returnDomains&#x60;. The customer portal of the product by default. Paddle&#39;s customer portal has no link back: ignored for Paddle customers.
         /// </summary>
-        /// <value>Where the Stripe customer portal links back to: a page of the customer portal, or of one of the product&#39;s &#x60;returnDomains&#x60;. The customer portal of the product by default.</value>
+        /// <value>Where the Stripe customer portal links back to: a page of the customer portal, or of one of the product&#39;s &#x60;returnDomains&#x60;. The customer portal of the product by default. Paddle&#39;s customer portal has no link back: ignored for Paddle customers.</value>
         /*
         <example>https://example.com/account</example>
         */

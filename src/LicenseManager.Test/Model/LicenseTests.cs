@@ -145,6 +145,15 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'PaddleTransactionId'
+        /// </summary>
+        [Fact]
+        public void PaddleTransactionIdTest()
+        {
+            // TODO unit test for the property 'PaddleTransactionId'
+        }
+
+        /// <summary>
         /// Test the property 'MaxMachines'
         /// </summary>
         [Fact]
@@ -259,6 +268,24 @@ namespace LicenseManager.Test.Model
         public void StripeRefundIdTest()
         {
             // TODO unit test for the property 'StripeRefundId'
+        }
+
+        /// <summary>
+        /// Test the property 'PaddleAdjustmentId'
+        /// </summary>
+        [Fact]
+        public void PaddleAdjustmentIdTest()
+        {
+            // TODO unit test for the property 'PaddleAdjustmentId'
+        }
+
+        /// <summary>
+        /// Test the property 'PaddleRefundStatus'
+        /// </summary>
+        [Fact]
+        public void PaddleRefundStatusTest()
+        {
+            // TODO unit test for the property 'PaddleRefundStatus'
         }
 
         /// <summary>

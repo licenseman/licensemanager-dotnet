@@ -6,13 +6,17 @@ All URIs are relative to *https://api.licensemanager.dev*
 |--------|--------------|-------------|
 | [**AuthorizeSlack**](IntegrationsApi.md#authorizeslack) | **POST** /v1/products/{productId}/integrations/slack/authorize | Start connecting a Slack channel |
 | [**CheckIntegration**](IntegrationsApi.md#checkintegration) | **POST** /v1/integrations/{id}/check | Check an integration |
+| [**ConnectPaddle**](IntegrationsApi.md#connectpaddle) | **PUT** /v1/products/{productId}/integrations/paddle | Connect Paddle |
 | [**ConnectStripe**](IntegrationsApi.md#connectstripe) | **PUT** /v1/products/{productId}/integrations/stripe | Connect Stripe |
+| [**CreatePaddleMapping**](IntegrationsApi.md#createpaddlemapping) | **POST** /v1/products/{productId}/integrations/paddle/mappings | Map a Paddle price to a policy |
 | [**CreateStripeMapping**](IntegrationsApi.md#createstripemapping) | **POST** /v1/products/{productId}/integrations/stripe/mappings | Map a Stripe price to a policy |
 | [**DeleteSlackConnection**](IntegrationsApi.md#deleteslackconnection) | **DELETE** /v1/slack-connections/{id} | Remove a Slack connection |
 | [**DeleteStripeMapping**](IntegrationsApi.md#deletestripemapping) | **DELETE** /v1/integration-mappings/{id} | Delete a mapping |
 | [**DisconnectIntegration**](IntegrationsApi.md#disconnectintegration) | **DELETE** /v1/integrations/{id} | Disconnect an integration |
+| [**GetPaddleIntegration**](IntegrationsApi.md#getpaddleintegration) | **GET** /v1/products/{productId}/integrations/paddle | Get the Paddle integration of a product |
 | [**GetSlackIntegration**](IntegrationsApi.md#getslackintegration) | **GET** /v1/products/{productId}/integrations/slack | Get the Slack integration of a product |
 | [**GetStripeIntegration**](IntegrationsApi.md#getstripeintegration) | **GET** /v1/products/{productId}/integrations/stripe | Get the Stripe integration of a product |
+| [**ListPaddlePrices**](IntegrationsApi.md#listpaddleprices) | **GET** /v1/integrations/{id}/paddle/prices | List the Paddle prices of an integration |
 | [**ListStripePrices**](IntegrationsApi.md#liststripeprices) | **GET** /v1/integrations/{id}/stripe/prices | List the Stripe prices of an integration |
 | [**TestSlackConnection**](IntegrationsApi.md#testslackconnection) | **POST** /v1/slack-connections/{id}/test | Send a test message to a Slack channel |
 | [**UpdateIntegration**](IntegrationsApi.md#updateintegration) | **PATCH** /v1/integrations/{id} | Update an integration |
@@ -230,7 +234,117 @@ catch (ApiException e)
 | **409** | &#x60;webhook_url_unreachable&#x60;: Stripe can&#39;t reach the server&#39;s webhook URL |  -  |
 | **422** | &#x60;validation_error&#x60;: invalid path, query or body, with the &#x60;issues&#x60; |  -  |
 | **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
-| **502** | &#x60;provider_unavailable&#x60;: Stripe couldn&#39;t be reached |  -  |
+| **502** | &#x60;provider_unavailable&#x60;: the provider (Stripe or Paddle) couldn&#39;t be reached |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="connectpaddle"></a>
+# **ConnectPaddle**
+> PaddleIntegration ConnectPaddle (string productId, ConnectPaddle connectPaddle)
+
+Connect Paddle
+
+Connects the Paddle Billing account of the API key for the organization's products of the product's mode, or replaces the key of the existing connection. Checks the key works and has the required permissions, then creates a notification destination on the account, telling the app about payments. Doesn't accept tokens: only API keys and sessions.  **Required role permission**: `integration:create` when called with a session, granted by the member's role. API keys aren't limited by roles.
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using LicenseManager.Api;
+using LicenseManager.Client;
+using LicenseManager.Model;
+
+namespace Example
+{
+    public class ConnectPaddleExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.licensemanager.dev";
+            // Configure API key authorization: apiKey
+            config.AddApiKey("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("x-api-key", "Bearer");
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new IntegrationsApi(httpClient, config, httpClientHandler);
+            var productId = x7Kp2QaZ;  // string | 
+            var connectPaddle = new ConnectPaddle(); // ConnectPaddle | 
+
+            try
+            {
+                // Connect Paddle
+                PaddleIntegration result = apiInstance.ConnectPaddle(productId, connectPaddle);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling IntegrationsApi.ConnectPaddle: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ConnectPaddleWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Connect Paddle
+    ApiResponse<PaddleIntegration> response = apiInstance.ConnectPaddleWithHttpInfo(productId, connectPaddle);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling IntegrationsApi.ConnectPaddleWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **productId** | **string** |  |  |
+| **connectPaddle** | [**ConnectPaddle**](ConnectPaddle.md) |  |  |
+
+### Return type
+
+[**PaddleIntegration**](PaddleIntegration.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Paddle integration |  -  |
+| **401** | &#x60;unauthorized&#x60;: no credentials. &#x60;invalid_api_key&#x60;: the API key doesn&#39;t exist, was revoked or has expired. &#x60;invalid_token&#x60;: the token&#39;s signature is invalid, it has expired, or the resource it&#39;s scoped to was deleted |  -  |
+| **402** | &#x60;plan_limit_exceeded&#x60;: the organization stayed over its plan&#39;s limits after the grace period, its API is blocked until it upgrades. &#x60;plan_limit_reached&#x60;: creating the resource would go over the plan&#39;s limit |  -  |
+| **403** | &#x60;token_not_allowed&#x60;: the endpoint doesn&#39;t accept tokens, or not of this type. &#x60;insufficient_scope&#x60;: the token lacks the permission. &#x60;no_active_organization&#x60; or &#x60;forbidden&#x60;: the session has no organization, or isn&#39;t a member of the one requested |  -  |
+| **404** | Product not found |  -  |
+| **409** | &#x60;webhook_url_unreachable&#x60;: Paddle can&#39;t reach the server&#39;s webhook URL |  -  |
+| **422** | &#x60;validation_error&#x60;: invalid body. &#x60;invalid_api_key&#x60;: not a Paddle Billing API key, or Paddle rejected it. &#x60;key_mode_mismatch&#x60;: a sandbox key for a live product, or the opposite. &#x60;missing_permission&#x60;: the key lacks required permissions, listed in the message. &#x60;too_many_destinations&#x60;: the account already has the 10 active notification destinations Paddle allows |  -  |
+| **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
+| **502** | &#x60;provider_unavailable&#x60;: the provider (Stripe or Paddle) couldn&#39;t be reached |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -340,7 +454,117 @@ catch (ApiException e)
 | **409** | &#x60;webhook_url_unreachable&#x60;: Stripe can&#39;t reach the server&#39;s webhook URL |  -  |
 | **422** | &#x60;validation_error&#x60;: invalid body. &#x60;invalid_api_key&#x60;: not a Stripe secret or restricted key, or Stripe rejected it. &#x60;key_mode_mismatch&#x60;: a test mode key for a live product, or the opposite. &#x60;missing_permission&#x60;: the key lacks required permissions, listed in the message. Optional ones aren&#39;t required: without Refunds: Write, it connects with &#x60;canRefund&#x60; false |  -  |
 | **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
-| **502** | &#x60;provider_unavailable&#x60;: Stripe couldn&#39;t be reached |  -  |
+| **502** | &#x60;provider_unavailable&#x60;: the provider (Stripe or Paddle) couldn&#39;t be reached |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="createpaddlemapping"></a>
+# **CreatePaddleMapping**
+> IntegrationMapping CreatePaddleMapping (string productId, CreatePaddleMapping createPaddleMapping)
+
+Map a Paddle price to a policy
+
+Paying the price then creates licenses of the product with the policy: one per unit bought, or one per subscription for a recurring price. Doesn't accept tokens: only API keys and sessions.  **Required role permission**: `integration:update` when called with a session, granted by the member's role. API keys aren't limited by roles.
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using LicenseManager.Api;
+using LicenseManager.Client;
+using LicenseManager.Model;
+
+namespace Example
+{
+    public class CreatePaddleMappingExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.licensemanager.dev";
+            // Configure API key authorization: apiKey
+            config.AddApiKey("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("x-api-key", "Bearer");
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new IntegrationsApi(httpClient, config, httpClientHandler);
+            var productId = x7Kp2QaZ;  // string | 
+            var createPaddleMapping = new CreatePaddleMapping(); // CreatePaddleMapping | 
+
+            try
+            {
+                // Map a Paddle price to a policy
+                IntegrationMapping result = apiInstance.CreatePaddleMapping(productId, createPaddleMapping);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling IntegrationsApi.CreatePaddleMapping: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the CreatePaddleMappingWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Map a Paddle price to a policy
+    ApiResponse<IntegrationMapping> response = apiInstance.CreatePaddleMappingWithHttpInfo(productId, createPaddleMapping);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling IntegrationsApi.CreatePaddleMappingWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **productId** | **string** |  |  |
+| **createPaddleMapping** | [**CreatePaddleMapping**](CreatePaddleMapping.md) |  |  |
+
+### Return type
+
+[**IntegrationMapping**](IntegrationMapping.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Created mapping |  -  |
+| **401** | &#x60;unauthorized&#x60;: no credentials. &#x60;invalid_api_key&#x60;: the API key doesn&#39;t exist, was revoked or has expired. &#x60;invalid_token&#x60;: the token&#39;s signature is invalid, it has expired, or the resource it&#39;s scoped to was deleted |  -  |
+| **402** | &#x60;plan_limit_exceeded&#x60;: the organization stayed over its plan&#39;s limits after the grace period, its API is blocked until it upgrades. &#x60;plan_limit_reached&#x60;: creating the resource would go over the plan&#39;s limit |  -  |
+| **403** | &#x60;token_not_allowed&#x60;: the endpoint doesn&#39;t accept tokens, or not of this type. &#x60;insufficient_scope&#x60;: the token lacks the permission. &#x60;no_active_organization&#x60; or &#x60;forbidden&#x60;: the session has no organization, or isn&#39;t a member of the one requested |  -  |
+| **404** | &#x60;not_found&#x60;: product not found. &#x60;policy_not_found&#x60;: the product has no policy with this &#x60;policyId&#x60;. &#x60;price_not_found&#x60;: the Paddle account has no price with this &#x60;paddlePriceId&#x60; |  -  |
+| **409** | &#x60;not_connected&#x60;: Paddle isn&#39;t connected in the product&#39;s mode. &#x60;price_mapped&#x60;: the price already creates licenses of a product |  -  |
+| **422** | &#x60;validation_error&#x60;: invalid body. &#x60;price_unusable&#x60;: the price or its product is archived, or it&#39;s a custom (non-catalog) price. &#x60;missing_permission&#x60;: a recurring price, while the API key lacks the Subscriptions: Read permission |  -  |
+| **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
+| **502** | &#x60;provider_unavailable&#x60;: the provider (Stripe or Paddle) couldn&#39;t be reached |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -450,7 +674,7 @@ catch (ApiException e)
 | **409** | &#x60;not_connected&#x60;: Stripe isn&#39;t connected in the product&#39;s mode. &#x60;price_mapped&#x60;: the price already creates licenses of a product |  -  |
 | **422** | &#x60;validation_error&#x60;: invalid body. &#x60;price_unusable&#x60;: the price is archived, or isn&#39;t a one-time price |  -  |
 | **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
-| **502** | &#x60;provider_unavailable&#x60;: Stripe couldn&#39;t be reached |  -  |
+| **502** | &#x60;provider_unavailable&#x60;: the provider (Stripe or Paddle) couldn&#39;t be reached |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -757,7 +981,113 @@ void (empty response body)
 | **404** | Integration not found |  -  |
 | **422** | &#x60;missing_permission&#x60;: the key can&#39;t delete the webhook endpoint |  -  |
 | **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
-| **502** | &#x60;provider_unavailable&#x60;: Stripe couldn&#39;t be reached |  -  |
+| **502** | &#x60;provider_unavailable&#x60;: the provider (Stripe or Paddle) couldn&#39;t be reached |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="getpaddleintegration"></a>
+# **GetPaddleIntegration**
+> PaddleIntegration GetPaddleIntegration (string productId)
+
+Get the Paddle integration of a product
+
+The organization connects one Paddle Billing account for its live products, and one sandbox account for its test products. Its mappings tell which Paddle prices create licenses of the product. Doesn't accept tokens: only API keys and sessions.
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using LicenseManager.Api;
+using LicenseManager.Client;
+using LicenseManager.Model;
+
+namespace Example
+{
+    public class GetPaddleIntegrationExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.licensemanager.dev";
+            // Configure API key authorization: apiKey
+            config.AddApiKey("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("x-api-key", "Bearer");
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new IntegrationsApi(httpClient, config, httpClientHandler);
+            var productId = x7Kp2QaZ;  // string | 
+
+            try
+            {
+                // Get the Paddle integration of a product
+                PaddleIntegration result = apiInstance.GetPaddleIntegration(productId);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling IntegrationsApi.GetPaddleIntegration: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the GetPaddleIntegrationWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Get the Paddle integration of a product
+    ApiResponse<PaddleIntegration> response = apiInstance.GetPaddleIntegrationWithHttpInfo(productId);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling IntegrationsApi.GetPaddleIntegrationWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **productId** | **string** |  |  |
+
+### Return type
+
+[**PaddleIntegration**](PaddleIntegration.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Paddle integration |  -  |
+| **401** | &#x60;unauthorized&#x60;: no credentials. &#x60;invalid_api_key&#x60;: the API key doesn&#39;t exist, was revoked or has expired. &#x60;invalid_token&#x60;: the token&#39;s signature is invalid, it has expired, or the resource it&#39;s scoped to was deleted |  -  |
+| **402** | &#x60;plan_limit_exceeded&#x60;: the organization stayed over its plan&#39;s limits after the grace period, its API is blocked until it upgrades. &#x60;plan_limit_reached&#x60;: creating the resource would go over the plan&#39;s limit |  -  |
+| **403** | &#x60;token_not_allowed&#x60;: the endpoint doesn&#39;t accept tokens, or not of this type. &#x60;insufficient_scope&#x60;: the token lacks the permission. &#x60;no_active_organization&#x60; or &#x60;forbidden&#x60;: the session has no organization, or isn&#39;t a member of the one requested |  -  |
+| **404** | Product not found |  -  |
+| **422** | &#x60;validation_error&#x60;: invalid path, query or body, with the &#x60;issues&#x60; |  -  |
+| **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -970,6 +1300,113 @@ catch (ApiException e)
 | **404** | Product not found |  -  |
 | **422** | &#x60;validation_error&#x60;: invalid path, query or body, with the &#x60;issues&#x60; |  -  |
 | **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="listpaddleprices"></a>
+# **ListPaddlePrices**
+> ListPaddlePrices200Response ListPaddlePrices (string id)
+
+List the Paddle prices of an integration
+
+Active catalog prices of active products of the Paddle account, the ones that can be mapped, up to 500. Doesn't accept tokens: only API keys and sessions.
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using LicenseManager.Api;
+using LicenseManager.Client;
+using LicenseManager.Model;
+
+namespace Example
+{
+    public class ListPaddlePricesExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.licensemanager.dev";
+            // Configure API key authorization: apiKey
+            config.AddApiKey("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("x-api-key", "Bearer");
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new IntegrationsApi(httpClient, config, httpClientHandler);
+            var id = i8Fz4QnRt;  // string | 
+
+            try
+            {
+                // List the Paddle prices of an integration
+                ListPaddlePrices200Response result = apiInstance.ListPaddlePrices(id);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling IntegrationsApi.ListPaddlePrices: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ListPaddlePricesWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // List the Paddle prices of an integration
+    ApiResponse<ListPaddlePrices200Response> response = apiInstance.ListPaddlePricesWithHttpInfo(id);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling IntegrationsApi.ListPaddlePricesWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **id** | **string** |  |  |
+
+### Return type
+
+[**ListPaddlePrices200Response**](ListPaddlePrices200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Prices |  -  |
+| **401** | &#x60;unauthorized&#x60;: no credentials. &#x60;invalid_api_key&#x60;: the API key doesn&#39;t exist, was revoked or has expired. &#x60;invalid_token&#x60;: the token&#39;s signature is invalid, it has expired, or the resource it&#39;s scoped to was deleted |  -  |
+| **402** | &#x60;plan_limit_exceeded&#x60;: the organization stayed over its plan&#39;s limits after the grace period, its API is blocked until it upgrades. &#x60;plan_limit_reached&#x60;: creating the resource would go over the plan&#39;s limit |  -  |
+| **403** | &#x60;token_not_allowed&#x60;: the endpoint doesn&#39;t accept tokens, or not of this type. &#x60;insufficient_scope&#x60;: the token lacks the permission. &#x60;no_active_organization&#x60; or &#x60;forbidden&#x60;: the session has no organization, or isn&#39;t a member of the one requested |  -  |
+| **404** | Integration not found |  -  |
+| **422** | &#x60;validation_error&#x60;: invalid path, query or body, with the &#x60;issues&#x60; |  -  |
+| **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
+| **502** | &#x60;provider_unavailable&#x60;: Paddle couldn&#39;t be reached, or refused the request |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

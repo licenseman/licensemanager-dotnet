@@ -104,7 +104,7 @@ Every method is documented, with its parameters and responses, in the [`docs`](d
 | [`ReleasesApi`](docs/ReleasesApi.md) | `ListReleasesAsync`, `CreateReleaseAsync`, `GetReleaseAsync`, `DeleteReleaseAsync`, `UpdateReleaseAsync` |
 | [`TokensApi`](docs/TokensApi.md) | `CreateCustomerTokenAsync`, `CreateLicenseTokenAsync`, `CreateMachineTokenAsync` |
 | [`EventsApi`](docs/EventsApi.md) | `ListPolicyEventsAsync`, `ListLicenseEventsAsync` |
-| [`IntegrationsApi`](docs/IntegrationsApi.md) | `GetStripeIntegrationAsync`, `ConnectStripeAsync`, `DisconnectIntegrationAsync`, `UpdateIntegrationAsync`, `CheckIntegrationAsync`, `ListStripePricesAsync`, `CreateStripeMappingAsync`, `DeleteStripeMappingAsync`, `UpdateStripeMappingAsync`, `GetSlackIntegrationAsync`, `AuthorizeSlackAsync`, `DeleteSlackConnectionAsync`, `UpdateSlackConnectionAsync`, `TestSlackConnectionAsync` |
+| [`IntegrationsApi`](docs/IntegrationsApi.md) | `GetStripeIntegrationAsync`, `ConnectStripeAsync`, `DisconnectIntegrationAsync`, `UpdateIntegrationAsync`, `CheckIntegrationAsync`, `ListStripePricesAsync`, `CreateStripeMappingAsync`, `DeleteStripeMappingAsync`, `UpdateStripeMappingAsync`, `GetPaddleIntegrationAsync`, `ConnectPaddleAsync`, `ListPaddlePricesAsync`, `CreatePaddleMappingAsync`, `GetSlackIntegrationAsync`, `AuthorizeSlackAsync`, `DeleteSlackConnectionAsync`, `UpdateSlackConnectionAsync`, `TestSlackConnectionAsync` |
 
 ## Versioning
 
