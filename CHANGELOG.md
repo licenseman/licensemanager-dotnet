@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1 (2026-11-16)
+
+Regenerated from the same API.
+
 ## 0.4.0 (2026-11-13)
 
 ### Breaking changes
