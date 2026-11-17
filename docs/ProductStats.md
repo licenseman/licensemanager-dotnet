@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **ActivationsByVersion** | [**List&lt;ProductStatsActivationsByVersionInner&gt;**](ProductStatsActivationsByVersionInner.md) | Successful activations of the licenses of the product each day, per version of the application, from the most recent one. | 
 **ActiveMachinesByVersion** | [**List&lt;ProductStatsActiveMachinesByVersionInner&gt;**](ProductStatsActiveMachinesByVersionInner.md) | Number of active machines running each version of the application, from the most recent one. | 
 **ActiveMachinesByPlatform** | [**List&lt;ProductStatsActiveMachinesByPlatformInner&gt;**](ProductStatsActiveMachinesByPlatformInner.md) | Number of active machines on each platform, from the one with the most machines. | 
+**ActiveMachinesByCountry** | [**List&lt;ProductStatsActiveMachinesByCountryInner&gt;**](ProductStatsActiveMachinesByCountryInner.md) | Number of active machines in each country, from the one with the most machines. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

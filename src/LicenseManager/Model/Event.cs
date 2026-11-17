@@ -58,7 +58,10 @@ namespace LicenseManager.Model
         /// <param name="machineId">machineId (required).</param>
         /// <param name="machine">machine (required).</param>
         /// <param name="actor">actor (required).</param>
-        public Event(string id = default, EventType type = default, DateTime createdAt = default, Dictionary<string, Object> payload = default, string policyId = default, string licenseId = default, string machineId = default, EventMachine machine = default, EventActor actor = default)
+        /// <param name="country">ISO 3166-1 alpha-2 code of the country of the IP address the request came from, for &#x60;license.validated&#x60; and &#x60;license.validation_failed&#x60; events. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be. (required).</param>
+        /// <param name="latitude">Approximate latitude of the IP address the request came from, for &#x60;license.validated&#x60; and &#x60;license.validation_failed&#x60; events. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be. (required).</param>
+        /// <param name="longitude">Approximate longitude of the IP address the request came from, for &#x60;license.validated&#x60; and &#x60;license.validation_failed&#x60; events. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be. (required).</param>
+        public Event(string id = default, EventType type = default, DateTime createdAt = default, Dictionary<string, Object> payload = default, string policyId = default, string licenseId = default, string machineId = default, EventMachine machine = default, EventActor actor = default, string country = default, decimal? latitude = default, decimal? longitude = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -104,6 +107,24 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("actor is a required property for Event and cannot be null");
             }
             this.Actor = actor;
+            // to ensure "country" is required (not null)
+            if (country == null)
+            {
+                throw new ArgumentNullException("country is a required property for Event and cannot be null");
+            }
+            this.Country = country;
+            // to ensure "latitude" is required (not null)
+            if (latitude == null)
+            {
+                throw new ArgumentNullException("latitude is a required property for Event and cannot be null");
+            }
+            this.Latitude = latitude;
+            // to ensure "longitude" is required (not null)
+            if (longitude == null)
+            {
+                throw new ArgumentNullException("longitude is a required property for Event and cannot be null");
+            }
+            this.Longitude = longitude;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -172,6 +193,36 @@ namespace LicenseManager.Model
         public EventActor Actor { get; set; }
 
         /// <summary>
+        /// ISO 3166-1 alpha-2 code of the country of the IP address the request came from, for &#x60;license.validated&#x60; and &#x60;license.validation_failed&#x60; events. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be.
+        /// </summary>
+        /// <value>ISO 3166-1 alpha-2 code of the country of the IP address the request came from, for &#x60;license.validated&#x60; and &#x60;license.validation_failed&#x60; events. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be.</value>
+        /*
+        <example>FR</example>
+        */
+        [DataMember(Name = "country", IsRequired = true, EmitDefaultValue = true)]
+        public string Country { get; set; }
+
+        /// <summary>
+        /// Approximate latitude of the IP address the request came from, for &#x60;license.validated&#x60; and &#x60;license.validation_failed&#x60; events. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be.
+        /// </summary>
+        /// <value>Approximate latitude of the IP address the request came from, for &#x60;license.validated&#x60; and &#x60;license.validation_failed&#x60; events. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be.</value>
+        /*
+        <example>48.8566</example>
+        */
+        [DataMember(Name = "latitude", IsRequired = true, EmitDefaultValue = true)]
+        public decimal? Latitude { get; set; }
+
+        /// <summary>
+        /// Approximate longitude of the IP address the request came from, for &#x60;license.validated&#x60; and &#x60;license.validation_failed&#x60; events. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be.
+        /// </summary>
+        /// <value>Approximate longitude of the IP address the request came from, for &#x60;license.validated&#x60; and &#x60;license.validation_failed&#x60; events. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be.</value>
+        /*
+        <example>2.3522</example>
+        */
+        [DataMember(Name = "longitude", IsRequired = true, EmitDefaultValue = true)]
+        public decimal? Longitude { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -194,6 +245,9 @@ namespace LicenseManager.Model
             sb.Append("  MachineId: ").Append(MachineId).Append("\n");
             sb.Append("  Machine: ").Append(Machine).Append("\n");
             sb.Append("  Actor: ").Append(Actor).Append("\n");
+            sb.Append("  Country: ").Append(Country).Append("\n");
+            sb.Append("  Latitude: ").Append(Latitude).Append("\n");
+            sb.Append("  Longitude: ").Append(Longitude).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

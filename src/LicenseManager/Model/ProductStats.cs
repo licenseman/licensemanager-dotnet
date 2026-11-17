@@ -64,7 +64,8 @@ namespace LicenseManager.Model
         /// <param name="activationsByVersion">Successful activations of the licenses of the product each day, per version of the application, from the most recent one. (required).</param>
         /// <param name="activeMachinesByVersion">Number of active machines running each version of the application, from the most recent one. (required).</param>
         /// <param name="activeMachinesByPlatform">Number of active machines on each platform, from the one with the most machines. (required).</param>
-        public ProductStats(int licenseCount = default, int activeLicenseCount = default, int newLicenseCount = default, int expiringLicenseCount = default, int expiredLicenseCount = default, int activeMachineCount = default, int inUseLicenseCount = default, int seatCount = default, int usedSeatCount = default, int fullLicenseCount = default, List<DateTime> days = default, List<string> months = default, List<int> newLicensesByDay = default, List<int> newLicensesByMonth = default, List<ProductStatsNewLicensesByPolicyInner> newLicensesByPolicy = default, CancellationStats cancellation = default, SubscriptionStats subscriptions = default, List<Revenue> revenue = default, List<ProductStatsActivationsByVersionInner> activationsByVersion = default, List<ProductStatsActiveMachinesByVersionInner> activeMachinesByVersion = default, List<ProductStatsActiveMachinesByPlatformInner> activeMachinesByPlatform = default)
+        /// <param name="activeMachinesByCountry">Number of active machines in each country, from the one with the most machines. (required).</param>
+        public ProductStats(int licenseCount = default, int activeLicenseCount = default, int newLicenseCount = default, int expiringLicenseCount = default, int expiredLicenseCount = default, int activeMachineCount = default, int inUseLicenseCount = default, int seatCount = default, int usedSeatCount = default, int fullLicenseCount = default, List<DateTime> days = default, List<string> months = default, List<int> newLicensesByDay = default, List<int> newLicensesByMonth = default, List<ProductStatsNewLicensesByPolicyInner> newLicensesByPolicy = default, CancellationStats cancellation = default, SubscriptionStats subscriptions = default, List<Revenue> revenue = default, List<ProductStatsActivationsByVersionInner> activationsByVersion = default, List<ProductStatsActiveMachinesByVersionInner> activeMachinesByVersion = default, List<ProductStatsActiveMachinesByPlatformInner> activeMachinesByPlatform = default, List<ProductStatsActiveMachinesByCountryInner> activeMachinesByCountry = default)
         {
             this.LicenseCount = licenseCount;
             this.ActiveLicenseCount = activeLicenseCount;
@@ -142,6 +143,12 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("activeMachinesByPlatform is a required property for ProductStats and cannot be null");
             }
             this.ActiveMachinesByPlatform = activeMachinesByPlatform;
+            // to ensure "activeMachinesByCountry" is required (not null)
+            if (activeMachinesByCountry == null)
+            {
+                throw new ArgumentNullException("activeMachinesByCountry is a required property for ProductStats and cannot be null");
+            }
+            this.ActiveMachinesByCountry = activeMachinesByCountry;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -329,6 +336,13 @@ namespace LicenseManager.Model
         public List<ProductStatsActiveMachinesByPlatformInner> ActiveMachinesByPlatform { get; set; }
 
         /// <summary>
+        /// Number of active machines in each country, from the one with the most machines.
+        /// </summary>
+        /// <value>Number of active machines in each country, from the one with the most machines.</value>
+        [DataMember(Name = "activeMachinesByCountry", IsRequired = true, EmitDefaultValue = true)]
+        public List<ProductStatsActiveMachinesByCountryInner> ActiveMachinesByCountry { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -363,6 +377,7 @@ namespace LicenseManager.Model
             sb.Append("  ActivationsByVersion: ").Append(ActivationsByVersion).Append("\n");
             sb.Append("  ActiveMachinesByVersion: ").Append(ActiveMachinesByVersion).Append("\n");
             sb.Append("  ActiveMachinesByPlatform: ").Append(ActiveMachinesByPlatform).Append("\n");
+            sb.Append("  ActiveMachinesByCountry: ").Append(ActiveMachinesByCountry).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

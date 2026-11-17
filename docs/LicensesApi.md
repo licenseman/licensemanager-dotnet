@@ -10,6 +10,7 @@ All URIs are relative to *https://api.licensemanager.dev*
 | [**GetLicense**](LicensesApi.md#getlicense) | **GET** /v1/licenses/{id} | Get a license |
 | [**GetLicenseStats**](LicensesApi.md#getlicensestats) | **GET** /v1/licenses/{id}/stats | Get the stats of a license |
 | [**GetSigningKey**](LicensesApi.md#getsigningkey) | **GET** /v1/signing-key | Get the organization&#39;s signing key |
+| [**ImportLicenses**](LicensesApi.md#importlicenses) | **POST** /v1/products/{productId}/licenses/import | Import licenses |
 | [**ListCustomerLicenses**](LicensesApi.md#listcustomerlicenses) | **GET** /v1/customers/{customerId}/licenses | List the licenses of a customer |
 | [**ListLicenses**](LicensesApi.md#listlicenses) | **GET** /v1/products/{productId}/licenses | List the licenses of a product |
 | [**SendLicenseKeys**](LicensesApi.md#sendlicensekeys) | **POST** /v1/licenses/send-keys | Email license keys to their customers |
@@ -648,6 +649,114 @@ This endpoint does not need any parameter.
 | **401** | &#x60;unauthorized&#x60;: no credentials. &#x60;invalid_api_key&#x60;: the API key doesn&#39;t exist, was revoked or has expired. &#x60;invalid_token&#x60;: the token&#39;s signature is invalid, it has expired, or the resource it&#39;s scoped to was deleted |  -  |
 | **402** | &#x60;plan_limit_exceeded&#x60;: the organization stayed over its plan&#39;s limits after the grace period, its API is blocked until it upgrades. &#x60;plan_limit_reached&#x60;: creating the resource would go over the plan&#39;s limit |  -  |
 | **403** | &#x60;token_not_allowed&#x60;: the endpoint doesn&#39;t accept tokens, or not of this type. &#x60;insufficient_scope&#x60;: the token lacks the permission. &#x60;no_active_organization&#x60; or &#x60;forbidden&#x60;: the session has no organization, or isn&#39;t a member of the one requested |  -  |
+| **422** | &#x60;validation_error&#x60;: invalid path, query or body, with the &#x60;issues&#x60; |  -  |
+| **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="importlicenses"></a>
+# **ImportLicenses**
+> ImportLicensesResult ImportLicenses (string productId, ImportLicenses importLicenses)
+
+Import licenses
+
+Creates up to 500 licenses with their current keys, like when moving from another license manager or Lemon Squeezy, in one request. Each license is created like with `createLicense`, which describes the defaults, and never emails its key. The licenses are imported one by one: one that fails doesn't stop the others, and the response tells the result of each.  A key already used by a license of the product is skipped, so an interrupted import can be sent again.  With a `subscription`, the license is kept valid by the Stripe or Paddle subscription, rather than one created by its next payment.  **Required role permission**: `license:create` when called with a session, granted by the member's role. API keys aren't limited by roles.
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using LicenseManager.Api;
+using LicenseManager.Client;
+using LicenseManager.Model;
+
+namespace Example
+{
+    public class ImportLicensesExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "https://api.licensemanager.dev";
+            // Configure API key authorization: apiKey
+            config.AddApiKey("x-api-key", "YOUR_API_KEY");
+            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+            // config.AddApiKeyPrefix("x-api-key", "Bearer");
+
+            // create instances of HttpClient, HttpClientHandler to be reused later with different Api classes
+            HttpClient httpClient = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            var apiInstance = new LicensesApi(httpClient, config, httpClientHandler);
+            var productId = x7Kp2QaZ;  // string | 
+            var importLicenses = new ImportLicenses(); // ImportLicenses | 
+
+            try
+            {
+                // Import licenses
+                ImportLicensesResult result = apiInstance.ImportLicenses(productId, importLicenses);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling LicensesApi.ImportLicenses: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ImportLicensesWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Import licenses
+    ApiResponse<ImportLicensesResult> response = apiInstance.ImportLicensesWithHttpInfo(productId, importLicenses);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling LicensesApi.ImportLicensesWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **productId** | **string** |  |  |
+| **importLicenses** | [**ImportLicenses**](ImportLicenses.md) |  |  |
+
+### Return type
+
+[**ImportLicensesResult**](ImportLicensesResult.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Result of each license |  -  |
+| **401** | &#x60;unauthorized&#x60;: no credentials. &#x60;invalid_api_key&#x60;: the API key doesn&#39;t exist, was revoked or has expired. &#x60;invalid_token&#x60;: the token&#39;s signature is invalid, it has expired, or the resource it&#39;s scoped to was deleted |  -  |
+| **402** | &#x60;plan_limit_exceeded&#x60;: the organization stayed over its plan&#39;s limits after the grace period, its API is blocked until it upgrades. &#x60;plan_limit_reached&#x60;: creating the resource would go over the plan&#39;s limit |  -  |
+| **403** | &#x60;token_not_allowed&#x60;: the endpoint doesn&#39;t accept tokens, or not of this type. &#x60;insufficient_scope&#x60;: the token lacks the permission. &#x60;no_active_organization&#x60; or &#x60;forbidden&#x60;: the session has no organization, or isn&#39;t a member of the one requested |  -  |
+| **404** | Product not found |  -  |
 | **422** | &#x60;validation_error&#x60;: invalid path, query or body, with the &#x60;issues&#x60; |  -  |
 | **429** | &#x60;rate_limited&#x60;: the API key made more than 10 requests in the last second. Wait for the &#x60;Retry-After&#x60; seconds |  -  |
 

@@ -242,5 +242,14 @@ namespace LicenseManager.Test.Model
         {
             // TODO unit test for the property 'ActiveMachinesByPlatform'
         }
+
+        /// <summary>
+        /// Test the property 'ActiveMachinesByCountry'
+        /// </summary>
+        [Fact]
+        public void ActiveMachinesByCountryTest()
+        {
+            // TODO unit test for the property 'ActiveMachinesByCountry'
+        }
     }
 }

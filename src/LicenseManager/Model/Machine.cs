@@ -94,9 +94,12 @@ namespace LicenseManager.Model
         /// <param name="varVersion">Version of the application last validated on the machine. (required).</param>
         /// <param name="overriddenByMachineId">For a machine deactivated or locked by automatic machine changes, the machine that took its place. Validating the key on a deactivated machine that has one takes its place back. &#x60;null&#x60; otherwise. (required).</param>
         /// <param name="lastValidatedAt">When the license was last validated on the machine. (required).</param>
+        /// <param name="country">ISO 3166-1 alpha-2 code of the country of the IP address the license was last successfully validated from on the machine. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be. (required).</param>
+        /// <param name="latitude">Approximate latitude of the IP address the license was last successfully validated from on the machine. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be. (required).</param>
+        /// <param name="longitude">Approximate longitude of the IP address the license was last successfully validated from on the machine. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be. (required).</param>
         /// <param name="createdAt">createdAt (required).</param>
         /// <param name="updatedAt">updatedAt (required).</param>
-        public Machine(string id = default, string licenseId = default, string fingerprint = default, string platform = default, string name = default, StatusEnum status = default, string varVersion = default, string overriddenByMachineId = default, DateTime? lastValidatedAt = default, DateTime createdAt = default, DateTime updatedAt = default)
+        public Machine(string id = default, string licenseId = default, string fingerprint = default, string platform = default, string name = default, StatusEnum status = default, string varVersion = default, string overriddenByMachineId = default, DateTime? lastValidatedAt = default, string country = default, decimal? latitude = default, decimal? longitude = default, DateTime createdAt = default, DateTime updatedAt = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -147,6 +150,24 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("lastValidatedAt is a required property for Machine and cannot be null");
             }
             this.LastValidatedAt = lastValidatedAt;
+            // to ensure "country" is required (not null)
+            if (country == null)
+            {
+                throw new ArgumentNullException("country is a required property for Machine and cannot be null");
+            }
+            this.Country = country;
+            // to ensure "latitude" is required (not null)
+            if (latitude == null)
+            {
+                throw new ArgumentNullException("latitude is a required property for Machine and cannot be null");
+            }
+            this.Latitude = latitude;
+            // to ensure "longitude" is required (not null)
+            if (longitude == null)
+            {
+                throw new ArgumentNullException("longitude is a required property for Machine and cannot be null");
+            }
+            this.Longitude = longitude;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
             this.AdditionalProperties = new Dictionary<string, object>();
@@ -226,6 +247,36 @@ namespace LicenseManager.Model
         public DateTime? LastValidatedAt { get; set; }
 
         /// <summary>
+        /// ISO 3166-1 alpha-2 code of the country of the IP address the license was last successfully validated from on the machine. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be.
+        /// </summary>
+        /// <value>ISO 3166-1 alpha-2 code of the country of the IP address the license was last successfully validated from on the machine. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be.</value>
+        /*
+        <example>FR</example>
+        */
+        [DataMember(Name = "country", IsRequired = true, EmitDefaultValue = true)]
+        public string Country { get; set; }
+
+        /// <summary>
+        /// Approximate latitude of the IP address the license was last successfully validated from on the machine. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be.
+        /// </summary>
+        /// <value>Approximate latitude of the IP address the license was last successfully validated from on the machine. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be.</value>
+        /*
+        <example>48.8566</example>
+        */
+        [DataMember(Name = "latitude", IsRequired = true, EmitDefaultValue = true)]
+        public decimal? Latitude { get; set; }
+
+        /// <summary>
+        /// Approximate longitude of the IP address the license was last successfully validated from on the machine. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be.
+        /// </summary>
+        /// <value>Approximate longitude of the IP address the license was last successfully validated from on the machine. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be.</value>
+        /*
+        <example>2.3522</example>
+        */
+        [DataMember(Name = "longitude", IsRequired = true, EmitDefaultValue = true)]
+        public decimal? Longitude { get; set; }
+
+        /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
         /*
@@ -266,6 +317,9 @@ namespace LicenseManager.Model
             sb.Append("  VarVersion: ").Append(VarVersion).Append("\n");
             sb.Append("  OverriddenByMachineId: ").Append(OverriddenByMachineId).Append("\n");
             sb.Append("  LastValidatedAt: ").Append(LastValidatedAt).Append("\n");
+            sb.Append("  Country: ").Append(Country).Append("\n");
+            sb.Append("  Latitude: ").Append(Latitude).Append("\n");
+            sb.Append("  Longitude: ").Append(Longitude).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");

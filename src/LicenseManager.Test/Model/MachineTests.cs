@@ -136,6 +136,33 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Country'
+        /// </summary>
+        [Fact]
+        public void CountryTest()
+        {
+            // TODO unit test for the property 'Country'
+        }
+
+        /// <summary>
+        /// Test the property 'Latitude'
+        /// </summary>
+        [Fact]
+        public void LatitudeTest()
+        {
+            // TODO unit test for the property 'Latitude'
+        }
+
+        /// <summary>
+        /// Test the property 'Longitude'
+        /// </summary>
+        [Fact]
+        public void LongitudeTest()
+        {
+            // TODO unit test for the property 'Longitude'
+        }
+
+        /// <summary>
         /// Test the property 'CreatedAt'
         /// </summary>
         [Fact]

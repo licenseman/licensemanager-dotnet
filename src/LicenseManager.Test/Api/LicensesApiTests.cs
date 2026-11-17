@@ -126,6 +126,19 @@ namespace LicenseManager.Test.Api
         }
 
         /// <summary>
+        /// Test ImportLicenses
+        /// </summary>
+        [Fact]
+        public void ImportLicensesTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string productId = null;
+            //ImportLicenses importLicenses = null;
+            //var response = instance.ImportLicenses(productId, importLicenses);
+            //Assert.IsType<ImportLicensesResult>(response);
+        }
+
+        /// <summary>
         /// Test ListCustomerLicenses
         /// </summary>
         [Fact]

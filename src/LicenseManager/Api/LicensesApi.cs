@@ -156,6 +156,29 @@ namespace LicenseManager.Api
         /// <returns>ApiResponse of SigningKey</returns>
         ApiResponse<SigningKey> GetSigningKeyWithHttpInfo();
         /// <summary>
+        /// Import licenses
+        /// </summary>
+        /// <remarks>
+        /// Creates up to 500 licenses with their current keys, like when moving from another license manager or Lemon Squeezy, in one request. Each license is created like with &#x60;createLicense&#x60;, which describes the defaults, and never emails its key. The licenses are imported one by one: one that fails doesn&#39;t stop the others, and the response tells the result of each.  A key already used by a license of the product is skipped, so an interrupted import can be sent again.  With a &#x60;subscription&#x60;, the license is kept valid by the Stripe or Paddle subscription, rather than one created by its next payment.  **Required role permission**: &#x60;license:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="importLicenses"></param>
+        /// <returns>ImportLicensesResult</returns>
+        ImportLicensesResult ImportLicenses(string productId, ImportLicenses importLicenses);
+
+        /// <summary>
+        /// Import licenses
+        /// </summary>
+        /// <remarks>
+        /// Creates up to 500 licenses with their current keys, like when moving from another license manager or Lemon Squeezy, in one request. Each license is created like with &#x60;createLicense&#x60;, which describes the defaults, and never emails its key. The licenses are imported one by one: one that fails doesn&#39;t stop the others, and the response tells the result of each.  A key already used by a license of the product is skipped, so an interrupted import can be sent again.  With a &#x60;subscription&#x60;, the license is kept valid by the Stripe or Paddle subscription, rather than one created by its next payment.  **Required role permission**: &#x60;license:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="importLicenses"></param>
+        /// <returns>ApiResponse of ImportLicensesResult</returns>
+        ApiResponse<ImportLicensesResult> ImportLicensesWithHttpInfo(string productId, ImportLicenses importLicenses);
+        /// <summary>
         /// List the licenses of a customer
         /// </summary>
         /// <remarks>
@@ -503,6 +526,31 @@ namespace LicenseManager.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SigningKey)</returns>
         System.Threading.Tasks.Task<ApiResponse<SigningKey>> GetSigningKeyWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Import licenses
+        /// </summary>
+        /// <remarks>
+        /// Creates up to 500 licenses with their current keys, like when moving from another license manager or Lemon Squeezy, in one request. Each license is created like with &#x60;createLicense&#x60;, which describes the defaults, and never emails its key. The licenses are imported one by one: one that fails doesn&#39;t stop the others, and the response tells the result of each.  A key already used by a license of the product is skipped, so an interrupted import can be sent again.  With a &#x60;subscription&#x60;, the license is kept valid by the Stripe or Paddle subscription, rather than one created by its next payment.  **Required role permission**: &#x60;license:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="importLicenses"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ImportLicensesResult</returns>
+        System.Threading.Tasks.Task<ImportLicensesResult> ImportLicensesAsync(string productId, ImportLicenses importLicenses, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Import licenses
+        /// </summary>
+        /// <remarks>
+        /// Creates up to 500 licenses with their current keys, like when moving from another license manager or Lemon Squeezy, in one request. Each license is created like with &#x60;createLicense&#x60;, which describes the defaults, and never emails its key. The licenses are imported one by one: one that fails doesn&#39;t stop the others, and the response tells the result of each.  A key already used by a license of the product is skipped, so an interrupted import can be sent again.  With a &#x60;subscription&#x60;, the license is kept valid by the Stripe or Paddle subscription, rather than one created by its next payment.  **Required role permission**: &#x60;license:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </remarks>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="importLicenses"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (ImportLicensesResult)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ImportLicensesResult>> ImportLicensesWithHttpInfoAsync(string productId, ImportLicenses importLicenses, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// List the licenses of a customer
         /// </summary>
@@ -1709,6 +1757,147 @@ namespace LicenseManager.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetSigningKey", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Import licenses Creates up to 500 licenses with their current keys, like when moving from another license manager or Lemon Squeezy, in one request. Each license is created like with &#x60;createLicense&#x60;, which describes the defaults, and never emails its key. The licenses are imported one by one: one that fails doesn&#39;t stop the others, and the response tells the result of each.  A key already used by a license of the product is skipped, so an interrupted import can be sent again.  With a &#x60;subscription&#x60;, the license is kept valid by the Stripe or Paddle subscription, rather than one created by its next payment.  **Required role permission**: &#x60;license:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="importLicenses"></param>
+        /// <returns>ImportLicensesResult</returns>
+        public ImportLicensesResult ImportLicenses(string productId, ImportLicenses importLicenses)
+        {
+            LicenseManager.Client.ApiResponse<ImportLicensesResult> localVarResponse = ImportLicensesWithHttpInfo(productId, importLicenses);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Import licenses Creates up to 500 licenses with their current keys, like when moving from another license manager or Lemon Squeezy, in one request. Each license is created like with &#x60;createLicense&#x60;, which describes the defaults, and never emails its key. The licenses are imported one by one: one that fails doesn&#39;t stop the others, and the response tells the result of each.  A key already used by a license of the product is skipped, so an interrupted import can be sent again.  With a &#x60;subscription&#x60;, the license is kept valid by the Stripe or Paddle subscription, rather than one created by its next payment.  **Required role permission**: &#x60;license:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="importLicenses"></param>
+        /// <returns>ApiResponse of ImportLicensesResult</returns>
+        public LicenseManager.Client.ApiResponse<ImportLicensesResult> ImportLicensesWithHttpInfo(string productId, ImportLicenses importLicenses)
+        {
+            // verify the required parameter 'productId' is set
+            if (productId == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'productId' when calling LicensesApi->ImportLicenses");
+
+            // verify the required parameter 'importLicenses' is set
+            if (importLicenses == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'importLicenses' when calling LicensesApi->ImportLicenses");
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("productId", LicenseManager.Client.ClientUtils.ParameterToString(productId)); // path parameter
+            localVarRequestOptions.Data = importLicenses;
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<ImportLicensesResult>("/v1/products/{productId}/licenses/import", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ImportLicenses", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Import licenses Creates up to 500 licenses with their current keys, like when moving from another license manager or Lemon Squeezy, in one request. Each license is created like with &#x60;createLicense&#x60;, which describes the defaults, and never emails its key. The licenses are imported one by one: one that fails doesn&#39;t stop the others, and the response tells the result of each.  A key already used by a license of the product is skipped, so an interrupted import can be sent again.  With a &#x60;subscription&#x60;, the license is kept valid by the Stripe or Paddle subscription, rather than one created by its next payment.  **Required role permission**: &#x60;license:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="importLicenses"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ImportLicensesResult</returns>
+        public async System.Threading.Tasks.Task<ImportLicensesResult> ImportLicensesAsync(string productId, ImportLicenses importLicenses, System.Threading.CancellationToken cancellationToken = default)
+        {
+            LicenseManager.Client.ApiResponse<ImportLicensesResult> localVarResponse = await ImportLicensesWithHttpInfoAsync(productId, importLicenses, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Import licenses Creates up to 500 licenses with their current keys, like when moving from another license manager or Lemon Squeezy, in one request. Each license is created like with &#x60;createLicense&#x60;, which describes the defaults, and never emails its key. The licenses are imported one by one: one that fails doesn&#39;t stop the others, and the response tells the result of each.  A key already used by a license of the product is skipped, so an interrupted import can be sent again.  With a &#x60;subscription&#x60;, the license is kept valid by the Stripe or Paddle subscription, rather than one created by its next payment.  **Required role permission**: &#x60;license:create&#x60; when called with a session, granted by the member&#39;s role. API keys aren&#39;t limited by roles.
+        /// </summary>
+        /// <exception cref="LicenseManager.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="productId"></param>
+        /// <param name="importLicenses"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (ImportLicensesResult)</returns>
+        public async System.Threading.Tasks.Task<LicenseManager.Client.ApiResponse<ImportLicensesResult>> ImportLicensesWithHttpInfoAsync(string productId, ImportLicenses importLicenses, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'productId' is set
+            if (productId == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'productId' when calling LicensesApi->ImportLicenses");
+
+            // verify the required parameter 'importLicenses' is set
+            if (importLicenses == null)
+                throw new LicenseManager.Client.ApiException(400, "Missing required parameter 'importLicenses' when calling LicensesApi->ImportLicenses");
+
+
+            LicenseManager.Client.RequestOptions localVarRequestOptions = new LicenseManager.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = LicenseManager.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = LicenseManager.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("productId", LicenseManager.Client.ClientUtils.ParameterToString(productId)); // path parameter
+            localVarRequestOptions.Data = importLicenses;
+
+            // authentication (apiKey) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-api-key")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("x-api-key", this.Configuration.GetApiKeyWithPrefix("x-api-key"));
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<ImportLicensesResult>("/v1/products/{productId}/licenses/import", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ImportLicenses", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
