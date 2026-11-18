@@ -82,15 +82,6 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'ReturnUrl'
-        /// </summary>
-        [Fact]
-        public void ReturnUrlTest()
-        {
-            // TODO unit test for the property 'ReturnUrl'
-        }
-
-        /// <summary>
         /// Test the property 'ReturnDomains'
         /// </summary>
         [Fact]

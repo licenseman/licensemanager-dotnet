@@ -100,6 +100,24 @@ namespace LicenseManager.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'WebsiteUrl'
+        /// </summary>
+        [Fact]
+        public void WebsiteUrlTest()
+        {
+            // TODO unit test for the property 'WebsiteUrl'
+        }
+
+        /// <summary>
+        /// Test the property 'DownloadUrl'
+        /// </summary>
+        [Fact]
+        public void DownloadUrlTest()
+        {
+            // TODO unit test for the property 'DownloadUrl'
+        }
+
+        /// <summary>
         /// Test the property 'Portal'
         /// </summary>
         [Fact]

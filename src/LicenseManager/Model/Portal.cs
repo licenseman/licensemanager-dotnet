@@ -49,7 +49,7 @@ namespace LicenseManager.Model
         /// <param name="logoUrl">Public URL of the product&#39;s logo. &#x60;null&#x60; without a logo. (required).</param>
         /// <param name="brandColor">Background of the side panel, as &#x60;#rrggbb&#x60;. &#x60;null&#x60; for the default color. (required).</param>
         /// <param name="accentColor">Color of the inputs and buttons, as &#x60;#rrggbb&#x60;. &#x60;null&#x60; for the default color. (required).</param>
-        /// <param name="returnUrl">Link back to the product&#39;s website: the requested &#x60;returnUrl&#x60; when its domain is allowed, the product&#39;s default return link otherwise. &#x60;null&#x60; for no link. (required).</param>
+        /// <param name="returnUrl">Link back to the product&#39;s website: the requested &#x60;returnUrl&#x60; when its domain is allowed, the product&#39;s website otherwise. &#x60;null&#x60; for no link. (required).</param>
         public Portal(string productId = default, string productName = default, string organizationName = default, string logoUrl = default, string brandColor = default, string accentColor = default, string returnUrl = default)
         {
             // to ensure "productId" is required (not null)
@@ -155,9 +155,9 @@ namespace LicenseManager.Model
         public string AccentColor { get; set; }
 
         /// <summary>
-        /// Link back to the product&#39;s website: the requested &#x60;returnUrl&#x60; when its domain is allowed, the product&#39;s default return link otherwise. &#x60;null&#x60; for no link.
+        /// Link back to the product&#39;s website: the requested &#x60;returnUrl&#x60; when its domain is allowed, the product&#39;s website otherwise. &#x60;null&#x60; for no link.
         /// </summary>
-        /// <value>Link back to the product&#39;s website: the requested &#x60;returnUrl&#x60; when its domain is allowed, the product&#39;s default return link otherwise. &#x60;null&#x60; for no link.</value>
+        /// <value>Link back to the product&#39;s website: the requested &#x60;returnUrl&#x60; when its domain is allowed, the product&#39;s website otherwise. &#x60;null&#x60; for no link.</value>
         /*
         <example>https://example.com/account</example>
         */

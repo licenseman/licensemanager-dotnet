@@ -37,12 +37,16 @@ namespace LicenseManager.Model
         /// </summary>
         /// <param name="name">name.</param>
         /// <param name="slug">Unique within the organization. Defaults to the name, lower cased, without accents and special characters. Starts with &#x60;test_&#x60; in test products, which is added when missing, and removed in live products..</param>
+        /// <param name="websiteUrl">The product&#39;s website, linked from the customer portal, when its URL has no allowed &#x60;return_url&#x60;, and from the emails sent to customers. &#x60;null&#x60; for no link..</param>
+        /// <param name="downloadUrl">Where customers download the product, linked from the email sending their license keys. &#x60;null&#x60; for no link..</param>
         /// <param name="portal">portal.</param>
         /// <param name="autoMachineChange">Whether a new machine validating a license already on its max machines takes the place of the license&#39;s machine validated the longest ago, rather than being refused with &#x60;machine_limit_reached&#x60;. When the replaced machine is validated again, it takes its place back and the machine that replaced it is locked. See &#x60;validateKey&#x60;..</param>
-        public UpdateProduct(string name = default, string slug = default, UpdateProductPortal portal = default, bool autoMachineChange = default)
+        public UpdateProduct(string name = default, string slug = default, string websiteUrl = default, string downloadUrl = default, UpdateProductPortal portal = default, bool autoMachineChange = default)
         {
             this.Name = name;
             this.Slug = slug;
+            this.WebsiteUrl = websiteUrl;
+            this.DownloadUrl = downloadUrl;
             this.Portal = portal;
             this.AutoMachineChange = autoMachineChange;
             this.AdditionalProperties = new Dictionary<string, object>();
@@ -66,6 +70,26 @@ namespace LicenseManager.Model
         */
         [DataMember(Name = "slug", EmitDefaultValue = false)]
         public string Slug { get; set; }
+
+        /// <summary>
+        /// The product&#39;s website, linked from the customer portal, when its URL has no allowed &#x60;return_url&#x60;, and from the emails sent to customers. &#x60;null&#x60; for no link.
+        /// </summary>
+        /// <value>The product&#39;s website, linked from the customer portal, when its URL has no allowed &#x60;return_url&#x60;, and from the emails sent to customers. &#x60;null&#x60; for no link.</value>
+        /*
+        <example>https://example.com</example>
+        */
+        [DataMember(Name = "websiteUrl", EmitDefaultValue = true)]
+        public string WebsiteUrl { get; set; }
+
+        /// <summary>
+        /// Where customers download the product, linked from the email sending their license keys. &#x60;null&#x60; for no link.
+        /// </summary>
+        /// <value>Where customers download the product, linked from the email sending their license keys. &#x60;null&#x60; for no link.</value>
+        /*
+        <example>https://example.com/download</example>
+        */
+        [DataMember(Name = "downloadUrl", EmitDefaultValue = true)]
+        public string DownloadUrl { get; set; }
 
         /// <summary>
         /// Gets or Sets Portal
@@ -99,6 +123,8 @@ namespace LicenseManager.Model
             sb.Append("class UpdateProduct {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Slug: ").Append(Slug).Append("\n");
+            sb.Append("  WebsiteUrl: ").Append(WebsiteUrl).Append("\n");
+            sb.Append("  DownloadUrl: ").Append(DownloadUrl).Append("\n");
             sb.Append("  Portal: ").Append(Portal).Append("\n");
             sb.Append("  AutoMachineChange: ").Append(AutoMachineChange).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
@@ -153,6 +179,18 @@ namespace LicenseManager.Model
                 {
                     yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Slug, must match a pattern of " + regexSlug, new [] { "Slug" });
                 }
+            }
+
+            // WebsiteUrl (string) maxLength
+            if (this.WebsiteUrl != null && this.WebsiteUrl.Length > 2000)
+            {
+                yield return new ValidationResult("Invalid value for WebsiteUrl, length must be less than 2000.", new [] { "WebsiteUrl" });
+            }
+
+            // DownloadUrl (string) maxLength
+            if (this.DownloadUrl != null && this.DownloadUrl.Length > 2000)
+            {
+                yield return new ValidationResult("Invalid value for DownloadUrl, length must be less than 2000.", new [] { "DownloadUrl" });
             }
 
             yield break;

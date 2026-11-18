@@ -46,9 +46,8 @@ namespace LicenseManager.Model
         /// <param name="enabled">Whether customers can use the customer portal. When disabled, it answers &#x60;404&#x60;. (required).</param>
         /// <param name="brandColor">Background of the portal&#39;s side panel, as &#x60;#rrggbb&#x60;, stored lower cased. &#x60;null&#x60; for the default color. (required).</param>
         /// <param name="accentColor">Color of the portal&#39;s inputs and buttons, as &#x60;#rrggbb&#x60;, stored lower cased. &#x60;null&#x60; for the default color. (required).</param>
-        /// <param name="returnUrl">Link back to your website shown in the portal, when the portal&#39;s URL has no allowed &#x60;return_url&#x60;. &#x60;null&#x60; for no link. (required).</param>
-        /// <param name="returnDomains">Domains the portal&#39;s &#x60;return_url&#x60; query parameter may point to, their subdomains included. Other return URLs are ignored, in favor of &#x60;returnUrl&#x60;. (required).</param>
-        public PortalSettings(bool enabled = default, string brandColor = default, string accentColor = default, string returnUrl = default, List<string> returnDomains = default)
+        /// <param name="returnDomains">Domains the portal&#39;s &#x60;return_url&#x60; query parameter may point to, their subdomains included. Other return URLs are ignored, in favor of the product&#39;s &#x60;websiteUrl&#x60;. (required).</param>
+        public PortalSettings(bool enabled = default, string brandColor = default, string accentColor = default, List<string> returnDomains = default)
         {
             this.Enabled = enabled;
             // to ensure "brandColor" is required (not null)
@@ -63,12 +62,6 @@ namespace LicenseManager.Model
                 throw new ArgumentNullException("accentColor is a required property for PortalSettings and cannot be null");
             }
             this.AccentColor = accentColor;
-            // to ensure "returnUrl" is required (not null)
-            if (returnUrl == null)
-            {
-                throw new ArgumentNullException("returnUrl is a required property for PortalSettings and cannot be null");
-            }
-            this.ReturnUrl = returnUrl;
             // to ensure "returnDomains" is required (not null)
             if (returnDomains == null)
             {
@@ -109,19 +102,9 @@ namespace LicenseManager.Model
         public string AccentColor { get; set; }
 
         /// <summary>
-        /// Link back to your website shown in the portal, when the portal&#39;s URL has no allowed &#x60;return_url&#x60;. &#x60;null&#x60; for no link.
+        /// Domains the portal&#39;s &#x60;return_url&#x60; query parameter may point to, their subdomains included. Other return URLs are ignored, in favor of the product&#39;s &#x60;websiteUrl&#x60;.
         /// </summary>
-        /// <value>Link back to your website shown in the portal, when the portal&#39;s URL has no allowed &#x60;return_url&#x60;. &#x60;null&#x60; for no link.</value>
-        /*
-        <example>https://example.com/account</example>
-        */
-        [DataMember(Name = "returnUrl", IsRequired = true, EmitDefaultValue = true)]
-        public string ReturnUrl { get; set; }
-
-        /// <summary>
-        /// Domains the portal&#39;s &#x60;return_url&#x60; query parameter may point to, their subdomains included. Other return URLs are ignored, in favor of &#x60;returnUrl&#x60;.
-        /// </summary>
-        /// <value>Domains the portal&#39;s &#x60;return_url&#x60; query parameter may point to, their subdomains included. Other return URLs are ignored, in favor of &#x60;returnUrl&#x60;.</value>
+        /// <value>Domains the portal&#39;s &#x60;return_url&#x60; query parameter may point to, their subdomains included. Other return URLs are ignored, in favor of the product&#39;s &#x60;websiteUrl&#x60;.</value>
         /*
         <example>[example.com]</example>
         */
@@ -145,7 +128,6 @@ namespace LicenseManager.Model
             sb.Append("  Enabled: ").Append(Enabled).Append("\n");
             sb.Append("  BrandColor: ").Append(BrandColor).Append("\n");
             sb.Append("  AccentColor: ").Append(AccentColor).Append("\n");
-            sb.Append("  ReturnUrl: ").Append(ReturnUrl).Append("\n");
             sb.Append("  ReturnDomains: ").Append(ReturnDomains).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
@@ -184,12 +166,6 @@ namespace LicenseManager.Model
                 {
                     yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for AccentColor, must match a pattern of " + regexAccentColor, new [] { "AccentColor" });
                 }
-            }
-
-            // ReturnUrl (string) maxLength
-            if (this.ReturnUrl != null && this.ReturnUrl.Length > 2000)
-            {
-                yield return new ValidationResult("Invalid value for ReturnUrl, length must be less than 2000.", new [] { "ReturnUrl" });
             }
 
             yield break;
