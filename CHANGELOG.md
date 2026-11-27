@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.6 (2026-11-27)
+
+Regenerated from the same API.
+
 ## 1.0.5 (2026-11-25)
 
 Regenerated from the same API.
